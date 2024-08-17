@@ -1,0 +1,17 @@
+/* styles.css or in a <style> tag */
+.day-red {
+    color: red !important;
+  }
+  .day-blue {
+    color: blue !important;
+  }
+  .day-green {
+    color: green !important;
+  }
+  .day-purple {
+    color: purple !important;
+  }
+  .day-default {
+    color: black !important;
+  }
+  

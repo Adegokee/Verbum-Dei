@@ -1,0 +1,35 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+/* dashboardContainer */
+.dashboard{
+   
+   width: calc(100% - 16%);
+   height: calc(160vh - 77px);
+}
+.good{
+  text-shadow: 2px 3px 6px rgba(0,0,0,0.24);
+}
+.myimage{
+ 
+}
+/* styles.css or in a <style> tag */
+.day-red {
+    color: red !important;
+  }
+  .day-blue {
+    color: blue !important;
+  }
+  .day-green {
+    color: green !important;
+  }
+  .day-purple {
+    color: purple !important;
+  }
+  .day-default {
+    color: black !important;
+  }
+  
+

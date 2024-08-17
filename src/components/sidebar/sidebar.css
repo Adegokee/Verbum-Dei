@@ -1,0 +1,15 @@
+/* Add this CSS to your global styles or a CSS module */
+.sidebarContainer::-webkit-scrollbar {
+    width: 8px; /* Width of the scrollbar */
+  }
+  
+  .sidebarContainer::-webkit-scrollbar-thumb {
+    background-color: #007bff; /* Color of the scrollbar thumb */
+    border-radius: 4px; /* Roundness of the scrollbar thumb */
+  }
+  
+  .sidebarContainer::-webkit-scrollbar-track {
+    background-color: #f1f1f1; /* Color of the scrollbar track */
+    border-radius: 4px; /* Roundness of the scrollbar track */
+  }
+  
