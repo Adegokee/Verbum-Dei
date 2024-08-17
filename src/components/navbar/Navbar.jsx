@@ -3,10 +3,17 @@ import { CiSearch } from "react-icons/ci";
 import { FaRegBell } from "react-icons/fa6";
 import profile from '../../assest/profile-avatar.png'
 import { FaCaretDown } from "react-icons/fa";
+import tunde from '../../assest/logo.png';
 
 const Navbar = () => {
   return (
-    <div className='flex h-[77px]  border-2 border-[#c5c8ca] items-center sticky top-0 z-[1000] bg-[#f5f9fc] '>
+    <div className='flex h-[77px]  border-2 border-[#c5c8ca] items-center  bg-[#f5f9fc] '>
+       <main className='flex items-center p-[12px] w-[282px]  bg-[#f5f9fc] border-r-[1px] border-b-[1px] border-[#c5c8ca]  z-[20px] px-auto'>
+          <div className='w-[50px]'>
+            <img className='w-[100px] object-cover' src={tunde} alt="" />
+          </div>
+          <h3 className='ml-[10px] font-bold text-[20px]  text-[#007bff]'>Verbum Dei</h3>
+        </main>
   
     <main className='w-[50%] bg-[#f5f9fc] p-[10px]'>
       <a href="" className='text-[15px] text-[#afb9d3]'>Home/Dashboard</a>

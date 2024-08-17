@@ -1,0 +1,5 @@
+.dashboard{
+   
+    width: calc(100% - 16%);
+    height: calc(160vh - 77px);
+ }

@@ -8,14 +8,16 @@ const Header = () => {
   return (
     <>
    
-    <div className=' flex w-[100%] '>
+    <div className='  w-[100%] '>
+      
+      
+      <div className='w-[100%] sticky top-0 z-[1000] '>
+      <Navbar/>
+      </div>
+
        <div className='w-[16%]'>
        <Sidebar />
         </div> 
-      
-      <div className='w-[84%] '>
-      <Navbar/>
-      </div>
 
       
     </div>
