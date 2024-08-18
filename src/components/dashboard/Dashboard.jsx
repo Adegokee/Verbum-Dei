@@ -10,7 +10,26 @@ import ApexChart from './ApexChart';
 import PercentAreaChart from './PercentAreaChart';
 import FinancialChart from './FinancialChart';
 import EventUpcoming from './EventUpcoming';
-
+const mygroup = [
+    {
+        name: 'STUDENTS',
+        number: 308,
+        img: require('../../assest/Group.png')
+        
+    }, 
+    {
+        name: 'TEACHERS',
+        number: 100,
+        img: require('../../assest/Group7.png')
+        
+    }, 
+    {
+        name: 'SUBJECTS',
+        number: 50,
+        img: require('../../assest/Group6.png')
+        
+    }, 
+]
 const Dashboard = () => {
   return (
 
@@ -30,7 +49,7 @@ const Dashboard = () => {
 
             <main>
                 <p className='text-[#dbd8e1]'>Total Tution for the month</p>
-                <p className='flex items-center font-bold text-2xl leading-3'> <span><TbCurrencyNaira /></span>123,456</p>
+                <p className='flex items-center text-2xl font-bold leading-3'> <span><TbCurrencyNaira /></span>123,456</p>
                 <p className='text-[#dbd8e1]'><span className='text-[#9ad9c6]'>+23% </span> than last month</p>
 
             </main>
@@ -38,66 +57,32 @@ const Dashboard = () => {
         </div>
       </section>
       <main className=' flex px-[10px]'>
-      <div className=' flex items-center pl-[20px] w-[280px]    bg-white rounded-3xl border-[3px] border-gray-200 h-[100px]'>
-           <nav>
-           <h1 className='text-[20px] font-medium '>STUDENTS</h1>
-            <p className='text-[20px] font-medium '>308</p>
-            <main className='flex'>
-                <div className='flex items-center mr-[15px]'>
-                    <span className='text-[10px] mr-[5px] text-[#233255]'><RiCheckboxBlankFill /></span>
-                    <smal className="text-[10px]">MALE (61%)</smal>
-                </div>
-                <div className='flex items-center'>
-                    <span className='text-[10px] mr-[5px] text-[#007bff]'><RiCheckboxBlankFill /></span>
-                    <small className="text-[10px]" >FEMALE (39%)</small>
-                </div>
-            </main>
-           </nav>
-           <div className='w-[150px]'>
-            <img src={group} alt="" className='w-[100%]'/>
-           </div>
-        </div>
+        {mygroup.map((x) => (
+            <div className=' flex items-center pl-[20px] w-[280px]    bg-white rounded-3xl border-[3px] border-gray-200 h-[100px]'>
+            <nav>
+            <h1 className='text-[20px] font-medium '>{x.name}</h1>
+             <p className='text-[20px] font-medium '>{x.number}</p>
+             <main className='flex'>
+                 <div className='flex items-center mr-[15px]'>
+                     <span className='text-[10px] mr-[5px] text-[#233255]'><RiCheckboxBlankFill /></span>
+                     <smal className="text-[10px]">MALE (61%)</smal>
+                 </div>
+                 <div className='flex items-center'>
+                     <span className='text-[10px] mr-[5px] text-[#007bff]'><RiCheckboxBlankFill /></span>
+                     <small className="text-[10px]" >FEMALE (39%)</small>
+                 </div>
+             </main>
+            </nav>
+            <div className='w-[150px]'>
+             <img src={x.img} alt="" className='w-[100%]'/>
+            </div>
+         </div>
+        ))}
+        
+      
 
+        
 
-        <div className=' top-[120px]  w-[280px] flex items-center pl-[20px] bg-white rounded-3xl border-[3px] border-gray-200 h-[100px]'>
-           <nav>
-           <h1 className='text-[20px] font-medium '>STUDENTS</h1>
-            <p className='text-[20px] font-medium '>308</p>
-            <main className='flex'>
-                <div className='flex items-center mr-[9px]'>
-                    <span className='text-[10px] mr-[5px] text-[#233255]'><RiCheckboxBlankFill /></span>
-                    <small className="text-[10px]">MALE (61%)</small>
-                </div>
-                <div className='flex items-center'>
-                    <span className='text-[10px] mr-[5px] text-[#007bff]'><RiCheckboxBlankFill /></span>
-                    <small className="text-[10px]" >FEMALE (39%)</small>
-                </div>
-            </main>
-           </nav>
-           <div className='w-[120px]'>
-            <img src={group} alt="" className='w-[100%]'/>
-           </div>
-        </div>
-
-        <div className='top-[150px] w-[280px]  flex items-center pl-[20px] bg-white rounded-3xl border-[3px] border-gray-200 h-[100px]'>
-           <nav>
-           <h1 className='text-[20px] font-medium '>STUDENTS</h1>
-            <p className='text-[20px] font-medium '>308</p>
-            <main className='flex'>
-                <div className='flex items-center mr-[15px]'>
-                    <span className='text-[10px] mr-[5px] text-[#233255]'><RiCheckboxBlankFill /></span>
-                    <smal className="text-[10px]">MALE (61%)</smal>
-                </div>
-                <div className='flex items-center'>
-                    <span className='text-[10px] mr-[5px] text-[#007bff]'><RiCheckboxBlankFill /></span>
-                    <small className="text-[10px]" >FEMALE (39%)</small>
-                </div>
-            </main>
-           </nav>
-           <div className='w-[150px]'>
-            <img src={group} alt="" className='w-[100%]'/>
-           </div>
-        </div>
       </main>
 
       <ApexChart />

@@ -16,6 +16,7 @@
   .sidebarContainer{
     height: calc(160vh - 77px);
   }
-  .mycolor{
+  /* .mycolor{
     background-color:#2580ff ;
-  }
+    color: white;
+  } */

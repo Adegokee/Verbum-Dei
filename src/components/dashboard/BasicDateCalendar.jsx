@@ -26,7 +26,7 @@ const getDayClass = (day) => {
 export default function BasicDateCalendar() {
   return (
     <div className='border-2 p-[20px] border-gray-200 ml-[20px] h-[340px] rounded-md bg-white'>
-      <h3>School Calendar</h3>
+      <h3 className='font-bold'>School Calendar</h3>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <DateCalendar
           renderDay={(day, selectedDate, DayComponent) => (
