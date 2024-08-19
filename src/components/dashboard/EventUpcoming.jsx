@@ -10,6 +10,19 @@ const EventUpcoming = () => {
             <span className='text-[17px] text-center mr-[10px] bg-[white] border-[2px] border-[#80beff] text-[#80beff] px-[12px] py-[4px] rounded-2xl'>Weekly</span>
             <span className='text-[17px] text-center mr-[10px] bg-[white] border-[2px] border-[#80beff] text-[#80beff] px-[12px] py-[4px] rounded-2xl'>Montly</span>
         </div>
+
+
+      <div className="bg-[#015486] mt-[15px] p-3 rounded-r-2xl border-l-[4px] border-[#fd9a56]">
+        <p className="text-white text-[16px]">Saturday</p>
+       <p className='text-[10px] text-white pl-[9px]'> Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+        <p className='text-right text-[9px] text-white mt-[7px]'>9th August, 2024</p>
+      </div>
+
+      <div className="bg-[#00b69b] mt-[15px] p-3 rounded-r-2xl border-l-[4px] border-[#357af6]">
+        <p className="text-white text-[16px]">Saturday</p>
+       <p className='text-[10px] text-white pl-[9px]'> Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+        <p className='text-right text-[9px] text-white mt-[7px]'>9th August, 2024</p>
+      </div>
         
     </div>
   )

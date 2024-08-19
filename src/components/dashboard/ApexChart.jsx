@@ -55,7 +55,7 @@ const ApexChart = () => {
 
   return (
     <div>
-      <div id="chart" className='w-[790px] mt-[30px] h-[400px] bg-white p-[20px] border-[4px] rounded-3xl border-gray-200'>
+      <div id="chart" className='w-[850px] mt-[30px] h-[400px] bg-white p-[20px] border-[4px] rounded-3xl border-gray-200'>
         <h1 className='font-bold'>School Performance</h1>
         <ReactApexChart options={options} series={series} type="area" height={250} width={750} />
       </div>

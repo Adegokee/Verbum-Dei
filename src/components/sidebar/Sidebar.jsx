@@ -22,7 +22,7 @@ const toggleDropdown = () => {
         <main className='mt-[50px] mx-[3px] border-b-2 border-[#c5c8ca]'>
           {dashBoardIcon.map((x) => (
             <Link to={`dashboard/${x.route}`} key={x.route}>
-              <div  className='flex pl-[30px] rounded-[4px] mb-[10px] mycolor' onClick={() => setActive(x.name)}  style={{background: x.name === active && '#588efe', color: 'black', padding:'10px'}} >
+              <div  className='flex pl-[30px] rounded-[4px] mb-[10px] hover:text-white' onClick={() => setActive(x.name)}  style={{background: x.name === active && '#588efe', color: 'black', padding:'10px'}} >
                 <span className='mr-[5px] text-[20px]'>{x.icon}</span>
                 <span className='text-[15px] font-[450]'>{x.name}</span>
               </div>
@@ -40,7 +40,7 @@ const toggleDropdown = () => {
           {/* Dropdown Menu */}
           {dropdownOpen && (
             <div className='absolute top-[47px] right-0 mt-[10px] w-[200px] bg-white border border-[#c5c8ca] shadow-lg rounded-md'>
-           <a href="#" className='block px-[10px] py-[8px] text-black hover:bg-[#f0f0f0]'>Dashbord</a>
+           <Link to='dashboard/dashboard' className='block px-[10px] py-[8px] text-black hover:bg-[#f0f0f0]'>Dashbord</Link>
             
             <a href="#" className='block px-[10px] py-[8px] text-black hover:bg-[#f0f0f0]'>Profile</a>
            
