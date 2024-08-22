@@ -14,13 +14,29 @@ import { myData } from './data';
 
 
 const StudentManagement = () => {
-  // let [currentPage, setCurrentPage] = useState(1)
-  // let recordPerPages = 5
-  // let lastIndex = currentPage * recordPerPages
-  // let firstIndex = lastIndex - recordPerPages
-  // let records = myData.slice(firstIndex, lastIndex)
-  // let npage = Math.ceil(myData.length / records)
-  // let numbers = [...Array(npage + 1).keys()].slice(1)
+  const [currentPage, setCurrentPage] = useState(1);
+  const recordsPerPage = 6;
+  const lastIndex = currentPage * recordsPerPage;
+  const firstIndex = lastIndex - recordsPerPage;
+  const records = myData.slice(firstIndex, lastIndex);
+  const npage = Math.ceil(myData.length / recordsPerPage);
+  const numbers = [...Array(npage).keys()].map(n => n + 1);
+  const prePage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const nextPage = () => {
+    if (currentPage < npage) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const changeCPage = (page) => {
+    setCurrentPage(page);
+  };
+
   const Dropdown = ({ label, children, label2, }) => (
     <div className="dropdown">
      
@@ -179,9 +195,50 @@ const StudentManagement = () => {
 
  
  </nav>
+ 
+
+<nav aria-label="Page navigation example" className="flex justify-end w-full mt-[7px] ">
+<ul className="inline-flex  text-sm mt-[15px]">
+      <li>
+        <a  
+          href="#" 
+          onClick={prePage} 
+          className="flex items-center justify-center h-8 px-3 leading-tight text-gray-500 bg-white border border-gray-300 ms-0 border-e-0 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+          Previous
+        </a>
+      </li>
+      {numbers.map((n) => (
+        <li key={n} className={`page-item ${currentPage === n ? 'active' : ''}`}>
+          <a 
+            href="#" 
+            aria-current={currentPage === n ? "page" : undefined}
+            className={`flex items-center justify-center h-8 px-3 border ${currentPage === n ? 'text-blue-600 bg-blue-50' : 'text-gray-500 bg-white'} border-gray-300 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white`}
+            onClick={() => changeCPage(n)}
+          >
+            {n}
+          </a>
+        </li>
+      ))}
+      <li>
+        <a 
+          href="#" 
+          onClick={nextPage} 
+          className="flex items-center justify-center h-8 px-3 leading-tight text-gray-500 bg-white border border-gray-300 ms-0 border-e-0 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+        >
+          Next
+        </a>
+      </li>
+    </ul>
+</nav>
+
+
+
+
 </div>
 
   )
+
 }
+
 
 export default StudentManagement
