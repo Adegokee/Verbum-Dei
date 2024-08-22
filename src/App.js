@@ -10,6 +10,7 @@ import EventManagement from './components/EventManagement';
 import Page from './page/Page';
 import './App.css'
 import {Routes, Route} from "react-router-dom";
+import CreateStudent from './components/CreateStudent';
 
 
 function App() {
@@ -21,14 +22,15 @@ function App() {
       <Routes>
       
       {/* <Route path='/' element={<Page/>}/> */}
-        <Route path="/dashboard/dashboard" element={<Dashboard />} />
-        <Route path="/dashboard/student_management" element={<StudentManagement />} />
-        <Route path="/dashboard/teacher_management" element={<TeacherManagement />} />
-        <Route path="/dashboard/fee_and_payment" element={<FeesAndPayment />} />
-        <Route path="/dashboard/class_and_exam" element={<ClassAndExam />} />
-        <Route path="/dashboard/library_and_management" element={<LibraryAndManagement />} />
-        <Route path="/dashboard/inventory_management" element={<InventoryManagement />} />
-        <Route path="/dashboard/event_management" element={<EventManagement />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/student-management" element={<StudentManagement />} />
+        <Route path="/teacher-management" element={<TeacherManagement />} />
+        <Route path="/fee-and-payment" element={<FeesAndPayment />} />
+        <Route path="/class-and-exam" element={<ClassAndExam />} />
+        <Route path="/library-and-management" element={<LibraryAndManagement />} />
+        <Route path="/inventory-management" element={<InventoryManagement />} />
+        <Route path="/event-management" element={<EventManagement />} />
+        <Route path="/create-student" element={<CreateStudent/>}/>
       
       
 

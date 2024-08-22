@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState, useEffect } from 'react';
 import { CiSearch } from "react-icons/ci";
 import { FaRegBell } from "react-icons/fa6";
 import profile from '../../assest/profile-avatar.png'
@@ -6,8 +6,38 @@ import { FaCaretDown } from "react-icons/fa";
 import tunde from '../../assest/logo.png';
 import { CgProfile } from "react-icons/cg";
 import {Link} from "react-router-dom"
+import { useParams } from 'react-router-dom';
+
+
+
+
+
+
 
 const Navbar = () => {
+ 
+    const [url, setUrl] = useState(window.location.href);
+  
+    useEffect(() => {
+      // Update URL when location changes
+      const handleLocationChange = () => {
+        setUrl(window.location.href);
+      };
+  
+      window.addEventListener('popstate', handleLocationChange);
+      window.addEventListener('pushState', handleLocationChange); // For pushState changes
+      window.addEventListener('replaceState', handleLocationChange); // For replaceState changes
+  
+      return () => {
+        window.removeEventListener('popstate', handleLocationChange);
+        window.removeEventListener('pushState', handleLocationChange);
+        window.removeEventListener('replaceState', handleLocationChange);
+      };
+    }, []);
+  
+  
+  
+  
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {
@@ -47,7 +77,7 @@ const Navbar = () => {
           {/* Dropdown Menu */}
           {dropdownOpen && (
             <div className='absolute top-[47px] right-0 mt-[10px] w-[200px] bg-white border border-[#c5c8ca] shadow-lg rounded-md'>
-          <Link to='dashboard/dashboard' className='block px-[10px] py-[8px] text-black hover:bg-[#f0f0f0]'>Dashbord</Link>
+          <Link to='dashboard' className='block px-[10px] py-[8px] text-black hover:bg-[#f0f0f0]'>Dashbord</Link>
             
             <a href="#" className='block px-[10px] py-[8px] text-black hover:bg-[#f0f0f0]'>Profile</a>
            

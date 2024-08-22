@@ -15,42 +15,111 @@ export let dashBoardIcon = [
 {
     icon: <PiStudentFill />,
     name: 'Student Management',
-    route:'student_management'
+    route:'student-management'
 },
 {
     icon: <FaChalkboardTeacher />,
     name: 'Teacher Management',
-    route: 'teacher_management'
+    route: 'teacher-management'
 },
 {
     icon: <SiContactlesspayment/>,
     name: 'Fees and Payment',
-    route: 'fee_and_payment'
+    route: 'fee-and-payment'
 },
 {
     icon: <TiChartBar/>,
     name: 'Class and Exam',
-    'route': 'class_and_exam'
+    'route': 'class-and-exam'
     
 },
 {
     icon: <IoLibrarySharp/>,
     name: 'Library and Management',
-    route: 'library_and_management'
+    route: 'library-and-management'
 }, 
 
 {
     icon: <TiVendorMicrosoft/>,
     name: 'Iventory Management',
-    route: 'inventory_management'
+    route: 'inventory-management'
 },
 {
     icon: <BsCalendarEventFill/>,
     name: 'Event Management',
-    route:'event_management'
+    route:'event-management'
 },
 
 
 
 
+]
+
+
+export let myData = [
+
+    {   id:'#1234567890',
+        img:require('../assest/high-res-student-smiling.jpg'),
+        name: 'Chukwudi Williams',
+        date: 'August 8, 2024',
+        parent_name: 'Amaka Williams',
+        address:'1 Owerri Close',
+        class: 'JSS3'
+    },
+    {   id:'#1234567890',
+        img:require('../assest/high-res-student-smiling.jpg'),
+        name: 'Chukwudi Williams',
+        date: 'August 8, 2024',
+        parent_name: 'Amaka Williams',
+        address:'1 Owerri Close',
+        class: 'JSS3'
+    },
+    {   id:'#1234567890',
+        img:require('../assest/high-res-student-smiling.jpg'),
+        name: 'Chukwudi Williams',
+        date: 'August 8, 2024',
+        parent_name: 'Amaka Williams',
+        address:'1 Owerri Close',
+        class: 'JSS3'
+    },
+    {   id:'#1234567890',
+        img:require('../assest/high-res-student-smiling.jpg'),
+        name: 'Chukwudi Williams',
+        date: 'August 8, 2024',
+        parent_name: 'Amaka Williams',
+        address:'1 Owerri Close',
+        class: 'JSS3'
+    },
+    {   id:'#1234567890',
+        img:require('../assest/high-res-student-smiling.jpg'),
+        name: 'Chukwudi Williams',
+        date: 'August 8, 2024',
+        parent_name: 'Amaka Williams',
+        address:'1 Owerri Close',
+        class: 'JSS3'
+    },
+    {   id:'#1234567890',
+        img:require('../assest/high-res-student-smiling.jpg'),
+        name: 'Chukwudi Williams',
+        date: 'August 8, 2024',
+        parent_name: 'Amaka Williams',
+        address:'1 Owerri Close',
+        class: 'JSS3'
+    },
+    {   id:'#1234567890',
+        img:require('../assest/high-res-student-smiling.jpg'),
+        name: 'Chukwudi Williams',
+        date: 'August 8, 2024',
+        parent_name: 'Amaka Williams',
+        address:'1 Owerri Close',
+        class: 'JSS3'
+    },
+    {   id:'#1234567890',
+        img:require('../assest/high-res-student-smiling.jpg'),
+        name: 'Chukwudi Williams',
+        date: 'August 8, 2024',
+        parent_name: 'Amaka Williams',
+        address:'1 Owerri Close',
+        class: 'JSS3'
+    },
 ]

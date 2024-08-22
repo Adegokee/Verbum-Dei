@@ -1,10 +1,11 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Sidebar from '../sidebar/Sidebar'
 import Navbar from '../navbar/Navbar'
 import Chart from '../Chart'
 import Dashboard from '../dashboard/Dashboard'
 // import './header.css'
 const Header = () => {
+ 
   return (
     <>
    
@@ -16,7 +17,7 @@ const Header = () => {
       </div>
 
        <div className='w-[16%]'>
-       <Sidebar />
+       <Sidebar  />
         </div> 
 
       
