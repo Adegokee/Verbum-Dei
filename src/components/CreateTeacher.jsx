@@ -1,11 +1,11 @@
 import React from 'react'
 import {Link} from '@mui/material';
 
-const CreateStudent = () => {
+const CreateTeacher = () => {
   return (
     <div className='dashboard absolute bg-[#f5f9fc] top-[75px] left-[16%] p-[10px] '>
  
-     <h6 className='p-[10px]  text-[#198cff] text-[20px] font-bold' >Student Details</h6>
+     <h6 className='p-[10px]  text-[#198cff] text-[20px] font-bold' >Teacher Employment Details</h6>
     
          
 <div className='flex'>
@@ -136,4 +136,4 @@ const CreateStudent = () => {
   )
 }
 
-export default CreateStudent
+export default CreateTeacher

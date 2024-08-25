@@ -11,6 +11,8 @@ import Page from './page/Page';
 import './App.css'
 import {Routes, Route} from "react-router-dom";
 import CreateStudent from './components/CreateStudent';
+import StudentFinishedReg from './components/StudentFinishedReg';
+import CreateTeacher from './components/CreateTeacher';
 
 
 function App() {
@@ -31,6 +33,10 @@ function App() {
         <Route path="/inventory-management" element={<InventoryManagement />} />
         <Route path="/event-management" element={<EventManagement />} />
         <Route path="/create-student" element={<CreateStudent/>}/>
+        <Route path="/create-teacher" element={<CreateTeacher/>}/>
+        <Route path="/student-finished-reg" element={<StudentFinishedReg/>}/>
+
+
       
       
 
