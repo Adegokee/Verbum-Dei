@@ -44,7 +44,7 @@ function App() {
   }, []);
 
   const addReview = async (newReview) => {
-    // const url = 'https://jsonplaceholder.typicode.com/posts'
+
     const url = "https://weekly-tamqrah-emekadefirst-39635d1c.koyeb.app/class/classes/"
 
     const response = await fetch(url,{
@@ -54,6 +54,28 @@ function App() {
     })
     const data = await response.json()
     setMydata([data, ...mydata])
+
+   }
+   
+   const editReview = async (id, updatedReview) => {
+    const url = `https://weekly-tamqrah-emekadefirst-39635d1c.koyeb.app/class/classes/${id}/`;
+    const response = await fetch(url, {
+      method: 'PUT',  
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(updatedReview),
+    });
+    const data = await response.json();
+    setMydata(mydata.map(item => (item.id === id ? data : item)));
+  };
+
+
+  const deleteReview = async(id) => {
+    if(window.confirm('Are you sure you want to delete this?')){
+      await fetch(`http://localhost:8000/api/v1/delete/${id}`,{
+          method: 'DELETE',
+      })
+      setTosin(tosin.filter((item)=> item.id !== id))
+    }
 
    }
 
