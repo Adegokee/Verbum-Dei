@@ -13,7 +13,7 @@ import { myData } from './data';
 
 
 
-const StudentManagement = () => {
+const StudentManagement = ({mydata, setMydata}) => {
   
   const [currentPage, setCurrentPage] = useState(1);
   const recordsPerPage = 6;
@@ -153,7 +153,7 @@ const StudentManagement = () => {
 
       
   </main>
-  {myData.map((x)=> (
+  {mydata.map((x)=> (
      <main className='mt-[20px] flex justify-between items-center border-b-2 border-[gray] py-[20px]'>
      <div  className='flex items-center'>
        <input type="checkbox" className='mr-[12px]' />

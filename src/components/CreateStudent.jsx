@@ -1,7 +1,7 @@
 import React from 'react'
 import {Link} from '@mui/material';
 
-const CreateStudent = () => {
+const CreateStudent = ({addReview}) => {
   return (
     <div className='dashboard absolute bg-[#f5f9fc] top-[75px] left-[16%] p-[10px] '>
  
@@ -56,8 +56,9 @@ const CreateStudent = () => {
 </div>
 
 
+<form action="">
 <div>
-<form className='pl-[40px]'>
+<div className='pl-[40px]'>
   <div className="grid gap-6 mb-6 md:grid-cols-2 md:w-[900px] ">
     <div>
       <label htmlFor="first_name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First name<span className='text-[red]'>*</span></label>
@@ -95,12 +96,12 @@ const CreateStudent = () => {
 
  
 
-</form>
+</div>
 
 <div className='pt-[30px] '>
 <h6 className='p-[10px]  text-[#198cff] text-[20px] font-bold' >Parent Details</h6>
 
-<form >
+<div >
   <div className="grid gap-6 mb-6 md:grid-cols-2 md:w-[900px] ">
     <div>
       <label htmlFor="first_name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First name<span className='text-[red]'>*</span></label>
@@ -124,9 +125,10 @@ const CreateStudent = () => {
  <button type="" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit Registration</button>
  </Link>
  
+</div>
+</div>
+</div>
 </form>
-</div>
-</div>
 </div>
 
 
