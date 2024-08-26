@@ -14,6 +14,7 @@ import {Routes, Route} from "react-router-dom";
 import CreateStudent from './components/CreateStudent';
 import StudentFinishedReg from './components/StudentFinishedReg';
 import CreateTeacher from './components/CreateTeacher';
+import Home from './components/Home';
 
 
 function App() {
@@ -34,7 +35,7 @@ function App() {
       
       <Routes>
       
-      {/* <Route path='/' element={<Page/>}/> */}
+        <Route path="/" element={<Home/>}/>
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/student-management" element={<StudentManagement />} />
         <Route path="/teacher-management" element={<TeacherManagement />} />

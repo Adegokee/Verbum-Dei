@@ -87,3 +87,13 @@
     background-color: blue;
   }
   
+
+  .mybg{
+    background-image: linear-gradient(#04376ecc, #04376ec3), url(../src/assest/logo.png);
+    background-repeat: no-repeat;
+    width: 100%;
+    background-position: center;
+    background-size: contain;
+
+
+  }
