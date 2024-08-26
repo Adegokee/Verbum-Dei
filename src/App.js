@@ -1,3 +1,4 @@
+import React, {useState, useEffect} from 'react';
 import './App.css';
 import Dashboard from './components/dashboard/Dashboard';
 import StudentManagement from './components/StudentManagement';
@@ -16,6 +17,16 @@ import CreateTeacher from './components/CreateTeacher';
 
 
 function App() {
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch('https://weekly-tamqrah-emekadefirst-39635d1c.koyeb.app/class/classes/');
+      const data = response.json();
+      console.log(data)
+ 
+    };
+
+    fetchData();
+  }, []);
   return (
     <div className="">
       <Page/>
@@ -35,6 +46,7 @@ function App() {
         <Route path="/create-student" element={<CreateStudent/>}/>
         <Route path="/create-teacher" element={<CreateTeacher/>}/>
         <Route path="/student-finished-reg" element={<StudentFinishedReg/>}/>
+
 
 
       

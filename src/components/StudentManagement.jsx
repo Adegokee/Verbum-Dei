@@ -14,6 +14,7 @@ import { myData } from './data';
 
 
 const StudentManagement = () => {
+  
   const [currentPage, setCurrentPage] = useState(1);
   const recordsPerPage = 6;
   const lastIndex = currentPage * recordsPerPage;
