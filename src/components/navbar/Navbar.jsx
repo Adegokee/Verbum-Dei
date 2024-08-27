@@ -14,6 +14,7 @@ import { useParams } from 'react-router-dom';
 
 
 
+
 const Navbar = () => {
  
     const [url, setUrl] = useState(window.location.href);
@@ -50,7 +51,9 @@ const Navbar = () => {
         <div className='w-[50px]'>
           <img className='w-[100px] object-cover' src={tunde} alt="Profile" />
         </div>
-        <h3 className='ml-[10px] font-bold text-[20px] text-[#007bff]'>Verbum Dei</h3>
+       <Link to='/'>
+       <h3 className='ml-[10px] font-bold text-[20px] text-[#007bff]'>Verbum Dei</h3>
+       </Link>
       </main>
 
       <main className='w-[50%] bg-[#f5f9fc] p-[10px]'>
