@@ -9,6 +9,7 @@ import { HiDotsHorizontal } from "react-icons/hi";
 
 const TeacherManagement = ({ setTeacherData, teacherData}) => {
   // const [teacherData, setTeacherData] = useState([]);
+  console.log(teacherData)
 
 
   const [currentPage, setCurrentPage] = useState(1);
