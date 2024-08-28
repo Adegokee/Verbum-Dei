@@ -16,10 +16,12 @@ import StudentFinishedReg from './components/StudentFinishedReg';
 import CreateTeacher from './components/CreateTeacher';
 import Home from './components/Home';
 import StudentId from './components/StudentId';
+import TeacherSuccess from './components/TeacherSuccess';
 
 
 function App() {
   const [mydata, setMydata] = useState([]);
+  const [teacherData, setTeacherData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -28,11 +30,9 @@ function App() {
       try {
         const response = await fetch('https://sore-ebba-emekadefirst-e04c4e7b.koyeb.app/student/students/');
         const data = await response.json();
-        console.log(data)
         
         if (Array.isArray(data)) {
           setMydata(data);
-          console.log(mydata)
         } else {
           throw new Error('Data is not an array');
         }
@@ -43,8 +43,14 @@ function App() {
       }
     };
 
-    fetchData();
-  }, []);
+    fetchData(); // Call the fetchData function
+
+  }, []); // Empty dependency array ensures this runs once on mount
+
+  // Optionally, you can log `myData` whenever it updates
+  useEffect(() => {
+    console.log(mydata);
+  }, [mydata]);
 
   const addReview = async (newReview) => {
 
@@ -83,6 +89,62 @@ function App() {
    }
 
 
+
+
+   useEffect(() => {
+    const fetchTeacherData = async () => {
+      try {
+        const response = await fetch('https://sore-ebba-emekadefirst-e04c4e7b.koyeb.app/staff/staff/');
+        const data = await response.json();
+        setTeacherData(data);
+      } catch (error) {
+        console.error('Failed to fetch teacher data:', error);
+      }
+    };
+
+    fetchTeacherData();
+  }, []);
+
+  useEffect(() => {
+    // console.log(teacherData);
+  }, [teacherData]);
+
+  //  const addTeacher = async (newReview) => {
+
+  //   const url = "https://sore-ebba-emekadefirst-e04c4e7b.koyeb.app/staff/staff/"
+
+  //   const response = await fetch(url,{
+  //     method:'POST',
+  //     headers: {'Content-Type': 'application/json'},
+  //     body: JSON.stringify(newReview),
+  //   })
+  //   const data = await response.json()
+  //   setTeacherData([data, ...teacherData])
+
+  //  }
+  const addTeacher = async (newTeacher) => {
+    const url = "https://sore-ebba-emekadefirst-e04c4e7b.koyeb.app/staff/staff/";
+  
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newTeacher),
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to add teacher');
+      }
+  
+      const data = await response.json();
+      setTeacherData([data, ...teacherData]);  // Ensure `teacherData` is defined and not null
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+   
+
+
   return (
     <div className="">
       <Page/>
@@ -94,15 +156,16 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/student-management" element={<StudentManagement  mydata={mydata} setMydata={setMydata}/>} />
         <Route path='/student-management/:id' element={< StudentId/>}/>
-        <Route path="/teacher-management" element={<TeacherManagement />} />
+        <Route path="/teacher-management" element={<TeacherManagement teacherData={teacherData}  setTeacherData={setTeacherData} />} />
         <Route path="/fee-and-payment" element={<FeesAndPayment />} />
         <Route path="/class-and-exam" element={<ClassAndExam />} />
         <Route path="/library-and-management" element={<LibraryAndManagement />} />
         <Route path="/inventory-management" element={<InventoryManagement />} />
         <Route path="/event-management" element={<EventManagement />} />
         <Route path="/create-student" element={<CreateStudent addReview={addReview}/>}/>
-        <Route path="/create-teacher" element={<CreateTeacher/>}/>
+        <Route path="/create-teacher" element={<CreateTeacher addTeacher={addTeacher }/>}/>
         <Route path="/student-finished-reg" element={<StudentFinishedReg/>}/>
+        <Route path="/teacher-finished-reg" element={<TeacherSuccess />} />
 
 
 

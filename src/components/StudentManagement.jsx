@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import profile from '../assest/profile-avatar.png'
 import { FaCaretDown } from "react-icons/fa";
 import {Link} from 'react-router-dom';
@@ -14,6 +14,8 @@ import { myData } from './data';
 
 
 const StudentManagement = ({mydata, setMydata}) => {
+
+  
   
   const [currentPage, setCurrentPage] = useState(1);
   const recordsPerPage = 6;
@@ -158,13 +160,13 @@ const StudentManagement = ({mydata, setMydata}) => {
      <div  className='flex items-center'>
        <input type="checkbox" className='mr-[12px]' />
        <div className='w-[40px] h-[40px] rounded-full'>
-       <img src={x.img} className='object-cover w-full h-full rounded-full' alt="" />
+       <img src={x.profile_image} className='object-cover w-full h-full rounded-full' alt="" />
        </div>
-       <span className='ml-[10px] font-semibold'>{x.name}</span>
+       <span className='ml-[10px] font-semibold'>{x.first_name}</span>
      </div>
 
      <div>
-      <p className='font-semibold'>#{x.id}</p>
+      <p className='font-semibold'>#{x.registration_id}</p>
      </div>
      <div>
       <p className='font-semibold'>{x.data}</p>
@@ -173,7 +175,7 @@ const StudentManagement = ({mydata, setMydata}) => {
       <p className='ml-[30px] font-semibold'>{x.parent_name}</p>
      </div>
      <div>
-      <p className='font-semibold'>{x.address}</p>
+      <p className='font-semibold'>{x.home_address}</p>
      </div>
 
      <div className='flex items-center'>
@@ -182,7 +184,7 @@ const StudentManagement = ({mydata, setMydata}) => {
      </div>
 
      <div  className='pr-[40px] text-center'>
-      <p className='font-semibold rounded-2xl bg-[#fb7d5b] py-[10px] px-[15px]  text-white'>{x.class}</p>
+      <p className='font-semibold rounded-2xl bg-[#fb7d5b] py-[10px] px-[15px]  text-white'>{x.class_assigned.name}</p>
      </div>
 
      <div className='font-semibold'>
