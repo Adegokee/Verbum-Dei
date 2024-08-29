@@ -1,294 +1,165 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const CreateStudent = ({ addReview }) => {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLasttName] = useState('');
-  const [otherName, setOtherName] = useState('');
-  const [image, setImage] = useState(null);
-  const [dob, setDob] = useState('');
-  const [nationality, setNationality] = useState('');
-  const [religion, setReligion] = useState('');
-  const [address, setAddress] = useState('');
-  const [gender, setGender] = useState('');
-  const [myclass, setMyClass] = useState('');
-  const [email, setEmail] = useState('');
-  const [myparent, setMyparent] = useState('');
-  const [myNumber, setMyNumber] = useState('');
+const CreateStudent = ({ addStudent, errors, parentData }) => {
+  console.log(parentData[0]['email']);
 
+  const [first_name, setFirst_name] = useState('');
+  const [other_name, setOther_name] = useState('');
+  const [last_name, setLast_name] = useState('');
+  const [date_of_birth, setDate_of_birth] = useState('');
+  const [gender, setGender] = useState('');
+  const [type, setType] = useState('');
+  const [home_address, setHome_address] = useState('');
+  const [state_of_origin, setState_of_origin] = useState('');
+  const [local_government_area, setLocal_government_area] = useState('');
+  const [nationality, setNationality] = useState('');
+  const [parent, setParent] = useState('');
+  const [religion, setReligion] = useState('');
+  const [profile_image, setProfile_image] = useState(null);
+  const [class_assigned, setClass_assigned] = useState('');
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     const newReview = {
-      firstName,
-      lastName,
-      otherName,
-      image,
-      dob,
-      nationality,
-      religion,
-      address,
+      first_name,
+      other_name,
+      last_name,
+      date_of_birth,
       gender,
-      myclass,
-      email,
-      myparent,
-      myNumber
+      type,
+      home_address,
+      state_of_origin,
+      local_government_area, 
+      nationality,
+      parent,
+      profile_image,
+      class_assigned,
+ 
+     
+     
     };
 
-    // Clear the form fields
-    setFirstName('');
-    setLasttName('');
-    setOtherName('');
-    setImage(null);
-    setDob('');
-    setNationality('');
-    setReligion('');
-    setAddress('');
+    setFirst_name('');
+    setOther_name('');
+    setLast_name('');
+    setDate_of_birth('');
     setGender('');
-    setMyClass('');
-    setEmail('');
-    setMyparent('');
-    setMyNumber('');
-
-    // Call the addReview function with the new student data
-    addReview(newReview);
+    setType('');
+    setHome_address('');
+    setState_of_origin('');
+    setLocal_government_area('');
+    setNationality('');
+    setParent('');
+    setReligion('');
+    setProfile_image();
+    setClass_assigned('');
+      
+   
+    addStudent(newReview);
   };
 
   return (
     <div className="dashboard absolute bg-[#f5f9fc] top-[75px] left-[16%] p-[10px]">
-      <h6 className="p-[10px] text-[#198cff] text-[20px] font-bold">Student Details</h6>
+      <h6 className="p-[10px] text-[#198cff] text-[20px] font-bold">Student Details Registration</h6>
 
-      <form className="flex" onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
+
+        <main>
+        <div className='flex justify-center'>
         <div className="items-center justify-center w-[250px] h-[210px]">
-          <div>
-            <label
-              htmlFor="dropzone-file"
-              className="flex flex-col items-center mb-[30px] justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
-            >
-              <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                <svg
-                  className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 20 16"
-                >
-                  <path
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
-                  />
-                </svg>
-                <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                  <span className="font-semibold">Click to upload</span> or drag and drop
-                </p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">
-                  SVG, PNG, JPG or GIF (MAX. 800x400px)
-                </p>
-              </div>
-              <input
-                id="dropzone-file"
-                type="file"
-                onChange={(e) => setImage(e.target.files[0])}
-                className="hidden"
-              />
-            </label>
-          </div>
-          <div className="max-w-sm mx-auto">
-            <label htmlFor="gender" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-              Gender <span className="text-[red]">*</span>
-            </label>
-            <select
-              id="gender"
-              value={gender}
-              onChange={(e) => setGender(e.target.value)}
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              required
-            >
-              <option value="" disabled>
-                Choose Gender
-              </option>
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-            </select>
-          </div>
-          <div className="max-w-sm mx-auto mt-[30px]">
-            <label htmlFor="class" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-              Class<span className="text-[red]">*</span>
-            </label>
-            <select
-              id="class"
-              value={myclass}
-              onChange={(e) => setMyClass(e.target.value)}
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              required
-            >
-              <option value="" disabled>
-                Choose Class
-              </option>
-              <option value="JSS1">JSS1</option>
-              <option value="JSS2">JSS2</option>
-              <option value="JSS3">JSS3</option>
-              <option value="SS1">SS1</option>
-              <option value="SS2">SS2</option>
-              <option value="SS3">SS3</option>
-            </select>
-          </div>
+          <label htmlFor="profile_img" className="flex flex-col items-center mb-[30px] justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50">
+            <div className="flex flex-col items-center justify-center pt-5 pb-6">
+              <svg className="w-8 h-8 mb-4 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+              </svg>
+              <p className="mb-2 text-sm text-gray-500"><span className="font-semibold">Click to upload</span> or drag and drop</p>
+              <p className="text-xs text-gray-500">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
+            </div>
+            {/* <input id="profile_img" type="file" className="hidden" onChange={(e) => setProfileImg(e.target.files[0])} /> */}
+            <input  type="file" aria-label="upload" value={profile_image} nChange={(e) => setProfile_image(e.target.files[0])} disabled="" className="flex-grow py-2 font-medium text-gray-300 x-3 m text-ellipsis dark:bg-gray-900 dark:text-gray-300 ml-[90px]"/>
+            {errors.profile_image && <p className="mt-1 text-sm text-red-500 ">{errors.profile_image}</p>}
+            
+          </label>
         </div>
 
+       
+        <div className="pl-[40px] w-[700px]">
         <div>
-          <div className="pl-[40px]">
-            <div className="grid gap-6 mb-6 md:grid-cols-2 md:w-[900px]">
-              <div>
-                <label htmlFor="first_name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  First Name<span className="text-[red]">*</span>
-                </label>
-                <input
-                  type="text"
-                  value={firstName}
-                  onChange={(e) => setFirstName(e.target.value)}
-                  id="first_name"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="John"
-                  required
-                />
-              </div>
-              <div>
-                <label htmlFor="other_name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  Other Name<span className="text-[red]">*</span>
-                </label>
-                <input
-                  type="text"
-                  value={otherName}
-                  onChange={(e) => setOtherName(e.target.value)}
-                  id="other_name"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="Doe"
-                  required
-                />
-              </div>
-              <div>
-                <label htmlFor="last_name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  Last Name<span className="text-[red]">*</span>
-                </label>
-                <input
-                  type="text"
-                  value={lastName}
-                  onChange={(e) => setLasttName(e.target.value)}
-                  id="last_name"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="Doe"
-                  required
-                />
-              </div>
-              <div>
-                <label htmlFor="dob" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  Date of Birth<span className="text-[red]">*</span>
-                </label>
-                <input
-                  type="date"
-                  value={dob}
-                  onChange={(e) => setDob(e.target.value)}
-                  id="dob"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  required
-                />
-              </div>
-              <div>
-                <label htmlFor="nationality" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  Nationality<span className="text-[red]">*</span>
-                </label>
-                <input
-                  type="text"
-                  value={nationality}
-                  onChange={(e) => setNationality(e.target.value)}
-                  id="nationality"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="Ghanaian"
-                  required
-                />
-              </div>
-              <div>
-                <label htmlFor="religion" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  Religion<span className="text-[red]">*</span>
-                </label>
-                <input
-                  type="text"
-                  value={religion}
-                  onChange={(e) => setReligion(e.target.value)}
-                  id="religion"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="Christian"
-                  required
-                />
-              </div>
-              <div>
-                <label htmlFor="address" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  Address<span className="text-[red]">*</span>
-                </label>
-                <input
-                  type="text"
-                  value={address}
-                  onChange={(e) => setAddress(e.target.value)}
-                  id="address"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="123 Main St"
-                  required
-                />
-              </div>
-              <div>
-                <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  Email<span className="text-[red]">*</span>
-                </label>
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  id="email"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="john.doe@example.com"
-                  required
-                />
-              </div>
-              <div>
-                <label htmlFor="parent" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  Parent's Name<span className="text-[red]">*</span>
-                </label>
-                <input
-                  type="text"
-                  value={myparent}
-                  onChange={(e) => setMyparent(e.target.value)}
-                  id="parent"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="Jane Doe"
-                  required
-                />
-              </div>
-              <div>
-                <label htmlFor="number" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                  Phone Number<span className="text-[red]">*</span>
-                </label>
-                <input
-                  type="text"
-                  value={myNumber}
-                  onChange={(e) => setMyNumber(e.target.value)}
-                  id="number"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="+233 123 456 7890"
-                  required
-                />
-              </div>
+              <label htmlFor="gender" className="block mb-2 text-sm font-medium text-gray-900">Type<span className='text-[red]'>*</span></label>
+              <select id="gender" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value={type} onChange={(e) => setType(e.target.value)} required>
+                <option value="" disabled>Select Type</option>
+                <option value="DAY">day</option>
+                <option value="BOARDER">boarder</option>
+              </select> {errors.gender && <p className="mt-1 text-sm text-red-500 ">{errors.gender}</p>}
             </div>
-            <button
-              type="submit"
-              className="text-white mt-[20px] mb-[20px] bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            >
-              Submit
-            </button>
-          </div>
+
+            <div>
+              <label htmlFor="first_name" className="block mb-2 text-sm font-medium text-gray-900">First name<span className='text-[red]'>*</span></label>
+              <input type="text" id="first_name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value={first_name} onChange={(e) => setFirst_name(e.target.value)} required />
+              {errors.first_name && <p className="mt-1 text-sm text-red-500 ">{errors.first_name}</p>}
+            </div>
+          
+            <div>
+              <label htmlFor="last_name" className="block mb-2 text-sm font-medium text-gray-900">Last name<span className='text-[red]'>*</span></label>
+              <input type="text" id="last_name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value={last_name} onChange={(e) => setLast_name(e.target.value)} required />
+              {errors.last_name && <p className="mt-1 text-sm text-red-500 ">{errors.last_name}</p>}
+            </div>
+
+            <div>
+              <label htmlFor="other_name" className="block mb-2 text-sm font-medium text-gray-900">Other Name<span className='text-[red]'>*</span></label>
+              <input type="text" id="other_name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value={other_name} onChange={(e) => setOther_name(e.target.value)} />
+              {errors.other_name && <p className="mt-1 text-sm text-red-500 ">{errors.other_name}</p>}
+            </div>
+           
+            <div>
+              <label htmlFor="other_name" className="block mb-2 text-sm font-medium text-gray-900">Nationality<span className='text-[red]'>*</span></label>
+              <input type="text" id="other_name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value={nationality} onChange={(e) => setNationality(e.target.value)} />
+              {errors.nationality && <p className="mt-1 text-sm text-red-500 ">{errors.nationality}</p>}
+            </div>
+            <div>
+      <label htmlFor="date_of_birth" className="block mb-2 text-sm font-medium text-gray-900">
+        Date of Birth<span className='text-[red]'>*</span>
+      </label>
+      <input
+        type="date"
+        id="date_of_birth"
+        className="vDateField border bg-white font-medium min-w-20 rounded-md shadow-sm text-gray-500 text-sm focus:ring focus:ring-primary-300 focus:border-primary-600 focus:outline-none group-[.errors]:border-red-600 group-[.errors]:focus:ring-red-200 dark:bg-gray-900 dark:border-gray-700 dark:text-gray-300 dark:focus:border-primary-600 dark:focus:ring-primary-700 dark:focus:ring-opacity-50 dark:group-[.errors]:border-red-500 dark:group-[.errors]:focus:ring-red-600/40 px-3 py-2 w-full min-w-52"
+        value={date_of_birth} onChange={(e) => setDate_of_birth(e.target.value)}
+        
+        required
+      />
+      {/* Display error message if there's any */}
+      {/* Example: {errors.date_of_birth && <p className="mt-1 text-sm text-red-500">{errors.date_of_birth}</p>} */}
+    </div>
+            <div>
+              <label htmlFor="gender" className="block mb-2 text-sm font-medium text-gray-900">Parent<span className='text-[red]'>*</span></label>
+              <select id="gender" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value={parent} onChange={(e) => setParent(e.target.value)} required>
+              <option value="" selected="">Select value</option>
+            
+                {parentData.map((x) => (
+                   <option value={x.id}>{x.code} - {x.email}</option>
+                ))}
+                
+                
+              </select>
+              {errors.parent && <p className="mt-1 text-sm text-red-500 ">{errors.parent}</p>}
+            </div>
+            <div>
+              <label htmlFor="other_name" className="block mb-2 text-sm font-medium text-gray-900">Religion<span className='text-[red]'>*</span></label>
+              <input type="text" id="other_name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value={religion} onChange={(e) => setReligion(e.target.value)} />
+              {errors.religion && <p className="mt-1 text-sm text-red-500 ">{errors.religion}</p>}
+            </div>
         </div>
-      </form>
+      </div>
+        </main>
+     
+    
+     
+
+      {/* Submit Button */}
+      <button type="submit" className="w-1/4 md:ml-[69px] text-white bg-blue-700 mt-[70px] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Submit</button>
+    </form>
     </div>
   );
 };

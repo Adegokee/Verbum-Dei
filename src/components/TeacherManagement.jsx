@@ -74,58 +74,44 @@ const TeacherManagement = ({ setTeacherData, teacherData}) => {
         {/* Add other categories similarly */}
       </div>
 
-      <nav className="flex flex-wrap">
+      <nav className="flex flex-wrap  ">
         {records.map((teacher) => (
-          <main key={teacher.id} className="mt-[20px] text-center border-b-2 border-[gray] py-[20px] w-[290px]">
-            <div className="items-center">
+         <div>
+          <main key={teacher.id} className="m-[10px]  bg-white text-center rounded-lg py-[20px] w-[200px]">
+            <div className="items-center flex flex-col justify-center">
               <div className="w-[40px] h-[40px] rounded-full">
                 <img src={teacher.profile_img ? teacher.profile_img : profile} className="object-cover w-full h-full rounded-full" alt={teacher.first_name} />
               </div>
               <span className="ml-[10px] font-semibold">{`${teacher.first_name} ${teacher.last_name}`}</span>
             </div>
             <div>
-              <p className="font-semibold">{teacher.staff_id}</p>
+              <p className="">{teacher.staff_id}</p>
             </div>
             <div>
-              <p className="font-semibold">{teacher.position}</p>
+              <p className="">{teacher.position}</p>
             </div>
-            <div>
-              <p className="font-semibold">{teacher.home_address}</p>
-            </div>
-            <div>
-              <p className="font-semibold">{teacher.staff_type}</p>
-            </div>
-            <div>
-              <p className="font-semibold">{teacher.staff_of_origin}</p>
-            </div>
-            <div>
-              <p className="font-semibold">{teacher.phone_number_1}</p>
-            </div>
-            <div>
-              <p className="font-semibold">{teacher.phone_number_2}</p>
-            </div>
-            <div>
-              <p className="font-semibold">{teacher.position}</p>
-            </div>
-            <div className="flex items-center">
-              <Link to={`tel:${teacher.phone_number_1}`}>
+            <div className="flex items-center pl-[45px]">
+            
+            
               <span className="mr-[20px] text-[#007bff] py-[10px] px-[15px] rounded-2xl bg-[#d6dfe8]">
                 <FaPhone />
               </span>
-              </Link>
+              
               
               <span className="text-[#007bff] text-[20px] py-[10px] px-[15px] rounded-2xl bg-[#d6dfe8]">
                 <TiMessages />
               </span>
             </div>
-            <div className="font-semibold">
+            {/* <div className="font-semibold">
               <HiDotsHorizontal />
-            </div>
+            </div> */}
           </main>
+         
+         </div>
         ))}
       </nav>
 
-      <nav aria-label="Page navigation example" className="flex justify-end w-full mt-[7px]">
+      <nav aria-label="Page navigation example" className="flex justify-end w-full mt-[27px]">
         <ul className="inline-flex text-sm mt-[15px]">
           <li>
             <a 
