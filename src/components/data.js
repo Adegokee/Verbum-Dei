@@ -29,6 +29,11 @@ export let dashBoardIcon = [
     route: 'fee-and-payment'
 },
 {
+    icon: <SiContactlesspayment/>,
+    name: 'Parent',
+    route: 'parent'
+},
+{
     icon: <TiChartBar/>,
     name: 'Class and Exam',
     'route': 'class-and-exam'

@@ -18,6 +18,9 @@ import Home from './components/Home';
 import StudentId from './components/StudentId';
 import TeacherSuccess from './components/TeacherSuccess';
 import { myData } from './components/data';
+import Parent from './components/Parent';
+import CreateParent from './components/CreateParent';
+import TeachersProfile from './components/TeachersProfile';
 
 
 function App() {
@@ -186,7 +189,50 @@ function App() {
   useEffect(() => {
     // console.log(teacherData);
   }, [parent]);
-   
+
+  const addMyParent = async (newReview) => {
+    const url = "https://sore-ebba-emekadefirst-e04c4e7b.koyeb.app/parent/";
+  
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newReview),
+      });
+      
+      // Check if the response is OK
+      if (!response.ok) {
+        // Read response text to debug server errors
+        const errorText = await response.text();
+        throw new Error(`Server error: ${errorText}`);
+      }
+  
+      // Try to parse JSON response
+      const data = await response.json();
+      
+      // Update state with response data
+      setParent([data, ...parent]);
+      setErrors({});
+    } catch (error) {
+      console.error('Error adding parent:', error);
+      setErrors({ global: 'An error occurred while adding the parent.' });
+    }
+  };
+  
+
+  // const addMyParent = async (newReview) => {
+  //   // const url = 'https://jsonplaceholder.typicode.com/posts'
+  //   const url = "https://sore-ebba-emekadefirst-e04c4e7b.koyeb.app/parent/"
+
+  //   const response = await fetch(url,{
+  //     method:'POST',
+  //     headers: {'Content-Type': 'application/json'},
+  //     body: JSON.stringify(newReview),
+  //   })
+  //   const data = await response.json()
+  //   setParent([data, ...parent])
+
+  //  }
 
 
   return (
@@ -197,7 +243,10 @@ function App() {
       <Routes>
       
         <Route path="/" element={<Home/>}/>
+        <Route path="/teacher_profile/:id" elememt={<TeachersProfile />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/create_parent" element={<CreateParent addMyParent={addMyParent} errors={errors}/>}/>
+        <Route path="/parent" element={<Parent parent={parent} errors={errors} />} />
         <Route path="/student-management" element={<StudentManagement  mydata={mydata} setMydata={setMydata}/>} />
         <Route path='/student-management/:id' element={< StudentId/>}/>
         <Route path="/teacher-management" element={<TeacherManagement teacherData={teacherData}  setTeacherData={setTeacherData} />} />
@@ -206,10 +255,11 @@ function App() {
         <Route path="/library-and-management" element={<LibraryAndManagement />} />
         <Route path="/inventory-management" element={<InventoryManagement />} />
         <Route path="/event-management" element={<EventManagement />} />
-        <Route path="/create-student" element={<CreateStudent addStudent={addStudent} errors={errors} parentsData={parent}/>}/>
+        <Route path="/create-student" element={<CreateStudent addStudent={addStudent} errors={errors} myparent={parent}/>}/>
         <Route path="/create-teacher" element={<CreateTeacher addTeacher={addTeacher } errors={errors}/>}/>
         <Route path="/student-finished-reg" element={<StudentFinishedReg/>}/>
         <Route path="/teacher-finished-reg" element={<TeacherSuccess />} />
+
 
 
 

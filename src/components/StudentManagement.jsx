@@ -123,33 +123,33 @@ const StudentManagement = ({mydata, setMydata}) => {
   
  <nav>
  <main className='mt-[20px] flex justify-between items-center border-b-2 border-[gray] py-[20px]'>
-      <div className='pr-[150px]'>
+      <div className='pr-[10px]'>
         <input type="checkbox" />
-        <span className='ml-8'>Name</span>
+        <span className='ml-[50px]'>Name</span>
       </div>
 
-      <div className='pr-[10px] text-center'>
+      <div className='pr-[5px] text-center'>
        <p>ID</p>
       </div>
-      <div  className='pl-[20px] text-center'>
+      <div  className='pl-[10px] text-center'>
        <p>Date Registered</p>
       </div>
-      <div  className='pl-[20px] text-center'>
+      <div  className='pl-[10px] text-center'>
        <p>Parent Name</p>
       </div>
-      <div  className='pl-[20px] text-center'>
+      <div  className='pl-[10px] text-center'>
        <p>Address</p>
       </div>
 
-      <div className='pl-[20px] text-center'>
+      <div className='pl-[10px] text-center'>
        <p>Contact</p>
       </div>
 
-      <div className='pl-[20px] text-right'>
+      <div className='pl-[10px] text-right'>
        <p>Class</p>
       </div>
 
-      <div  className='pl-[20px] text-center'>
+      <div  className='pl-[10px] text-center'>
        <p>More</p>
       </div>
 
@@ -166,16 +166,16 @@ const StudentManagement = ({mydata, setMydata}) => {
      </div>
 
      <div>
-      <p className='font-semibold'>#{x.registration_id}</p>
+      <small className='font-semibold'>#{x.registration_id}</small>
      </div>
      <div>
-      <p className='font-semibold'>{x.data}</p>
+      <p className='font-semibold'>{x.class_assigned.created_at.slice(0, 10)}</p>
      </div>
      <div>
-      <p className='ml-[30px] font-semibold'>{x.parent_name}</p>
+      <p className='ml-[30px] font-semibold'>{x.parent.parent_name}</p>
      </div>
      <div>
-      <p className='font-semibold'>{x.home_address}</p>
+      <small className='font-semibold'>{x.home_address.slice(0, 19)}...</small>
      </div>
 
      <div className='flex items-center'>

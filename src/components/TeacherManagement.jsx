@@ -74,13 +74,13 @@ const TeacherManagement = ({ setTeacherData, teacherData}) => {
         {/* Add other categories similarly */}
       </div>
 
-      <nav className="flex flex-wrap  ">
+      <nav className="flex flex-wrap ">
         {records.map((teacher) => (
-         <div>
-          <main key={teacher.id} className="m-[10px]  bg-white text-center rounded-lg py-[20px] w-[200px]">
-            <div className="items-center flex flex-col justify-center">
+         <Link to={`/teacher_profile/${teacher.id}`}>
+          <main key={teacher.id} className="m-[10px] cursor-pointer  bg-white text-center rounded-lg py-[20px] w-[200px]">
+            <div className="flex flex-col items-center justify-center">
               <div className="w-[40px] h-[40px] rounded-full">
-                <img src={teacher.profile_img ? teacher.profile_img : profile} className="object-cover w-full h-full rounded-full" alt={teacher.first_name} />
+                <img src={teacher.profile_img ? teacher.profile_img : profile} className="object-cover w-full h-full rounded-full cursor-pointer" alt={teacher.first_name} />
               </div>
               <span className="ml-[10px] font-semibold">{`${teacher.first_name} ${teacher.last_name}`}</span>
             </div>
@@ -107,7 +107,7 @@ const TeacherManagement = ({ setTeacherData, teacherData}) => {
             </div> */}
           </main>
          
-         </div>
+         </Link>
         ))}
       </nav>
 

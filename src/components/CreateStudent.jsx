@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-const CreateStudent = ({ addStudent, parentsData }) => {
+const CreateStudent = ({ addStudent, myparent }) => {
 
 
 
@@ -21,6 +21,7 @@ const CreateStudent = ({ addStudent, parentsData }) => {
       parent: '',
       religion: '',
       profile_image: null,
+      class_assigned: ''
     });
   
     // Log errors whenever they change
@@ -73,6 +74,7 @@ const CreateStudent = ({ addStudent, parentsData }) => {
             parent: '',
             religion: '',
             profile_image: null,
+            class_assigned:''
           });
           setErrors({});
         } else {
@@ -274,12 +276,22 @@ const CreateStudent = ({ addStudent, parentsData }) => {
         <label>Parent</label>
         <select name="parent" value={formData.parent} onChange={handleInputChange} required>
           <option value="" disabled>Select Parent</option>
-          {parentsData.map((parent) => (
-            <option key={parent.id} value={parent.id}>
-              {parent.code} - {parent.email}
+          {myparent.map((x) => (
+            <option key={x.id} value={x.id}>
+              {x.code} - {x.email}
             </option>
           ))}
         </select>
+        {errors.parent && errors.parent.map((error, index) => <p key={index} className="error">{error}</p>)}
+      </div>
+      <div>
+        <label>Class Assign</label>
+        <select name="class_assigned" value={formData.class_assigned}  onChange={handleInputChange} className="border bg-white font-medium min-w-20 rounded-md shadow-sm text-gray-500 text-sm focus:ring focus:ring-primary-300 focus:border-primary-600 focus:outline-none group-[.errors]:border-red-600 group-[.errors]:focus:ring-red-200 dark:bg-gray-900 dark:border-gray-700 dark:text-gray-300 dark:focus:border-primary-600 dark:focus:ring-primary-700 dark:focus:ring-opacity-50 dark:group-[.errors]:border-red-500 dark:group-[.errors]:focus:ring-red-600/40 px-3 py-2 w-full pr-8 max-w-2xl appearance-none " data-context="available-source" required="" id="id_class_assigned">
+        <option value="" selected="">Select value</option>
+        <option value="2">SS1B</option>
+        <option value="1">SS1A</option>
+
+</select>
         {errors.parent && errors.parent.map((error, index) => <p key={index} className="error">{error}</p>)}
       </div>
 
