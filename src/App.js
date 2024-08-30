@@ -42,40 +42,36 @@ function App() {
     fetchStudentData()
     
   }, []);
+
+
   useEffect(() => {
-
-    console.log(mydata);
+      console.log(mydata);
   }, [mydata]);
-
  
   const addStudent = async (newReview) => {
     const url = "https://sore-ebba-emekadefirst-e04c4e7b.koyeb.app/student/students/";
-
+  
     try {
       const response = await fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newReview),
       });
-      
+  
       const data = await response.json();
-      // setTeacherData([data, ...teacherData]);
-      console.log(data)
+      
       if (response.ok) {
-        
         setMydata([data, ...mydata]);
         setErrors({}); 
       } else {
-       
-        setErrors(data); 
+        setErrors(data);
       }
     } catch (error) {
       console.error('Error adding teacher:', error);
       setErrors({ global: 'An error occurred while adding the teacher.' });
     }
   };
-
-   
+  
    const editReview = async (id, updatedReview) => {
     const url = `https://weekly-tamqrah-emekadefirst-39635d1c.koyeb.app/class/classes/${id}/`;
     const response = await fetch(url, {
@@ -210,7 +206,7 @@ function App() {
         <Route path="/library-and-management" element={<LibraryAndManagement />} />
         <Route path="/inventory-management" element={<InventoryManagement />} />
         <Route path="/event-management" element={<EventManagement />} />
-        <Route path="/create-student" element={<CreateStudent addStudent={addStudent} errors={errors} parentData={parent}/>}/>
+        <Route path="/create-student" element={<CreateStudent addStudent={addStudent} errors={errors} parentsData={parent}/>}/>
         <Route path="/create-teacher" element={<CreateTeacher addTeacher={addTeacher } errors={errors}/>}/>
         <Route path="/student-finished-reg" element={<StudentFinishedReg/>}/>
         <Route path="/teacher-finished-reg" element={<TeacherSuccess />} />

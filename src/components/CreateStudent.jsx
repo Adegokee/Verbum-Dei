@@ -1,9 +1,89 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-const CreateStudent = ({ addStudent, errors, parentData }) => {
-  console.log(parentData[0]['email']);
+const CreateStudent = ({ addStudent, parentsData }) => {
 
+
+
+    const [errors, setErrors] = useState({});
+    const [formData, setFormData] = useState({
+      type: '',
+      registration_id: '',
+      first_name: '',
+      other_name: '',
+      last_name: '',
+      date_of_birth: '',
+      gender: '',
+      home_address: '',
+      state_of_origin: '',
+      local_government_area: '',
+      nationality: '',
+      parent: '',
+      religion: '',
+      profile_image: null,
+    });
+  
+    // Log errors whenever they change
+    useEffect(() => {
+      if (Object.keys(errors).length > 0) {
+        console.error(errors);
+      }
+    }, [errors]);
+  
+    const handleInputChange = (e) => {
+      const { name, value } = e.target;
+      setFormData({ ...formData, [name]: value });
+    };
+  
+    const handleFileChange = (e) => {
+      setFormData({ ...formData, profile_image: e.target.files[0] });
+    };
+  
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      const url = "https://sore-ebba-emekadefirst-e04c4e7b.koyeb.app/student/students/";
+  
+      const formDataToSend = new FormData();
+      for (const key in formData) {
+        formDataToSend.append(key, formData[key]);
+      }
+  
+      try {
+        const response = await fetch(url, {
+          method: 'POST',
+          body: formDataToSend,
+        });
+  
+        const data = await response.json();
+  
+        if (response.ok) {
+          // Handle successful submission
+          setFormData({
+            type: '',
+            registration_id: '',
+            first_name: '',
+            other_name: '',
+            last_name: '',
+            date_of_birth: '',
+            gender: '',
+            home_address: '',
+            state_of_origin: '',
+            local_government_area: '',
+            nationality: '',
+            parent: '',
+            religion: '',
+            profile_image: null,
+          });
+          setErrors({});
+        } else {
+          // Handle validation errors
+          setErrors(data);
+        }
+      } catch (error) {
+        console.error('Error submitting the form:', error);
+        setErrors({ global: 'An error occurred while submitting the form.' });
+      }
+    };
   const [first_name, setFirst_name] = useState('');
   const [other_name, setOther_name] = useState('');
   const [last_name, setLast_name] = useState('');
@@ -19,147 +99,216 @@ const CreateStudent = ({ addStudent, errors, parentData }) => {
   const [profile_image, setProfile_image] = useState(null);
   const [class_assigned, setClass_assigned] = useState('');
   
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const newReview = {
-      first_name,
-      other_name,
-      last_name,
-      date_of_birth,
-      gender,
-      type,
-      home_address,
-      state_of_origin,
-      local_government_area, 
-      nationality,
-      parent,
-      profile_image,
-      class_assigned,
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   const newReview = {
+  //     first_name,
+  //     other_name,
+  //     last_name,
+  //     date_of_birth,
+  //     gender,
+  //     type,
+  //     home_address,
+  //     state_of_origin,
+  //     local_government_area, 
+  //     nationality,
+  //     parent,
+  //     profile_image,
+  //     class_assigned,
  
      
      
-    };
+  //   };
 
-    setFirst_name('');
-    setOther_name('');
-    setLast_name('');
-    setDate_of_birth('');
-    setGender('');
-    setType('');
-    setHome_address('');
-    setState_of_origin('');
-    setLocal_government_area('');
-    setNationality('');
-    setParent('');
-    setReligion('');
-    setProfile_image();
-    setClass_assigned('');
+  //   setFirst_name('');
+  //   setOther_name('');
+  //   setLast_name('');
+  //   setDate_of_birth('');
+  //   setGender('');
+  //   setType('');
+  //   setHome_address('');
+  //   setState_of_origin('');
+  //   setLocal_government_area('');
+  //   setNationality('');
+  //   setParent('');
+  //   setReligion('');
+  //   setProfile_image();
+  //   setClass_assigned('');
       
    
-    addStudent(newReview);
-  };
+  //   addStudent(newReview);
+  // };
 
   return (
     <div className="dashboard absolute bg-[#f5f9fc] top-[75px] left-[16%] p-[10px]">
       <h6 className="p-[10px] text-[#198cff] text-[20px] font-bold">Student Details Registration</h6>
-
       <form onSubmit={handleSubmit}>
-
-        <main>
-        <div className='flex justify-center'>
-        <div className="items-center justify-center w-[250px] h-[210px]">
-          <label htmlFor="profile_img" className="flex flex-col items-center mb-[30px] justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50">
-            <div className="flex flex-col items-center justify-center pt-5 pb-6">
-              <svg className="w-8 h-8 mb-4 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
-              </svg>
-              <p className="mb-2 text-sm text-gray-500"><span className="font-semibold">Click to upload</span> or drag and drop</p>
-              <p className="text-xs text-gray-500">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
-            </div>
-            {/* <input id="profile_img" type="file" className="hidden" onChange={(e) => setProfileImg(e.target.files[0])} /> */}
-            <input  type="file" aria-label="upload" value={profile_image} nChange={(e) => setProfile_image(e.target.files[0])} disabled="" className="flex-grow py-2 font-medium text-gray-300 x-3 m text-ellipsis dark:bg-gray-900 dark:text-gray-300 ml-[90px]"/>
-            {errors.profile_image && <p className="mt-1 text-sm text-red-500 ">{errors.profile_image}</p>}
-            
-          </label>
-        </div>
-
-       
-        <div className="pl-[40px] w-[700px]">
-        <div>
-              <label htmlFor="gender" className="block mb-2 text-sm font-medium text-gray-900">Type<span className='text-[red]'>*</span></label>
-              <select id="gender" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value={type} onChange={(e) => setType(e.target.value)} required>
-                <option value="" disabled>Select Type</option>
-                <option value="DAY">day</option>
-                <option value="BOARDER">boarder</option>
-              </select> {errors.gender && <p className="mt-1 text-sm text-red-500 ">{errors.gender}</p>}
-            </div>
-
-            <div>
-              <label htmlFor="first_name" className="block mb-2 text-sm font-medium text-gray-900">First name<span className='text-[red]'>*</span></label>
-              <input type="text" id="first_name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value={first_name} onChange={(e) => setFirst_name(e.target.value)} required />
-              {errors.first_name && <p className="mt-1 text-sm text-red-500 ">{errors.first_name}</p>}
-            </div>
-          
-            <div>
-              <label htmlFor="last_name" className="block mb-2 text-sm font-medium text-gray-900">Last name<span className='text-[red]'>*</span></label>
-              <input type="text" id="last_name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value={last_name} onChange={(e) => setLast_name(e.target.value)} required />
-              {errors.last_name && <p className="mt-1 text-sm text-red-500 ">{errors.last_name}</p>}
-            </div>
-
-            <div>
-              <label htmlFor="other_name" className="block mb-2 text-sm font-medium text-gray-900">Other Name<span className='text-[red]'>*</span></label>
-              <input type="text" id="other_name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value={other_name} onChange={(e) => setOther_name(e.target.value)} />
-              {errors.other_name && <p className="mt-1 text-sm text-red-500 ">{errors.other_name}</p>}
-            </div>
-           
-            <div>
-              <label htmlFor="other_name" className="block mb-2 text-sm font-medium text-gray-900">Nationality<span className='text-[red]'>*</span></label>
-              <input type="text" id="other_name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value={nationality} onChange={(e) => setNationality(e.target.value)} />
-              {errors.nationality && <p className="mt-1 text-sm text-red-500 ">{errors.nationality}</p>}
-            </div>
-            <div>
-      <label htmlFor="date_of_birth" className="block mb-2 text-sm font-medium text-gray-900">
-        Date of Birth<span className='text-[red]'>*</span>
-      </label>
-      <input
-        type="date"
-        id="date_of_birth"
-        className="vDateField border bg-white font-medium min-w-20 rounded-md shadow-sm text-gray-500 text-sm focus:ring focus:ring-primary-300 focus:border-primary-600 focus:outline-none group-[.errors]:border-red-600 group-[.errors]:focus:ring-red-200 dark:bg-gray-900 dark:border-gray-700 dark:text-gray-300 dark:focus:border-primary-600 dark:focus:ring-primary-700 dark:focus:ring-opacity-50 dark:group-[.errors]:border-red-500 dark:group-[.errors]:focus:ring-red-600/40 px-3 py-2 w-full min-w-52"
-        value={date_of_birth} onChange={(e) => setDate_of_birth(e.target.value)}
-        
-        required
-      />
-      {/* Display error message if there's any */}
-      {/* Example: {errors.date_of_birth && <p className="mt-1 text-sm text-red-500">{errors.date_of_birth}</p>} */}
-    </div>
-            <div>
-              <label htmlFor="gender" className="block mb-2 text-sm font-medium text-gray-900">Parent<span className='text-[red]'>*</span></label>
-              <select id="gender" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value={parent} onChange={(e) => setParent(e.target.value)} required>
-              <option value="" selected="">Select value</option>
-            
-                {parentData.map((x) => (
-                   <option value={x.id}>{x.code} - {x.email}</option>
-                ))}
-                
-                
-              </select>
-              {errors.parent && <p className="mt-1 text-sm text-red-500 ">{errors.parent}</p>}
-            </div>
-            <div>
-              <label htmlFor="other_name" className="block mb-2 text-sm font-medium text-gray-900">Religion<span className='text-[red]'>*</span></label>
-              <input type="text" id="other_name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value={religion} onChange={(e) => setReligion(e.target.value)} />
-              {errors.religion && <p className="mt-1 text-sm text-red-500 ">{errors.religion}</p>}
-            </div>
-        </div>
+      <div>
+        <label>Type</label>
+        <select name="type" value={formData.type} onChange={handleInputChange} required>
+          <option value="" disabled>Select Type</option>
+          <option value="DAY">Day</option>
+          <option value="BOARDER">Boarder</option>
+        </select>
+        {errors.type && errors.type.map((error, index) => <p key={index} className="error">{error}</p>)}
       </div>
-        </main>
-     
-    
-     
 
-      {/* Submit Button */}
-      <button type="submit" className="w-1/4 md:ml-[69px] text-white bg-blue-700 mt-[70px] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Submit</button>
+      {/* <div>
+        <label>Registration ID</label>
+        <input
+          type="text"
+          name="registration_id"
+          value={formData.registration_id}
+          onChange={handleInputChange}
+          required
+        />
+        {errors.registration_id && errors.registration_id.map((error, index) => <p key={index} className="error">{error}</p>)}
+      </div> */}
+
+      <div>
+        <label>First Name</label>
+        <input
+          type="text"
+          name="first_name"
+          value={formData.first_name}
+          onChange={handleInputChange}
+          required
+        />
+        {errors.first_name && errors.first_name.map((error, index) => <p key={index} className="error">{error}</p>)}
+      </div>
+
+      <div>
+        <label>Other Name</label>
+        <input
+          type="text"
+          name="other_name"
+          value={formData.other_name}
+          onChange={handleInputChange}
+        />
+        {errors.other_name && errors.other_name.map((error, index) => <p key={index} className="error">{error}</p>)}
+      </div>
+
+      <div>
+        <label>Last Name</label>
+        <input
+          type="text"
+          name="last_name"
+          value={formData.last_name}
+          onChange={handleInputChange}
+          required
+        />
+        {errors.last_name && errors.last_name.map((error, index) => <p key={index} className="error">{error}</p>)}
+      </div>
+
+      <div>
+        <label>Date of Birth</label>
+        <input
+          type="date"
+          name="date_of_birth"
+          value={formData.date_of_birth}
+          onChange={handleInputChange}
+          required
+        />
+        {errors.date_of_birth && errors.date_of_birth.map((error, index) => <p key={index} className="error">{error}</p>)}
+      </div>
+
+      <div>
+        <label>Gender</label>
+        <select name="gender" value={formData.gender} onChange={handleInputChange} required>
+          <option value="" disabled>Select Gender</option>
+          <option value="MALE">Male</option>
+          <option value="FEMALE">Female</option>
+        </select>
+        {errors.gender && errors.gender.map((error, index) => <p key={index} className="error">{error}</p>)}
+      </div>
+
+      <div>
+        <label>Home Address</label>
+        <input
+          type="text"
+          name="home_address"
+          value={formData.home_address}
+          onChange={handleInputChange}
+          required
+        />
+        {errors.home_address && errors.home_address.map((error, index) => <p key={index} className="error">{error}</p>)}
+      </div>
+
+      <div>
+        <label>State of Origin</label>
+        <input
+          type="text"
+          name="state_of_origin"
+          value={formData.state_of_origin}
+          onChange={handleInputChange}
+          required
+        />
+        {errors.state_of_origin && errors.state_of_origin.map((error, index) => <p key={index} className="error">{error}</p>)}
+      </div>
+
+      <div>
+        <label>Local Government Area</label>
+        <input
+          type="text"
+          name="local_government_area"
+          value={formData.local_government_area}
+          onChange={handleInputChange}
+          required
+        />
+        {errors.local_government_area && errors.local_government_area.map((error, index) => <p key={index} className="error">{error}</p>)}
+      </div>
+
+      <div>
+        <label>Nationality</label>
+        <input
+          type="text"
+          name="nationality"
+          value={formData.nationality}
+          onChange={handleInputChange}
+          required
+        />
+        {errors.nationality && errors.nationality.map((error, index) => <p key={index} className="error">{error}</p>)}
+      </div>
+
+      <div>
+        <label>Parent</label>
+        <select name="parent" value={formData.parent} onChange={handleInputChange} required>
+          <option value="" disabled>Select Parent</option>
+          {parentsData.map((parent) => (
+            <option key={parent.id} value={parent.id}>
+              {parent.code} - {parent.email}
+            </option>
+          ))}
+        </select>
+        {errors.parent && errors.parent.map((error, index) => <p key={index} className="error">{error}</p>)}
+      </div>
+
+      <div>
+        <label>Religion</label>
+        <input
+          type="text"
+          name="religion"
+          value={formData.religion}
+          onChange={handleInputChange}
+          required
+        />
+        {errors.religion && errors.religion.map((error, index) => <p key={index} className="error">{error}</p>)}
+      </div>
+
+      <div>
+        <label>Profile Image</label>
+        <input
+          type="file"
+          name="profile_image"
+          onChange={handleFileChange}
+        />
+        {errors.profile_image && errors.profile_image.map((error, index) => <p key={index} className="error">{error}</p>)}
+      </div>
+
+      <button type="submit">Submit</button>
+      {errors.global && <p className="error">{errors.global}</p>}
     </form>
+    
     </div>
   );
 };
