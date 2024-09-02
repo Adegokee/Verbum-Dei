@@ -75,8 +75,33 @@ const TeacherManagement = ({ setTeacherData, teacherData}) => {
       </div>
 
       <nav className="flex flex-wrap ">
-        {records.map((teacher) => (
-         <Link to={`/teacher_profile/${teacher.id}`}>
+      {records.map((teacher) => (
+  <Link key={teacher.id} to={`/teacher-management/${teacher.id}`}>
+    <main className="m-[10px] cursor-pointer bg-white text-center rounded-lg py-[20px] w-[200px]">
+      <div className="flex flex-col items-center justify-center">
+        <div className="w-[40px] h-[40px] rounded-full">
+          <img src={teacher.profile_img ? teacher.profile_img : profile} className="object-cover w-full h-full rounded-full cursor-pointer" alt={teacher.first_name} />
+        </div>
+        <span className="ml-[10px] font-semibold">{`${teacher.first_name} ${teacher.last_name}`}</span>
+      </div>
+      <div>
+        <p className="">{teacher.staff_id}</p>
+      </div>
+      <div>
+        <p className="">{teacher.position}</p>
+      </div>
+      <div className="flex items-center pl-[45px]">
+        <span className="mr-[20px] text-[#007bff] py-[10px] px-[15px] rounded-2xl bg-[#d6dfe8]">
+          <FaPhone />
+        </span>
+        <span className="text-[#007bff] text-[20px] py-[10px] px-[15px] rounded-2xl bg-[#d6dfe8]">
+          <TiMessages />
+        </span>
+      </div>
+    </main>
+  </Link>
+))}   {records.map((teacher) => (
+         <Link to={`/teacher-management/${teacher.id}`}>
           <main key={teacher.id} className="m-[10px] cursor-pointer  bg-white text-center rounded-lg py-[20px] w-[200px]">
             <div className="flex flex-col items-center justify-center">
               <div className="w-[40px] h-[40px] rounded-full">

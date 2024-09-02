@@ -9,6 +9,8 @@ import LibraryAndManagement from './components/LibraryAndManagement';
 import InventoryManagement from './components/InventoryManagement';
 import EventManagement from './components/EventManagement';
 import Page from './page/Page';
+import Signup from './components/SignUp';
+import PasswordReset from './components/PasswordReset';
 import './App.css'
 import {Routes, Route} from "react-router-dom";
 import CreateStudent from './components/CreateStudent';
@@ -21,6 +23,11 @@ import { myData } from './components/data';
 import Parent from './components/Parent';
 import CreateParent from './components/CreateParent';
 import TeachersProfile from './components/TeachersProfile';
+import Navbar from './components/navbar/Navbar';
+import Login from './components/Login';
+import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
 
 
 function App() {
@@ -29,11 +36,50 @@ function App() {
   const [parent, setParent] = useState([])
   const [loading, setLoading] = useState(true);
   const [errors, setErrors] = useState({});
+  const [myerrors, setMyErrors] = useState({});
+  // import Dashboard from './Dashboard';
+  const [user, setUser] = useState(null);
+
+
+const PrivateRoute = ({ user, children }) => {
+  return user ? children : <Navigate to="/login" />;
+};
+
+// const handleLogout = () => {
+//   setUser(null);
+//   localStorage.removeItem('token');
+//   navigate('/login');
+// };
+
+const handleLogout = async (setUser) => {
+  try {
+    const token = localStorage.getItem('token');
+    const response = await fetch('https://sore-ebba-emekadefirst-e04c4e7b.koyeb.app/sub-admin/api/auth/logout/', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error('Logout failed');
+    }
+
+    setUser(null); // Clear user data
+    localStorage.removeItem('token'); // Remove token
+    Navigate('/login'); // Redirect to login page
+  } catch (error) {
+    console.error('Error logging out:', error);
+  }
+};
+
+
+
 
   useEffect(() => {
     const fetchStudentData = async () => {
       try {
-        const response = await fetch('https://sore-ebba-emekadefirst-e04c4e7b.koyeb.app/student/students/');
+        const response = await fetch('https://verbumdei-management-system-vms.onrender.com/student/students/');
         const data = await response.json();
         setMydata(data);
         // console.log(data)
@@ -52,29 +98,30 @@ function App() {
   }, [mydata]);
  
   const addStudent = async (newReview) => {
-    const url = "https://sore-ebba-emekadefirst-e04c4e7b.koyeb.app/student/students/";
-  
+    const url = "https://verbumdei-management-system-vms.onrender.com/student/students/";
+
     try {
       const response = await fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newReview),
       });
-  
-      const data = await response.json();
       
+      const data = await response.json();
+      // setTeacherData([data, ...teacherData]);
       if (response.ok) {
+     
         setMydata([data, ...mydata]);
         setErrors({}); 
       } else {
-        setErrors(data);
+       
+        setErrors(data); 
       }
     } catch (error) {
       console.error('Error adding teacher:', error);
       setErrors({ global: 'An error occurred while adding the teacher.' });
     }
   };
-  
    const editReview = async (id, updatedReview) => {
     const url = `https://weekly-tamqrah-emekadefirst-39635d1c.koyeb.app/class/classes/${id}/`;
     const response = await fetch(url, {
@@ -103,7 +150,7 @@ function App() {
    useEffect(() => {
     const fetchTeacherData = async () => {
       try {
-        const response = await fetch('https://sore-ebba-emekadefirst-e04c4e7b.koyeb.app/staff/staff/');
+        const response = await fetch('https://verbumdei-management-system-vms.onrender.com/staff/staff/');
         const data = await response.json();
         setTeacherData(data);
         // console.log(data)
@@ -122,7 +169,7 @@ function App() {
   }, [teacherData]);
 
   const addTeacher = async (newReview) => {
-    const url = "https://sore-ebba-emekadefirst-e04c4e7b.koyeb.app/staff/staff/";
+    const url = "https://verbumdei-management-system-vms.onrender.com/staff/staff/";
 
     try {
       const response = await fetch(url, {
@@ -172,7 +219,7 @@ function App() {
   useEffect(() => {
     const fetchParentData = async () => {
       try {
-        const response = await fetch('https://sore-ebba-emekadefirst-e04c4e7b.koyeb.app/parent/');
+        const response = await fetch('https://verbumdei-management-system-vms.onrender.com/parent/');
         const data = await response.json();
         setParent(data);
         // console.log(data)
@@ -191,7 +238,7 @@ function App() {
   }, [parent]);
 
   const addMyParent = async (newReview) => {
-    const url = "https://sore-ebba-emekadefirst-e04c4e7b.koyeb.app/parent/";
+    const url = "https://verbumdei-management-system-vms.onrender.com/parent/";
   
     try {
       const response = await fetch(url, {
@@ -212,7 +259,7 @@ function App() {
       
       // Update state with response data
       setParent([data, ...parent]);
-      setErrors({});
+      setMyErrors({});
     } catch (error) {
       console.error('Error adding parent:', error);
       setErrors({ global: 'An error occurred while adding the parent.' });
@@ -238,18 +285,29 @@ function App() {
   return (
     <div className="">
       <Page/>
-    
+
+        
       
       <Routes>
-      
+      <Route path="/login" element={<Login/>}/>
+      <Route path="/dashboard" element={<Dashboard user={user} />} />
+
         <Route path="/" element={<Home/>}/>
-        <Route path="/teacher_profile/:id" elememt={<TeachersProfile />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/create_parent" element={<CreateParent addMyParent={addMyParent} errors={errors}/>}/>
+        
+        <Route path="/teacher-management" element={<TeacherManagement teacherData={teacherData}  setTeacherData={setTeacherData} />} />
+        <Route path="/teacher-management/:id" element={<TeachersProfile />} />
+        <Route path="/dashboard" element={
+          <PrivateRoute>
+            <Dashboard />
+          </PrivateRoute>
+          } />
+           <Route path="/signup" element={<Signup />} />
+           <Route path="/password-reset" element={<PasswordReset />} />
+        <Route path="/create_parent" element={<CreateParent addMyParent={addMyParent} myerrors={myerrors}/>}/>
         <Route path="/parent" element={<Parent parent={parent} errors={errors} />} />
         <Route path="/student-management" element={<StudentManagement  mydata={mydata} setMydata={setMydata}/>} />
         <Route path='/student-management/:id' element={< StudentId/>}/>
-        <Route path="/teacher-management" element={<TeacherManagement teacherData={teacherData}  setTeacherData={setTeacherData} />} />
+        {/* <Route path="/teacher-management" element={<TeacherManagement teacherData={teacherData}  setTeacherData={setTeacherData} />} /> */}
         <Route path="/fee-and-payment" element={<FeesAndPayment />} />
         <Route path="/class-and-exam" element={<ClassAndExam />} />
         <Route path="/library-and-management" element={<LibraryAndManagement />} />

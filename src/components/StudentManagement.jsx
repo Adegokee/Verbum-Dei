@@ -156,6 +156,8 @@ const StudentManagement = ({mydata, setMydata}) => {
       
   </main>
   {mydata.map((x)=> (
+    <Link key={x.id} to={`/student-management/${x.id}`}>
+   
      <main className='mt-[20px] flex justify-between items-center border-b-2 border-[gray] py-[20px]'>
      <div  className='flex items-center'>
        <input type="checkbox" className='mr-[12px]' />
@@ -193,6 +195,9 @@ const StudentManagement = ({mydata, setMydata}) => {
 
      
  </main>
+ 
+ </Link>
+ 
   ))}
  
 

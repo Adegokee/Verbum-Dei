@@ -102,6 +102,7 @@ const CreateTeacher = ({addTeacher, errors}) => {
             {errors.profile_img && <p className="text-red-500 text-sm mt-1 ">{errors.profile_img}</p>}
             
           </label>
+          {errors.profile_img && <p className="text-red-500 text-sm mt-1 ">{errors.profile_img}</p>}
         </div>
 
         {/* Form Fields */}
