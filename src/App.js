@@ -96,32 +96,47 @@ const handleLogout = async (setUser) => {
   useEffect(() => {
       console.log(mydata);
   }, [mydata]);
- 
   const addStudent = async (newReview) => {
-    const url = "https://verbumdei-management-system-vms.onrender.com/student/students/";
+    // const url = 'https://jsonplaceholder.typicode.com/posts'
+    const url = "https://verbumdei-management-system-vms.onrender.com/student/students/"
 
-    try {
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(newReview),
-      });
+    const response = await fetch(url,{
+      method:'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(newReview),
+    })
+    const data = await response.json()
+    setMydata([data, ...mydata]);
+
+   }
+
+ 
+  // const addStudent  = async (newReview) => {
+  //   const url = "https://verbumdei-management-system-vms.onrender.com/student/students/";
+
+  //   try {
+  //     const response = await fetch(url, {
+  //       method: 'POST',
+  //       headers: { 'Content-Type': 'application/json'},
+  //       body: JSON.stringify(newReview),
+  //     });
       
-      const data = await response.json();
-      // setTeacherData([data, ...teacherData]);
-      if (response.ok) {
+  //     const data = await response.json();
      
-        setMydata([data, ...mydata]);
-        setErrors({}); 
-      } else {
+  //     if (response.ok) {
+     
+  //        setMydata([data, ...mydata]);
+  //       setErrors({}); 
+  //     } else {
        
-        setErrors(data); 
-      }
-    } catch (error) {
-      console.error('Error adding teacher:', error);
-      setErrors({ global: 'An error occurred while adding the teacher.' });
-    }
-  };
+  //       setErrors(data); 
+  //     }
+  //   } catch (error) {
+  //     console.error('Error adding teacher:', error);
+  //     setErrors({ global: 'An error occurred while adding the teacher.' });
+  //   }
+  // };
+
    const editReview = async (id, updatedReview) => {
     const url = `https://weekly-tamqrah-emekadefirst-39635d1c.koyeb.app/class/classes/${id}/`;
     const response = await fetch(url, {
@@ -211,7 +226,7 @@ const handleLogout = async (setUser) => {
   //     }
   
   //     const data = await response.json();
-  //     setTeacherData([data, ...teacherData]);  // Ensure `teacherData` is defined and not null
+  //     setTeacherData([data, ...teacherData]);  
   //   } catch (error) {
   //     console.error("Error:", error);
   //   }

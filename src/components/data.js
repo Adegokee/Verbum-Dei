@@ -18,6 +18,8 @@ export let dashBoardIcon = [
     name: 'Student Management',
     route:'student-management'
 },
+
+
 {
     icon: <FaChalkboardTeacher />,
     name: 'Teacher Management',
