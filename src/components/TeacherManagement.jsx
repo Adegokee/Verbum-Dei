@@ -116,7 +116,7 @@ const TeacherManagement = ({ setTeacherData, teacherData}) => {
               <p className="">{teacher.position}</p>
             </div>
             <div className="flex items-center pl-[45px]">
-            
+                
             
               <span className="mr-[20px] text-[#007bff] py-[10px] px-[15px] rounded-2xl bg-[#d6dfe8]">
                 <FaPhone />
