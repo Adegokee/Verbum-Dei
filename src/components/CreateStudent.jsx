@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-const CreateStudent = ({ addStudent, mydata, errors, myparent }) => {
+const CreateStudent = ({ addStudent, myclass, mydata, errors, myparent }) => {
   // const [errors, setErrors] = useState({});
+
   const [type, setType] = useState('');
   const [registration_id, setRegistration_id] = useState('');
   const [first_name, setFirst_name] = useState('');
@@ -25,35 +26,46 @@ const CreateStudent = ({ addStudent, mydata, errors, myparent }) => {
 
   
   const handleSubmit = async (e) => {
- 
     e.preventDefault();
-    
-    const addReview = {type, registration_id, first_name, last_name, other_name,date_of_birth, gender, home_address, state_of_origin, religion, class_assigned, parent, local_government_area, profile_image, nationality}
 
-    addStudent(addReview);
-    setType("");
-    setClass_assigned("");
-    setDate_of_birth();
-    setFirst_name("");
+    const newReview = {
+      type,
+      registration_id,
+      first_name,
+      last_name,
+      other_name,
+      date_of_birth,
+      gender,
+      home_address,
+      state_of_origin,
+      religion,
+      class_assigned,
+      parent,
+      local_government_area,
+      profile_image,
+      nationality,
+    };
+
+    await addStudent(newReview);
+
+    console.log(newReview)
+    setType('');
+    setRegistration_id('');
+    setFirst_name('');
+    setOther_name('');
+    setLast_name('');
+    setDate_of_birth('');
     setGender('');
-    setLast_name("");
-    setState_of_origin("");
-    setLocal_government_area("");
-    setNationality("");
-    setOther_name("");
-    setParent("");
-    setProfile_image();
-    setReligion("");
-    setNationality('');
-    setRegistration_id("");
     setHome_address('');
-
-
-    console.log(addReview);
-
-
-
-  }
+    setState_of_origin('');
+    setLocal_government_area('');
+    setNationality('');
+    setReligion('');
+    setClass_assigned({});
+    setParent({});
+    setProfile_image(null);
+  };
+  
 
   return (
 
@@ -75,12 +87,12 @@ const CreateStudent = ({ addStudent, mydata, errors, myparent }) => {
             </div>
             {/* <input id="profile_img" type="file" className="hidden" onChange={(e) => setProfileImg(e.target.files[0])} /> */}
             {/* <input type="file" aria-label="Choose file to upload"  id="profile_img" value={setProfile_image} disabled="" nChange={(e) => setProfile_image(e.target.files[0])} className="w-[107px] flex-grow font-medium px-3 py-2 text-ellipsis dark:bg-gray-900 text-gray-300 dark:text-gray-300"/> */}
-            <input type="file" name="profile_image" value={setProfile_image} nChange={(e) => setProfile_image(e.target.files[0])} accept="image/*" required="" id="id_profile_image"/>
+            <input type="file" name="profile_image" value={setProfile_image} onChange={(e) => setProfile_image(e.target.files[0])} accept="image/*" required="" id="profile_image"/>
             
-            {errors.profile_image && <p className="text-red-500 text-sm mt-1 ">{errors.profile_image}</p>}
+            {errors.profile_image && <p className="mt-1 text-sm text-red-500 ">{errors.profile_image}</p>}
             
           </label>
-          {errors.profile_image && <p className="text-red-500 text-sm mt-1 ">{errors.profile_image}</p>}
+          {errors.profile_image && <p className="mt-1 text-sm text-red-500 ">{errors.profile_image}</p>}
         </div>
 
         <div className='mr-[100px]'>
@@ -220,14 +232,14 @@ const CreateStudent = ({ addStudent, mydata, errors, myparent }) => {
           <label className="block mb-2 text-sm font-medium text-gray-900">Parent<span className='text-[red]'>*</span></label>
           <select name="parent" value={parent} onChange={(e) => setParent(e.target.value)}className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
          
-            {myparent.map((x) => {
-               let {id, email, phone_number_1, phone_number_2, parent_name, home_address, code} = x
+            {mydata.map((x) => {
+              //  let {id, email, phone_number_1, phone_number_2, parent_name, home_address, code} = x
               // console.log(x)
               
               return(
                 <>
                 <option value="" disabled>Select Parent</option>
-              <option key={id} value={code}>{parent_name}</option>
+              <option key={x.parent.id} value={x.parent.code}>{x.parent.parent_name}</option>
             </>
 
               )})}
@@ -240,8 +252,11 @@ const CreateStudent = ({ addStudent, mydata, errors, myparent }) => {
           <label className="block mb-2 text-sm font-medium text-gray-900">Class Assign<span className='text-[red]'>*</span></label>
           <select name="class_assigned" value={class_assigned} onChange={(e) => setClass_assigned(e.target.value)} required className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" data-context="available-source" id="id_class_assigned">
           <option value="" selected="">Select Class</option>
-          <option value="2">SS1B</option>
-          <option value="1">SS1A</option>
+          {myclass.map((x)=> (
+             <option key={x.id} value={x.id} className='text-white bg-black'>{x.name}</option>
+           
+          ))}
+         
 
         </select>
         {errors.class_assigned && <p className="mt-1 text-sm text-red-500 ">{errors.class_assigned}</p>}

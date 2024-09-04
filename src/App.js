@@ -27,13 +27,15 @@ import Navbar from './components/navbar/Navbar';
 import Login from './components/Login';
 import { Navigate } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 
 
 function App() {
   const [mydata, setMydata] = useState([]);
   const [teacherData, setTeacherData] = useState([]);
-  const [parent, setParent] = useState([])
+  const [parent, setParent] = useState([]);
+  const [myclass, setMyClass] = useState([]);
   const [loading, setLoading] = useState(true);
   const [errors, setErrors] = useState({});
   const [myerrors, setMyErrors] = useState({});
@@ -97,7 +99,7 @@ const handleLogout = async (setUser) => {
       console.log(mydata);
   }, [mydata]);
   const addStudent = async (newReview) => {
-    // const url = 'https://jsonplaceholder.typicode.com/posts'
+
     const url = "https://verbumdei-management-system-vms.onrender.com/student/students/"
 
     const response = await fetch(url,{
@@ -296,7 +298,44 @@ const handleLogout = async (setUser) => {
 
   //  }
 
+  useEffect(() => {
+    const fetchClassData = async () => {
+      try {
+        const response = await fetch('https://verbumdei-management-system-vms.onrender.com/class/classes/');
+        const data = await response.json();
+        setMyClass(data);
+        // console.log(data)
+        // console.log(teacherData)
+      } catch (error) {
+        console.error('Failed to fetch teacher data:', error);
+      }
+    };
+    fetchClassData()
+    
+  }, []);
 
+
+  useEffect(() => {
+    console.log(myclass);
+  }, [myclass]);
+
+  // useEffect(() => {
+    // Replace with your API endpoint
+  //   axios.get('https://verbumdei-management-system-vms.onrender.com/class/classes/')
+  //   .then(response => {
+  //     if (Array.isArray(response.data)) {
+  //       setMyClass(response.data);
+  //     } else {
+  //       console.error('Expected an array of classes');
+  //     }
+  //   })
+  //   .catch(error => {
+  //     console.error('Error fetching data:', error);
+  //   });
+  // }, []);
+  //  useEffect(() => {
+  //   console.log(myclass);
+  // }, [myclass]);
   return (
     <div className="">
       <Page/>
@@ -328,7 +367,7 @@ const handleLogout = async (setUser) => {
         <Route path="/library-and-management" element={<LibraryAndManagement />} />
         <Route path="/inventory-management" element={<InventoryManagement />} />
         <Route path="/event-management" element={<EventManagement />} />
-        <Route path="/create-student" element={<CreateStudent addStudent={addStudent} mydata={mydata} errors={errors} myparent={parent}/>}/>
+        <Route path="/create-student" element={<CreateStudent addStudent={addStudent} myclass={myclass} mydata={mydata} errors={errors} myparent={parent}/>}/>
         <Route path="/create-teacher" element={<CreateTeacher addTeacher={addTeacher } errors={errors}/>}/>
         <Route path="/student-finished-reg" element={<StudentFinishedReg/>}/>
         <Route path="/teacher-finished-reg" element={<TeacherSuccess />} />
