@@ -9,7 +9,7 @@ const StudentId = () => {
 
   useEffect(() => {
     // Fetch staff data using the id from the URL
-    fetch(`https://verbumdei-management-system-vms.onrender.com/student/student/${id}/`)
+    fetch(`https://verbumdei-management-system-vms.onrender.com/student/students/${id}/`)
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');

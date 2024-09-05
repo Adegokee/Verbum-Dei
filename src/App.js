@@ -27,7 +27,6 @@ import Navbar from './components/navbar/Navbar';
 import Login from './components/Login';
 import { Navigate } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 
 
 
