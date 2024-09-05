@@ -43,6 +43,7 @@ function App() {
   const [subject, setSubject] =useState([]);
   // import Dashboard from './Dashboard';
   const [user, setUser] = useState(null);
+  const [inventoryType, setInventoryType] = useState();
 
 
 const PrivateRoute = ({ user, children }) => {
@@ -306,8 +307,7 @@ const handleLogout = async (setUser) => {
         const response = await fetch('https://verbumdei-management-system-vms.onrender.com/class/classes/');
         const data = await response.json();
         setMyClass(data);
-        // console.log(data)
-        // console.log(teacherData)
+        
       } catch (error) {
         console.error('Failed to fetch teacher data:', error);
       }
@@ -324,11 +324,10 @@ const handleLogout = async (setUser) => {
   useEffect(() => {
     const fetchSubject = async () => {
       try {
-        const response = await fetch('https://verbumdei-management-system-vms.onrender.com/class/classes/');
+        const response = await fetch('https://verbumdei-management-system-vms.onrender.com/class/subjects/');
         const data = await response.json();
         setSubject(data);
-        // console.log(data)
-        // console.log(teacherData)
+        
       } catch (error) {
         console.error('Failed to fetch teacher data:', error);
       }
@@ -348,8 +347,7 @@ const handleLogout = async (setUser) => {
         const response = await fetch('https://verbumdei-management-system-vms.onrender.com/class/classes/');
         const data = await response.json();
         setMyClass(data);
-        // console.log(data)
-        // console.log(teacherData)
+     
       } catch (error) {
         console.error('Failed to fetch teacher data:', error);
       }
@@ -361,6 +359,55 @@ const handleLogout = async (setUser) => {
 
   const addSubject = async (newReview) => {
     const url = "https://verbumdei-management-system-vms.onrender.com/class/subjects/";
+    
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newReview),
+      });
+      
+      if (!response.ok) {
+        const errorText = await response.text();
+       
+        throw new Error(`Server error ${response.status}: ${errorText}`);
+      }
+  
+      const data = await response.json();
+      
+      
+      setSubject(prevSubjects => [data, ...prevSubjects]);
+      setMyErrors({}); 
+    } catch (error) {
+      console.error('Error adding subject:', error.message);  
+      setErrors({ global: 'An error occurred while adding the subject.' });  
+    }
+  };
+  useEffect(() => {
+    const fetchInventoryType = async () => {
+      try {
+        const response = await fetch('https://verbumdei-management-system-vms.onrender.com/inventory/all-type/');
+        const data = await response.json();
+        setInventoryType(data);
+        
+      } catch (error) {
+        console.error('Failed to fetch teacher data:', error);
+      }
+    };
+    fetchInventoryType()
+    
+  }, []);
+
+
+  useEffect(() => {
+    console.log(inventoryType);
+  }, [inventoryType]);
+
+
+
+
+  const addInventoryType = async (newReview) => {
+    const url = "https://verbumdei-management-system-vms.onrender.com/inventory/all-type/";
   
     try {
       const response = await fetch(url, {
@@ -369,25 +416,24 @@ const handleLogout = async (setUser) => {
         body: JSON.stringify(newReview),
       });
       
-      // Check if the response is OK
+   
       if (!response.ok) {
-        // Read response text to debug server errors
+     
         const errorText = await response.text();
         throw new Error(`Server error: ${errorText}`);
       }
   
-      
+     
       const data = await response.json();
       
-   
-      setSubject([data, ...subject]);
+    
+      setInventoryType([data, ...inventoryType]);
       setMyErrors({});
     } catch (error) {
       console.error('Error adding parent:', error);
       setErrors({ global: 'An error occurred while adding the parent.' });
     }
   };
-  
   return (
     <div className="">
       <Page/>      
@@ -416,18 +462,12 @@ const handleLogout = async (setUser) => {
         <Route path="/fee-and-payment" element={<FeesAndPayment />} />
         <Route path="/class-and-exam" element={<ClassAndExam />} />
         <Route path="/library-and-management" element={<LibraryAndManagement />} />
-        <Route path="/inventory-management" element={<InventoryManagement />} />
+        <Route path="/inventory-management" element={<InventoryManagement inventoryType={inventoryType} />} />
         <Route path="/event-management" element={<EventManagement />} />
         <Route path="/create-student" element={<CreateStudent addStudent={addStudent} myclass={myclass} mydata={mydata} errors={errors} myparent={parent}/>}/>
         <Route path="/create-teacher" element={<CreateTeacher addTeacher={addTeacher } errors={errors}/>}/>
         <Route path="/student-finished-reg" element={<StudentFinishedReg/>}/>
         <Route path="/teacher-finished-reg" element={<TeacherSuccess />} />
-
-
-
-
-      
-      
 
       </Routes>
      
