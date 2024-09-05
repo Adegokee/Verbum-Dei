@@ -115,7 +115,7 @@ const TeachersProfile = () => {
               </nav>
           </main>
           <main>
-            <small>Date of Employment</small>
+            <small>Email:</small>
               <nav className='flex items-center '>
                 <div className='bg-[#0f83ff] p-[5px]  rounded-[50%] w-[30px] h-[30px] '>
                 <img src={cal} className=' w-[20px]  ' alt="" />
