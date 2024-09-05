@@ -228,21 +228,18 @@ const CreateStudent = ({ addStudent, myclass, mydata, errors, myparent }) => {
         </div>
 
         {/* Parent */}
-        <div>
+        <div className="mr-[100px]">
           <label className="block mb-2 text-sm font-medium text-gray-900">Parent<span className='text-[red]'>*</span></label>
-          <select name="parent" value={parent} onChange={(e) => setParent(e.target.value)}className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
-         
-            {mydata.map((x) => {
-              //  let {id, email, phone_number_1, phone_number_2, parent_name, home_address, code} = x
-              // console.log(x)
-              
-              return(
-                <>
-                <option value="" disabled>Select Parent</option>
-              <option key={x.parent.id} value={x.parent.code}>{x.parent.parent_name}</option>
-            </>
-
-              )})}
+          <select name="parent" value={parent} onChange={(e) => setParent(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
+            <option value="" disabled>Select Parent</option>
+            {myparent.length > 0 && mydata.map((x) => {
+              if (x.parent) {
+                return (
+                  <option key={x.id} value={x.code}>{x.parent_name}</option>
+                );
+              }
+              return null; 
+            })}
           </select>
           {errors.parent && <p className="mt-1 text-sm text-red-500 ">{errors.parent}</p>}
         </div>

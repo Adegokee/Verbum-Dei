@@ -171,7 +171,7 @@ const StudentManagement = ({mydata, setMydata}) => {
       <small className='font-semibold'>#{x.registration_id}</small>
      </div>
      <div>
-      <p className='font-semibold'>{x.class_assigned.created_at.slice(0, 10)}</p>
+      <p className='font-semibold'>{x.class_assigned.created_at}</p>
      </div>
      <div>
       <p className='ml-[30px] font-semibold'>{x.parent.parent_name}</p>
