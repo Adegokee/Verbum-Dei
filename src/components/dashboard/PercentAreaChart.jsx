@@ -19,11 +19,11 @@ const getPercents = (array: number[]) =>
 
 export default function PercentAreaChart() {
   return (
-   <div className="mt-[30px] absolute bg-white rounded-2xl border-[3px] border-gray-200 w-[600px] p-[20px]">
+   <div className="mt-[30px] absolute bg-white rounded-2xl border-[3px] border-gray-200 w-[580px] p-[20px]">
     <h3 className='font-bold'>Attendance Summary</h3>
 <LineChart
-      width={500}
-      height={200}
+      width={570}
+      height={150}
       series={[
         {
           data: getPercents(a),

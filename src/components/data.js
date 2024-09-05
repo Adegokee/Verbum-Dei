@@ -37,6 +37,12 @@ export let dashBoardIcon = [
 },
 {
     icon: <TiChartBar/>,
+    name: 'Subject',
+    'route': 'subject-management'
+    
+},
+{
+    icon: <TiChartBar/>,
     name: 'Class and Exam',
     'route': 'class-and-exam'
     

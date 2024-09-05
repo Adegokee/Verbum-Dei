@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import mywindow from '../assest/myIcon.png'
 import Icon from '../assest/icon.png';
 import cal from '../assest/calendar_today1.png'
-const TeachersProfile = () => {
+const TeachersProfile = ({editReview}) => {
   const { id } = useParams();  // Get the teacher ID from the URL
   const [staff, setStaff] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -19,17 +19,17 @@ const TeachersProfile = () => {
         return response.json();
       })
       .then(data => {
-        setStaff(data);  // Set the staff data to state
+        setStaff(data); 
         setLoading(false);
       })
       .catch(error => {
-        setError(error.message);  // Handle any errors
+        setError(error.message);  
         setLoading(false);
       });
   }, [id]);
 
-  if (loading) return <p>Loading...</p>;  // Display loading message while fetching data
-  if (error) return <p>Error: {error}</p>;  // Display error message if there's an error
+  if (loading) return <p>Loading...</p>;  
+  if (error) return <p>Error: {error}</p>;  
 
   return (
     <div className='dashboard absolute bg-[#f5f9fc] top-[75px] left-[16%] p-[10px] '>
@@ -37,7 +37,7 @@ const TeachersProfile = () => {
       {staff ? (
         <div>
          
-         <main className='flex justify-between items-center'>
+         <main className='flex items-center justify-between'>
          <div className='w-[100px] h-[100px] rounded-[50%] border-2 border-[#0f83ff]  '>
          <img src={staff.profile_img} className='w-full h-full rounded-[50%]' alt="" />
          </div>
@@ -49,7 +49,7 @@ const TeachersProfile = () => {
          </main>
           <p>{staff.staff_id}</p>
           
-          <main className='flex justify-between items-center'>
+          <main className='flex items-center justify-between'>
                 <div>
                 <p className='text-[20px] font-semibold '>{staff.first_name} {staff.last_name} <span className='ml-[15px] text-[10px] bg-[#00b69b] text-white rounded-full font-thin p-[5px]'>{staff.status}</span></p>
                 <p className='font-semibold text-[#beb8c8]'>{staff.position} Teacher</p>
@@ -57,7 +57,7 @@ const TeachersProfile = () => {
 
                 <div className='bg-[#0f83ff] flex items-center justify-center p-[10px] w-[100px] h-[30px] rounded-md'>
                   <span className='bg-[#0f83ff] text-white p-[5px] rounded-full'><img src={mywindow} alt="" /></span>
-                  <p className='text-white '>Edit</p>
+                  <button onClick={() => editReview(staff.id)} className='text-white '>Edit</button>
                 </div>
           </main>
          

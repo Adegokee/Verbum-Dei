@@ -27,6 +27,8 @@ import Navbar from './components/navbar/Navbar';
 import Login from './components/Login';
 import { Navigate } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import Subject from './components/Subject';
+import CreateSubject from './components/CreateSubject';
 
 
 
@@ -38,6 +40,7 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [errors, setErrors] = useState({});
   const [myerrors, setMyErrors] = useState({});
+  const [subject, setSubject] =useState([]);
   // import Dashboard from './Dashboard';
   const [user, setUser] = useState(null);
 
@@ -318,32 +321,81 @@ const handleLogout = async (setUser) => {
     console.log(myclass);
   }, [myclass]);
 
-  // useEffect(() => {
-    // Replace with your API endpoint
-  //   axios.get('https://verbumdei-management-system-vms.onrender.com/class/classes/')
-  //   .then(response => {
-  //     if (Array.isArray(response.data)) {
-  //       setMyClass(response.data);
-  //     } else {
-  //       console.error('Expected an array of classes');
-  //     }
-  //   })
-  //   .catch(error => {
-  //     console.error('Error fetching data:', error);
-  //   });
-  // }, []);
-  //  useEffect(() => {
-  //   console.log(myclass);
-  // }, [myclass]);
+  useEffect(() => {
+    const fetchSubject = async () => {
+      try {
+        const response = await fetch('https://verbumdei-management-system-vms.onrender.com/class/classes/');
+        const data = await response.json();
+        setSubject(data);
+        // console.log(data)
+        // console.log(teacherData)
+      } catch (error) {
+        console.error('Failed to fetch teacher data:', error);
+      }
+    };
+    fetchSubject()
+    
+  }, []);
+
+
+  useEffect(() => {
+    console.log(subject);
+  }, [subject]);
+
+  useEffect(() => {
+    const fetchClassData = async () => {
+      try {
+        const response = await fetch('https://verbumdei-management-system-vms.onrender.com/class/classes/');
+        const data = await response.json();
+        setMyClass(data);
+        // console.log(data)
+        // console.log(teacherData)
+      } catch (error) {
+        console.error('Failed to fetch teacher data:', error);
+      }
+    };
+    fetchClassData()
+    
+  }, []);
+
+
+  const addSubject = async (newReview) => {
+    const url = "https://verbumdei-management-system-vms.onrender.com/class/subjects/";
+  
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newReview),
+      });
+      
+      // Check if the response is OK
+      if (!response.ok) {
+        // Read response text to debug server errors
+        const errorText = await response.text();
+        throw new Error(`Server error: ${errorText}`);
+      }
+  
+      
+      const data = await response.json();
+      
+   
+      setSubject([data, ...subject]);
+      setMyErrors({});
+    } catch (error) {
+      console.error('Error adding parent:', error);
+      setErrors({ global: 'An error occurred while adding the parent.' });
+    }
+  };
+  
   return (
     <div className="">
-      <Page/>
-
-        
-      
+      <Page/>      
       <Routes>
       <Route path="/login" element={<Login/>}/>
       <Route path="/dashboard" element={<Dashboard user={user} />} />
+      <Route path="/subject-management" element={<Subject subject={subject}  />}/>
+      <Route path="/create-subject" element={<CreateSubject teacherData={teacherData} myclass={myclass} subject={subject} addSubject={addSubject} />}/> 
 
         <Route path="/" element={<Home/>}/>
         

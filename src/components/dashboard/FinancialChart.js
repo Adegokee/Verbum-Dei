@@ -17,11 +17,11 @@ const xLabels = [
 
 export default function FinancialChart() {
   return (
- <div className=' absolute left-[600px] bg-white rounded-2xl ml-[20px] mt-[30px] border-[3px] border-gray-200 w-[600px] p-[20px]'>
+ <div className=' absolute left-[600px] bg-white rounded-2xl ml-[20px] mt-[30px] border-[3px] border-gray-200 w-[590px] p-[20px]'>
        <h3 className='font-bold'>Fanancial Summary</h3>
        <BarChart
-      width={500}
-      height={200}
+      width={580}
+      height={150}
       series={[
         { data: pData, label: '', stack: 'stack1' },
         { data: amtData, label: '' },
