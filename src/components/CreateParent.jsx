@@ -34,7 +34,7 @@ const CreateParent = ({addMyParent, myerrors} ) => {
 
     };
   return (
-    <div className='dashboard absolute bg-[#f5f9fc] top-[75px] left-[16%] p-[10px]'>
+    <div  className='dashboard hero-pattern absolute  top-[75px] left-[16%] p-[10px]'>
         
         <p className='mb-[40px] ml-[150px] text-[#227fff] font-bold text-[20px]'>Parent Form</p>
 

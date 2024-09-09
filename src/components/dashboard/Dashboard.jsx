@@ -75,18 +75,18 @@ useEffect(() => {
       <div>
       <section class="flex">
       <div className='pt-[20px] pl-[13px]'>
-            <h1 className='text-[30px] font-bold good mr-[10px]'> Good Morning, <span className="text-[#2580ff]">Favor John</span></h1>
+            <h1 className='text-[20px] font-bold good mr-[90px]'> Good Morning, <span className="text-[#2580ff]">Favor John</span></h1>
         </div>
 
         <div className='w-[390px] h-[116px] mb-[14px] px-3 flex items-center bg-white border-[3px] border-gray-200 rounded-md'>
-            <main className='bg-[#fcc43e] w-[40px] h-[40px] rounded-full flex justify-center items-center mr-[20px] '>
+            <main className='bg-[#fcc43e] w-[25px] h-[25px] rounded-full flex justify-center items-center mr-[20px] '>
             <img src={payment} alt="" />
             </main>
 
             <main>
-                <p className='text-[#dbd8e1]'>Total Tution for the month</p>
-                <p className='flex items-center text-2xl font-bold leading-3'> <span className=''><TbCurrencyNaira /></span>123,456</p>
-                <p className='text-[#dbd8e1]'><span className='text-[#9ad9c6]'>+23% </span> than last month</p>
+                <small className='text-[#dbd8e1]'>Total Tution for the month</small>
+                <p className='flex items-center text-[15px] font-bold leading-3'> <span className=''><TbCurrencyNaira /></span>123,456</p>
+                <small className='text-[#dbd8e1]'><span className='text-[#9ad9c6]'>+23% </span> than last month</small>
 
             </main>
             <img className='myimage' src={linegraph} alt="" />
@@ -95,7 +95,7 @@ useEffect(() => {
      <div className='flex'>
         <main className=' flex px-[3px]'>
             
-            <div className=' flex items-center pl-[20px] w-[280px]    bg-white rounded-3xl border-[3px] border-gray-200 h-[100px]'>
+            <div className=' flex items-center pl-[20px] w-[260px]    bg-white rounded-3xl border-[3px] border-gray-200 h-[100px]'>
             <nav>
             <h1 className='text-[20px] font-medium '>Student</h1>
                 <p className='text-[20px] font-medium '>{count.count}</p>
@@ -123,7 +123,7 @@ useEffect(() => {
         </main>
         <main className=' flex px-[3px]'>
         
-            <div className=' flex items-center pl-[20px] w-[280px]    bg-white rounded-3xl border-[3px] border-gray-200 h-[100px]'>
+            <div className=' flex items-center pl-[20px] w-[260px]    bg-white rounded-3xl border-[3px] border-gray-200 h-[100px]'>
             <nav>
             <h1 className='text-[20px] font-medium '>Teacher</h1>
                 <p className='text-[20px] font-medium '>{teacherCount.count}</p>

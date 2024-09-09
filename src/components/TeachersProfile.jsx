@@ -2,8 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import mywindow from '../assest/myIcon.png'
 import Icon from '../assest/icon.png';
-import cal from '../assest/calendar_today1.png'
-const TeachersProfile = ({editReview}) => {
+import cal from '../assest/calendar_today1.png';
+import profileavatar from '../assest/profile-avatar.png'
+
+
+
+const TeachersProfile = ({updateTeacher}) => {
   const { id } = useParams();  // Get the teacher ID from the URL
   const [staff, setStaff] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -27,9 +31,15 @@ const TeachersProfile = ({editReview}) => {
         setLoading(false);
       });
   }, [id]);
+  const handleEdit = () => {
+    if (updateTeacher) {
+      updateTeacher(staff);
+    }
+  };
 
   if (loading) return <p>Loading...</p>;  
   if (error) return <p>Error: {error}</p>;  
+
 
   return (
     <div className='dashboard absolute bg-[#f5f9fc] top-[75px] left-[16%] p-[10px] '>
@@ -39,7 +49,7 @@ const TeachersProfile = ({editReview}) => {
          
          <main className='flex items-center justify-between'>
          <div className='w-[100px] h-[100px] rounded-[50%] border-2 border-[#0f83ff]  '>
-         <img src={staff.profile_img} className='w-full h-full rounded-[50%]' alt="" />
+         <img src={staff.profile_img? staff.profile_img: profileavatar} className='w-full h-full rounded-[50%]' alt="" />
          </div>
 
          <div>
@@ -57,7 +67,7 @@ const TeachersProfile = ({editReview}) => {
 
                 <div className='bg-[#0f83ff] flex items-center justify-center p-[10px] w-[100px] h-[30px] rounded-md'>
                   <span className='bg-[#0f83ff] text-white p-[5px] rounded-full'><img src={mywindow} alt="" /></span>
-                  <button onClick={() => editReview(staff.id)} className='text-white '>Edit</button>
+                  <button onClick={() => handleEdit(staff.id)} className='text-white '>Edit</button>
                 </div>
           </main>
          

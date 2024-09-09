@@ -22,9 +22,11 @@ const toggleDropdown = () => {
         <main className='mt-[50px] mx-[3px] border-b-2 border-[#c5c8ca]'>
           {dashBoardIcon.map((x) => (
             <Link to={`${x.route}`} key={x.route}>
-              <div  className='flex pl-[30px] rounded-[4px] mb-[10px] hover:text-white' onClick={() => setActive(x.name)}  style={{background: x.name === active && '#588efe', color: 'black',  padding:'10px'}} >
+              <div className={`flex items-center px-4 py-2 mb-2 rounded-md cursor-pointer ${
+                    x.name === active ? 'bg-blue-700 text-white' : 'text-gray-700 hover:bg-blue-700 hover:text-white'
+                  }`} >
                 <span className='mr-[5px] text-[20px]'>{x.icon}</span>
-                <span className='text-[15px] font-[450]'>{x.name}</span>
+                <span className='text-[12px] font-[490]'>{x.name}</span>
               </div>
             </Link>
           ))}

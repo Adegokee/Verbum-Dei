@@ -6,6 +6,7 @@ import { CiSearch } from "react-icons/ci";
 import { FaPhone } from "react-icons/fa6";
 import { TiMessages } from "react-icons/ti";
 import { HiDotsHorizontal } from "react-icons/hi";
+import profileavatar from '../assest/profile-avatar.png'
 
 const TeacherManagement = ({ setTeacherData, teacherData}) => {
   // const [teacherData, setTeacherData] = useState([]);
@@ -74,13 +75,13 @@ const TeacherManagement = ({ setTeacherData, teacherData}) => {
         {/* Add other categories similarly */}
       </div>
 
-      <nav className="flex flex-wrap ">
+      <nav className="flex flex-wrap justify-center ">
       {records.map((teacher) => (
   <Link key={teacher.id} to={`/teacher-management/${teacher.id}`}>
     <main className="m-[10px] cursor-pointer bg-white text-center rounded-lg py-[20px] w-[200px]">
       <div className="flex flex-col items-center justify-center">
         <div className="w-[40px] h-[40px] rounded-full">
-          <img src={teacher.profile_img ? teacher.profile_img : profile} className="object-cover w-full h-full rounded-full cursor-pointer" alt={teacher.first_name} />
+          <img src={teacher.profile_img ? teacher.profile_img : profileavatar} className="object-cover w-full h-full rounded-full cursor-pointer" alt={teacher.first_name} />
         </div>
         <span className="ml-[10px] font-semibold">{`${teacher.first_name} ${teacher.last_name}`}</span>
       </div>

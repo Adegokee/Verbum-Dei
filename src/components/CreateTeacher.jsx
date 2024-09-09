@@ -1,29 +1,31 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const CreateTeacher = ({addTeacher, errors}) => {
+const CreateTeacher = ({addTeacher, editTeacher, teacherData, errors}) => {
 
 
-  const [bvn, setBvn] = useState('');
-  const [created_at, setCreatedAt] = useState('');
-  const [email, setEmail] = useState('');
-  const [employment_type, setEmploymentType] = useState('');
-  const [first_name, setFirstName] = useState('');
-  const [gender, setGender] = useState('');
-  const [home_address, setHomeAddress] = useState('');
-  const [id, setId] = useState('');
-  const [last_name, setLastName] = useState('');
-  const [local_government_area, setLocalGovernmentArea] = useState('');
-  const [nin, setNin] = useState('');
-  const [other_name, setOtherName] = useState('');
-  const [phone_number_1, setPhoneNumber1] = useState('');
-  const [phone_number_2, setPhoneNumber2] = useState('');
-  const [position, setPosition] = useState('');
-  const [profile_img, setProfileImg] = useState(null);
-  const [staff_id, setStaffId] = useState('');
-  const [staff_type, setStaffType] = useState('');
-  const [state_of_origin, setStateOfOrigin] = useState('');
-  const [status, setStatus] = useState('');
+  const [bvn, setBvn] = useState(teacherData?.bvn || '');
+  const [created_at, setCreatedAt] = useState(teacherData?.created_at || '');
+  const [email, setEmail] = useState(teacherData?.email || '');
+  const [employment_type, setEmploymentType] = useState(teacherData?.employment_type || '');
+  const [first_name, setFirstName] = useState(teacherData?.first_name || '');
+  const [gender, setGender] = useState(teacherData?.gender || '');
+  const [home_address, setHomeAddress] = useState(teacherData?.home_address || '');
+  const [id, setId] = useState(teacherData?.id || '');
+  const [last_name, setLastName] = useState(teacherData?.last_name || '');
+  const [local_government_area, setLocalGovernmentArea] = useState(teacherData?.local_government_area || '');
+  const [nin, setNin] = useState(teacherData?.nin || '');
+  const [other_name, setOtherName] = useState(teacherData?.other_name || '');
+  const [phone_number_1, setPhoneNumber1] = useState(teacherData?.phone_number_1 || '');
+  const [phone_number_2, setPhoneNumber2] = useState(teacherData?.phone_number_2 || '');
+  const [position, setPosition] = useState(teacherData?.position || '');
+  const [profile_img, setProfileImg] = useState(teacherData?.profile_img || null);
+  const [staff_id, setStaffId] = useState(teacherData?.staff_id || '');
+  const [staff_type, setStaffType] = useState(teacherData?.staff_type || '');
+  const [state_of_origin, setStateOfOrigin] = useState(teacherData?.state_of_origin || '');
+  const [status, setStatus] = useState(teacherData?.status || '');
+
+  
  
   const handleSubmit= async (e) => {
     e.preventDefault()
@@ -51,6 +53,12 @@ const CreateTeacher = ({addTeacher, errors}) => {
       state_of_origin,
       status,
     };
+    if (id) {
+      await editTeacher(formData); // Update existing teacher
+    } else {
+      await addTeacher(formData); // Create new teacher
+    }
+    
     console.log(formData)
 
     addTeacher(formData)
@@ -81,6 +89,8 @@ const CreateTeacher = ({addTeacher, errors}) => {
     //   const file = e.target.files[0];
     //   setProfileImg(file);
   };
+
+
 
 
 
@@ -208,7 +218,7 @@ const CreateTeacher = ({addTeacher, errors}) => {
       </div>
 
       {/* Submit Button */}
-      <button type="submit" className="w-1/4 md:ml-[199px] text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Submit</button>
+      <button type="submit" className="w-1/4 md:ml-[599px] text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Submit</button>
     </form>
     </div>
   );
