@@ -47,7 +47,7 @@ const Navbar = () => {
 
   return (
     <div className='flex h-[77px] border-2 border-[#c5c8ca] items-center bg-[#f5f9fc]'>
-      <main className='flex items-center p-[12px] w-[282px] bg-[#f5f9fc] border-r-[1px] border-b-[1px] border-[#c5c8ca] z-[20px] px-auto'>
+      <main className='flex items-center p-[12px] w-[250px] bg-[#f5f9fc] border-r-[1px] border-b-[1px] border-[#c5c8ca] z-[20px] px-auto'>
         <div className='w-[50px]'>
           <img className='w-[100px] object-cover' src={tunde} alt="Profile" />
         </div>

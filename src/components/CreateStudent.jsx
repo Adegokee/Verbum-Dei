@@ -19,15 +19,33 @@ const CreateStudent = ({ addStudent, myclass, mydata, errors, myparent }) => {
   const [religion, setReligion] = useState('');
   const [class_assigned, setClass_assigned] = useState('');
   const [parent, setParent] = useState('');
-  const [profile_image, setProfile_image] = useState(null);
+  const [profile_image, setProfile_image] = useState("");
+  const [file, setFile] = useState(null);
  
+  const imageUrl = "https://verbumdei-management-system-vms.onrender.com/media/Student_profile/Annotation_2022-03-08_120639.jpg";
 
-
+  const handleFileChange = (event) => {
+    const selectedFile = event.target.files[0];
+    if (selectedFile) {
+      setFile(selectedFile);
+      setProfile_image(URL.createObjectURL(selectedFile)); // For previewing the selected file
+    }
+  };
 
 
   
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
+
+    const formData = new FormData();
+
+    // Check if a new file is uploaded
+    if (file) {
+      formData.append("profile_image", file); // append the file
+    } else {
+      // If no file, append the URL as is or fetch and convert it into a file
+      formData.append("profile_image", imageUrl); 
+    }
 
     const newReview = {
       type,
@@ -46,8 +64,9 @@ const CreateStudent = ({ addStudent, myclass, mydata, errors, myparent }) => {
       profile_image,
       nationality,
     };
+    console.log(newReview);
 
-    await addStudent(newReview);
+    addStudent(newReview);
 
     console.log(newReview)
     setType('');
@@ -72,12 +91,12 @@ const CreateStudent = ({ addStudent, myclass, mydata, errors, myparent }) => {
 
     <div className="dashboard absolute bg-[#f5f9fc] top-[75px] left-[16%] p-[10px]">
       <h6 className="p-[10px] text-[#198cff] text-[20px] font-bold">Student Details Registration</h6>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} encType="multipart/form-data">
       {errors.global && <p className="error">{errors.global}</p>}
    
 
-        <div className="flex ">
-        <div className="items-center justify-center w-[250px] h-[210px]">
+        <div className="flex  ">
+        <div className="items-center justify-center w-[350px] h-[210px] mr-[40px]">
           <label htmlFor="profile_img" className="flex flex-col items-center mb-[30px] justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50">
             <div className="flex flex-col items-center justify-center pt-5 pb-6">
               <svg className="w-8 h-8 mb-4 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
@@ -89,6 +108,8 @@ const CreateStudent = ({ addStudent, myclass, mydata, errors, myparent }) => {
             {/* <input id="profile_img" type="file" className="hidden" onChange={(e) => setProfileImg(e.target.files[0])} /> */}
             {/* <input type="file" aria-label="Choose file to upload"  id="profile_img" value={setProfile_image} disabled="" nChange={(e) => setProfile_image(e.target.files[0])} className="w-[107px] flex-grow font-medium px-3 py-2 text-ellipsis dark:bg-gray-900 text-gray-300 dark:text-gray-300"/> */}
             <input type="file" name="profile_image" value={setProfile_image} onChange={(e) => setProfile_image(e.target.files[0])} accept="image/*" required="" id="profile_image"/>
+            {/* <label for="profile_image">Profile Image:</label> */}
+            {/* <input type="file" id="profile_image" name="profile_image"  onChange={handleFileChange}  accept="image/*" className='ml-[100px]' required/> */}
             
             {errors.profile_image && <p className="mt-1 text-sm text-red-500 ">{errors.profile_image}</p>}
             
@@ -96,9 +117,9 @@ const CreateStudent = ({ addStudent, myclass, mydata, errors, myparent }) => {
           {errors.profile_image && <p className="mt-1 text-sm text-red-500 ">{errors.profile_image}</p>}
         </div>
 
-        <div className='mr-[100px]'>
+        <div className='w-[350px] mr-[25px]'>
                 {/* Type */}
-        <div className=''>
+        <div className=' '>
           <label className="block mb-2 text-sm font-medium text-gray-900">Type<span className='text-[red]'>*</span></label>
           <select name="type" value={type} onChange={(e) =>   setType(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
             <option value="" disabled>Select Type</option>
@@ -188,9 +209,9 @@ const CreateStudent = ({ addStudent, myclass, mydata, errors, myparent }) => {
         </div>
         </div>
 
-        <div className=''>
+        <div className='w-[350px] mr-[25px]'>
               {/* State of Origin */}
-        <div>
+        <div className=''>
           <label className="block mb-2 text-sm font-medium text-gray-900">State of Origin<span className='text-[red]'>*</span></label>
           <input
             type="text"
@@ -229,17 +250,25 @@ const CreateStudent = ({ addStudent, myclass, mydata, errors, myparent }) => {
         </div>
 
         {/* Parent */}
-        <div className="mr-[100px]">
+        <div className="mr-[]">
           <label className="block mb-2 text-sm font-medium text-gray-900">Parent<span className='text-[red]'>*</span></label>
           <select name="parent" value={parent} onChange={(e) => setParent(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
             <option value="" disabled>Select Parent</option>
             {myparent.map((x) => {
+<<<<<<< HEAD
               
+=======
+            
+>>>>>>> 036cc74e92d172b21fcb57d13e7a2f9516b42848
                 return (
-                  <option key={x.id} value={x.code}>{x.parent_name}</option>
+                  <option key={x.id} value={x.id}>{x.parent_name}</option>
                 );
+<<<<<<< HEAD
               
         
+=======
+           
+>>>>>>> 036cc74e92d172b21fcb57d13e7a2f9516b42848
             })}
           </select>
           {errors.parent && <p className="mt-1 text-sm text-red-500 ">{errors.parent}</p>}
@@ -251,7 +280,11 @@ const CreateStudent = ({ addStudent, myclass, mydata, errors, myparent }) => {
           <select name="class_assigned" value={class_assigned} onChange={(e) => setClass_assigned(e.target.value)} required className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" data-context="available-source" id="id_class_assigned">
           <option value="" selected="">Select Class</option>
           {myclass.map((x)=> (
+<<<<<<< HEAD
              <option key={x.id} value={x.id} className='text-white bg-black'>{x.name}</option> 
+=======
+             <option key={x.id} value={x.name} className='text-white bg-black'>{x.name}</option>
+>>>>>>> 036cc74e92d172b21fcb57d13e7a2f9516b42848
            
           ))}
          
@@ -273,7 +306,10 @@ const CreateStudent = ({ addStudent, myclass, mydata, errors, myparent }) => {
           />
           {errors.religion && <p className="mt-1 text-sm text-red-500 ">{errors.religion}</p>}
         </div>
+        <button className="w-[100%]  text-white bg-blue-700 mt-[34px] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" type="submit">Submit</button>
+        {errors.global && <p className="error">{errors.global}</p>}
         </div>
+        
               
         </div>
     
@@ -281,8 +317,7 @@ const CreateStudent = ({ addStudent, myclass, mydata, errors, myparent }) => {
   
         
 
-        <button className="w-[99px] md:ml-[369px] mx-auto text-white bg-blue-700 mt-[70px] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" type="submit">Submit</button>
-        {errors.global && <p className="error">{errors.global}</p>}
+       
         {/* console.log(errors) */}
       </form>
 

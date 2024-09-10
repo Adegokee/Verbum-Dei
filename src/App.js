@@ -149,16 +149,7 @@ const handleLogout = async (setUser) => {
   //   }
   // };
 
-   const editReview = async (id, updatedReview) => {
-    const url = `https://weekly-tamqrah-emekadefirst-39635d1c.koyeb.app/class/classes/${id}/`;
-    const response = await fetch(url, {
-      method: 'PUT',  
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(updatedReview),
-    });
-    const data = await response.json();
-    setMydata(mydata.map(item => (item.id === id ? data : item)));
-  };
+
 
 
   const deleteReview = async(id) => {
@@ -195,6 +186,18 @@ const handleLogout = async (setUser) => {
     // console.log(teacherData);
   }, [teacherData]);
 
+   const editTeacher= async (id, updatedReview) => {
+    const url = `https://verbumdei-management-system-vms.onrender.com/staff/staff/${id}/`;
+    const response = await fetch(url, {
+      method: 'PUT',  
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(updatedReview),
+    });
+    const data = await response.json();
+    setTeacherData(teacherData.map(item => (item.id === id ? data : item)));
+  };
+
+
   const addTeacher = async (newReview) => {
     const url = "https://verbumdei-management-system-vms.onrender.com/staff/staff/";
 
@@ -220,6 +223,38 @@ const handleLogout = async (setUser) => {
       setErrors({ global: 'An error occurred while adding the teacher.' });
     }
   };
+
+  // const editTeacher = async (id, updatedData) => {
+  //   const url = `https://verbumdei-management-system-vms.onrender.com/staff/staff/${id}/`;
+  
+  //   try {
+  //     const response = await fetch(url, {
+  //       method: 'PUT',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify(updatedData),
+  //     });
+  
+  //     const data = await response.json();
+  
+  //     if (response.ok) {
+  //       // Success - Update the state or notify the user
+  //       console.log('Teacher updated successfully:', data);
+  //       setTeacherData((prevData) =>
+  //         prevData.map((teacher) => (teacher.id === id ? data : teacher))
+  //       );
+  //       setErrors({});
+  //     } else {
+  //       // Handle validation errors from the API
+  //       setErrors(data);
+  //     }
+  //   } catch (error) {
+  //     console.error('Error updating teacher:', error);
+  //     setErrors({ global: 'An error occurred while editing the teacher.' });
+  //   }
+  // };
+
 
 
   
@@ -453,7 +488,7 @@ const handleLogout = async (setUser) => {
         <Route path="/" element={<Home/>}/>
         
         <Route path="/teacher-management" element={<TeacherManagement teacherData={teacherData}  setTeacherData={setTeacherData} />} />
-        <Route path="/teacher-management/:id" element={<TeachersProfile />} />
+        
         {/* <Route path="/dashboard" element={
           <PrivateRoute>
             <Dashboard />
@@ -471,8 +506,9 @@ const handleLogout = async (setUser) => {
         <Route path="/library-and-management" element={<LibraryAndManagement />} />
         <Route path="/inventory-management" element={<InventoryManagement inventoryType={inventoryType} />} />
         <Route path="/event-management" element={<EventManagement />} />
-        <Route path="/create-student" element={<CreateStudent addStudent={addStudent} myclass={myclass} mydata={mydata} errors={errors} myparent={parent}/>}/>
-        <Route path="/create-teacher" element={<CreateTeacher addTeacher={addTeacher } errors={errors}/>}/>
+        <Route path="/create-student" element={<CreateStudent addStudent={addStudent} myclass={myclass} mydata={mydata} errors={errors} myparent={parent} teacherData={teacherData}/>}/>
+        <Route path="/create-teacher" element={<CreateTeacher addTeacher={addTeacher } editTeacher={editTeacher} errors={errors} teacherData={teacherData}/>}/>
+        <Route path="/teacher-management/:id" element={<TeachersProfile updateTeacher={editTeacher}  />} />
         <Route path="/student-finished-reg" element={<StudentFinishedReg/>}/>
         <Route path="/teacher-finished-reg" element={<TeacherSuccess />} />
 

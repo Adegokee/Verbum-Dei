@@ -16,7 +16,7 @@ const ApexChart = () => {
 
   const [options] = useState({
     chart: {
-      height: 400,
+      height: 350,
       type: 'area'
     },
     dataLabels: {
@@ -55,9 +55,9 @@ const ApexChart = () => {
 
   return (
     <div>
-      <div id="chart" className='w-[810px] mt-[30px] h-[420px] bg-white p-[20px] border-[4px] rounded-3xl border-gray-200'>
+      <div id="chart" className='w-[730px] mt-[30px] h-[370px] bg-white p-[20px] border-[4px] rounded-3xl border-gray-200'>
         <h1 className='font-bold'>School Performance</h1>
-        <ReactApexChart options={options} series={series} type="area" height={360} width={735} />
+        <ReactApexChart options={options} series={series} type="area" height={310} width={675} />
       </div>
       <div id="html-dist"></div>
     </div>

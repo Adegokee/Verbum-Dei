@@ -2,7 +2,7 @@ import React from 'react'
 
 const EventUpcoming = () => {
   return (
-    <div className='border-2 p-[20px] mt-[20px] border-gray-200 ml-[20px] h-[310px] rounded-md bg-white'>
+    <div className='border-2 p-[20px] mt-[20px] border-gray-200 ml-[20px] h-[290px] rounded-md bg-white'>
         <h3 className='font-bold mb-[10px]'>UpComing Event</h3>
         <div className=''>
             <span className='text-[17px] mr-[10px] bg-[#cce5ff] text-[#80beff] px-[12px] py-[4px] rounded-2xl'>All</span>

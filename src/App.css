@@ -70,6 +70,11 @@
   .dropdown:hover .dropdown-menu {
     display: block;
   }
+  .parent{
+    background-image: linear-gradient(blue, blue, url(./assest/logo-removebg.png));
+    height: 100vh;
+    width: 100%;
+  }
   
   /* Dropdown item styles */
   .dropdown-item {
