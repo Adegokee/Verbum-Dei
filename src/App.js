@@ -261,7 +261,7 @@ const handleLogout = async (setUser) => {
 
 
   useEffect(() => {
-    // console.log(teacherData);
+    console.log(parent);
   }, [parent]);
 
   const addMyParent = async (newReview) => {
