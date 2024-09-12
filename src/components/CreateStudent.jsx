@@ -255,20 +255,15 @@ const CreateStudent = ({ addStudent, myclass, mydata, errors, myparent }) => {
           <select name="parent" value={parent} onChange={(e) => setParent(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
             <option value="" disabled>Select Parent</option>
             {myparent.map((x) => {
-<<<<<<< HEAD
+
               
-=======
+
             
->>>>>>> 036cc74e92d172b21fcb57d13e7a2f9516b42848
+
                 return (
                   <option key={x.id} value={x.id}>{x.parent_name}</option>
                 );
-<<<<<<< HEAD
-              
-        
-=======
-           
->>>>>>> 036cc74e92d172b21fcb57d13e7a2f9516b42848
+
             })}
           </select>
           {errors.parent && <p className="mt-1 text-sm text-red-500 ">{errors.parent}</p>}
@@ -280,11 +275,11 @@ const CreateStudent = ({ addStudent, myclass, mydata, errors, myparent }) => {
           <select name="class_assigned" value={class_assigned} onChange={(e) => setClass_assigned(e.target.value)} required className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" data-context="available-source" id="id_class_assigned">
           <option value="" selected="">Select Class</option>
           {myclass.map((x)=> (
-<<<<<<< HEAD
+
              <option key={x.id} value={x.id} className='text-white bg-black'>{x.name}</option> 
-=======
-             <option key={x.id} value={x.name} className='text-white bg-black'>{x.name}</option>
->>>>>>> 036cc74e92d172b21fcb57d13e7a2f9516b42848
+
+            //  <option key={x.id} value={x.name} className='text-white bg-black'>{x.name}</option>
+
            
           ))}
          
