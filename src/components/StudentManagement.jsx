@@ -162,13 +162,13 @@ const StudentManagement = ({mydata, setMydata}) => {
      <div  className='flex items-center'>
        <input type="checkbox" className='mr-[12px]' />
        <div className='w-[40px] h-[40px] rounded-full'>
-       <img src={x.profile_image} className='object-cover w-full h-full rounded-full' alt="" />
+       <img src={x.img_url} className='object-cover w-full h-full rounded-full' alt="" />
        </div>
        <span className='ml-[10px] font-semibold'>{x.first_name}</span>
      </div>
 
      <div>
-      <small className='font-semibold'>#{x.registration_id}</small>
+      <small className='font-semibold'>{x.registration_id}</small>
      </div>
      <div>
       <p className='font-semibold'>{x.class_assigned.created_at}</p>

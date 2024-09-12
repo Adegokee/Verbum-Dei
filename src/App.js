@@ -180,8 +180,6 @@ const handleLogout = async (setUser) => {
     fetchTeacherData()
     
   }, []);
-
-
   useEffect(() => {
     // console.log(teacherData);
   }, [teacherData]);
