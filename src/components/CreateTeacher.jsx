@@ -101,7 +101,7 @@ const CreateTeacher = ({addTeacher, editTeacher, teacherData, errors}) => {
       <form onSubmit={handleSubmit}>
       {/* Profile Image Upload */}
       <div className='flex'>
-        <div className="items-center justify-center w-[250px] h-[210px]">
+        <div className="items-center justify-center w-[300px] h-[210px]">
           <label htmlFor="profile_img" className="flex flex-col items-center mb-[30px] justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50">
             <div className="flex flex-col items-center justify-center pt-5 pb-6">
               <svg className="w-8 h-8 mb-4 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
@@ -111,7 +111,7 @@ const CreateTeacher = ({addTeacher, editTeacher, teacherData, errors}) => {
               <p className="text-xs text-gray-500">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
             </div>
             {/* <input id="profile_img" type="file" className="hidden" onChange={(e) => setProfileImg(e.target.files[0])} /> */}
-            <input type="file" aria-label="Choose file to upload"  id="profile_img" value={profile_img} disabled="" nChange={(e) => setProfileImg(e.target.files[0])} className="w-[107px] flex-grow font-medium px-3 py-2 text-ellipsis dark:bg-gray-900 text-gray-300 dark:text-gray-300"/>
+            <input type="file" aria-label="Choose file to upload"  id="profile_img" value={profile_img} disabled="" onChange={(e) => setProfileImg(e.target.files[0])} className="w-[167px] flex-grow font-medium px-3 py-2 text-ellipsis dark:bg-gray-900 text-gray-300 dark:text-gray-300"/>
             {errors.profile_img && <p className="text-red-500 text-sm mt-1 ">{errors.profile_img}</p>}
             
           </label>
@@ -120,7 +120,7 @@ const CreateTeacher = ({addTeacher, editTeacher, teacherData, errors}) => {
 
         {/* Form Fields */}
         <div className="pl-[40px]">
-          <div className="grid gap-6 mb-6 md:grid-cols-2 md:w-[900px]">
+          <div className="grid gap-6 mb-6 md:grid-cols-2 md:w-[700px]">
             {/* Individual Fields */}
             <div>
               <label htmlFor="first_name" className="block mb-2 text-sm font-medium text-gray-900">First name<span className='text-[red]'>*</span></label>
