@@ -107,7 +107,8 @@ const CreateStudent = ({ addStudent, myclass, mydata, errors, myparent }) => {
             </div>
             {/* <input id="profile_img" type="file" className="hidden" onChange={(e) => setProfileImg(e.target.files[0])} /> */}
             {/* <input type="file" aria-label="Choose file to upload"  id="profile_img" value={setProfile_image} disabled="" nChange={(e) => setProfile_image(e.target.files[0])} className="w-[107px] flex-grow font-medium px-3 py-2 text-ellipsis dark:bg-gray-900 text-gray-300 dark:text-gray-300"/> */}
-            <input type="file" name="profile_image" value={setProfile_image} onChange={(e) => setProfile_image(e.target.files[0])} accept="image/*" required="" id="profile_image"/>
+            {/* <input type="file" name="profile_image" value={setProfile_image} onChange={(e) => setProfile_image(e.target.files[0])} accept="image/*" required="" id="profile_image"/> */}
+            <input type="file" class="form-control" id="upload" accept="image/*" required=""></input>
             {/* <label for="profile_image">Profile Image:</label> */}
             {/* <input type="file" id="profile_image" name="profile_image"  onChange={handleFileChange}  accept="image/*" className='ml-[100px]' required/> */}
             
