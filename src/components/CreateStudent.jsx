@@ -27,7 +27,7 @@ const CreateStudent = ({ addStudent, myclass, mydata, errors, myparent }) => {
     const selectedFile = event.target.files[0];
     if (selectedFile) {
       setFile(selectedFile);
-      setProfile_image(URL.createObjectURL(selectedFile)); // For previewing the selected file
+      setProfile_image(URL.createObjectURL(selectedFile));
     }
   };
 
@@ -35,14 +35,11 @@ const CreateStudent = ({ addStudent, myclass, mydata, errors, myparent }) => {
   
   const handleSubmit = (e) => {
     e.preventDefault();
-
     const formData = new FormData();
-
-    // Check if a new file is uploaded
     if (file) {
-      formData.append("profile_image", file); // append the file
+      formData.append("profile_image", file);
     } else {
-      // If no file, append the URL as is or fetch and convert it into a file
+    
       formData.append("profile_image", imageUrl); 
     }
 
@@ -295,17 +292,8 @@ const CreateStudent = ({ addStudent, myclass, mydata, errors, myparent }) => {
         </div>
         <button className="w-[100%]  text-white bg-blue-700 mt-[34px] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" type="submit">Submit</button>
         {errors.global && <p className="error">{errors.global}</p>}
+        </div> 
         </div>
-        
-              
-        </div>
-    
-
-  
-        
-
-       
-        {/* console.log(errors) */}
       </form>
 
     </div>
