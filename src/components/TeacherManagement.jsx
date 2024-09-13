@@ -81,7 +81,7 @@ const TeacherManagement = ({ setTeacherData, teacherData}) => {
     <main className="m-[10px] cursor-pointer bg-white text-center rounded-lg py-[20px] w-[200px]">
       <div className="flex flex-col items-center justify-center">
         <div className="w-[40px] h-[40px] rounded-full">
-          <img src={teacher.profile_img ? teacher.profile_img : profileavatar} className="object-cover w-full h-full rounded-full cursor-pointer" alt={teacher.first_name} />
+          <img src={teacher.img_url ? teacher.img_url : profileavatar} className="object-cover w-full h-full rounded-full cursor-pointer" alt={teacher.first_name} />
         </div>
         <span className="ml-[10px] font-semibold">{`${teacher.first_name} ${teacher.last_name}`}</span>
       </div>

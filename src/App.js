@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import './App.css';
+import EditTeacher from './components/EditTeacher';
 import Dashboard from './components/dashboard/Dashboard';
 import StudentManagement from './components/StudentManagement';
 import TeacherManagement from "./components/TeacherManagement";
@@ -502,6 +503,7 @@ const handleLogout = async (setUser) => {
         <Route path="/create-student" element={<CreateStudent addStudent={addStudent} myclass={myclass} mydata={mydata} errors={errors} myparent={parent} teacherData={teacherData}/>}/>
         <Route path="/create-teacher" element={<CreateTeacher addTeacher={addTeacher } editTeacher={editTeacher} errors={errors} teacherData={teacherData} setTeacherData={setTeacherData}/>}/>
         <Route path="/teacher-management/:id" element={<TeachersProfile updateTeacher={editTeacher}  />} />
+        <Route path="/edit-teacher/:id" element={<EditTeacher />} />
         <Route path="/student-finished-reg" element={<StudentFinishedReg/>}/>
         <Route path="/teacher-finished-reg" element={<TeacherSuccess />} />
 

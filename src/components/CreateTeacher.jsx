@@ -112,7 +112,7 @@
 //             </div>
 //             {/* <input id="profile_img" type="file" className="hidden" onChange={(e) => setProfileImg(e.target.files[0])} /> */}
 //             {/* <input type="file" aria-label="Choose file to upload"  id="profile_img" value={profile_img} disabled="" onChange={(e) => setProfileImg(e.target.files[0])} className="w-[167px] flex-grow font-medium px-3 py-2 text-ellipsis dark:bg-gray-900 text-gray-300 dark:text-gray-300"/>
-//             {errors.profile_img && <p className="text-red-500 text-sm mt-1 ">{errors.profile_img}</p>} */}
+//             {errors.profile_img && <p className="mt-1 text-sm text-red-500 ">{errors.profile_img}</p>} */}
 //                <input
 //               type="file"
 //               id="upload"
@@ -125,7 +125,7 @@
             
             
 //           </label>
-//           {errors.profile_img && <p className="text-red-500 text-sm mt-1 ">{errors.profile_img}</p>}
+//           {errors.profile_img && <p className="mt-1 text-sm text-red-500 ">{errors.profile_img}</p>}
 //         </div>
 
 //         {/* Form Fields */}
@@ -148,12 +148,12 @@
 //             <div>
 //               <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900">Email<span className='text-[red]'>*</span></label>
 //               <input type="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value={email} onChange={(e) => setEmail(e.target.value)} required />
-//               {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
+//               {errors.email && <p className="mt-1 text-sm text-red-500">{errors.email}</p>}
 //             </div>
 //             <div>
 //               <label htmlFor="home_address" className="block mb-2 text-sm font-medium text-gray-900">Home Address<span className='text-[red]'>*</span></label>
 //               <input type="text" id="home_address" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value={home_address} onChange={(e) => setHomeAddress(e.target.value)} required />
-//               {errors.home_address && <p className="text-red-500 text-sm mt-1">{errors.home_address}</p>}
+//               {errors.home_address && <p className="mt-1 text-sm text-red-500">{errors.home_address}</p>}
 //             </div>
 //             <div>
 //               <label htmlFor="state_of_origin" className="block mb-2 text-sm font-medium text-gray-900">State of Origin<span className='text-[red]'>*</span></label>
@@ -166,22 +166,22 @@
 //             <div>
 //               <label htmlFor="nin" className="block mb-2 text-sm font-medium text-gray-900">NIN<span className='text-[red]'>*</span></label>
 //               <input type="text" id="nin" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value={nin} onChange={(e) => setNin(e.target.value)} required />
-//               {errors.nin && <p className="text-red-500 text-sm mt-1">{errors.nin}</p>}
+//               {errors.nin && <p className="mt-1 text-sm text-red-500">{errors.nin}</p>}
 //             </div>
 //             <div>
 //               <label htmlFor="bvn" className="block mb-2 text-sm font-medium text-gray-900">BVN<span className='text-[red]'>*</span></label>
 //               <input type="text" id="bvn" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value={bvn} onChange={(e) => setBvn(e.target.value)} required />
-//               {errors.bvn && <p className="text-red-500 text-sm mt-1">{errors.bvn}</p>}
+//               {errors.bvn && <p className="mt-1 text-sm text-red-500">{errors.bvn}</p>}
 //             </div>
 //             <div>
 //               <label htmlFor="phone_number_1" className="block mb-2 text-sm font-medium text-gray-900">Phone Number 1<span className='text-[red]'>*</span></label>
 //               <input type="text" id="phone_number_1" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value={phone_number_1} onChange={(e) => setPhoneNumber1(e.target.value)} required />
-//               {errors.phone_number_1 && <p className="text-red-500 text-sm mt-1">{errors.phone_number_1}</p>}
+//               {errors.phone_number_1 && <p className="mt-1 text-sm text-red-500">{errors.phone_number_1}</p>}
 //             </div>
 //             <div>
 //               <label htmlFor="phone_number_2" className="block mb-2 text-sm font-medium text-gray-900">Phone Number 2</label>
 //               <input type="text" id="phone_number_2" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value={phone_number_2} onChange={(e) => setPhoneNumber2(e.target.value)} />
-//               {errors.phone_number_2 && <p className="text-red-500 text-sm mt-1">{errors.phone_number_2}</p>}
+//               {errors.phone_number_2 && <p className="mt-1 text-sm text-red-500">{errors.phone_number_2}</p>}
 //             </div>
 //             <div>
 //               <label htmlFor="position" className="block mb-2 text-sm font-medium text-gray-900">Position<span className='text-[red]'>*</span></label>
@@ -319,11 +319,23 @@ const CreateTeacher = ({ teacherData,  setTeacherData }) => {
   return (
    <div className='dashboard absolute bg-[#f5f9fc] top-[75px] left-[16%] p-[10px]'>
      <form onSubmit={handleSubmit} encType="multipart/form-data">
-    <div className="row">
+    <div className="flex flex-wrap justify-center">
+     <div className="w-[270px] p-2">
+        <label htmlFor="upload" className="block mb-2 text-sm font-medium text-gray-900">Upload Image<span className='text-[red]'>*</span></label>
+        <input
+          type="file"
+          name="upload"
+          id="upload"
+          onChange={handleFileChange}
+          accept="image/*"
+          required
+          className=" form-control bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+        />
+      </div>
       {/* Form fields */}
      
   
-      <div className="col-md-4 mb-3">
+      <div className="w-[270px] p-2">
         <label htmlFor="first_name" className="block mb-2 text-sm font-medium text-gray-900">First name<span className='text-[red]'>*</span></label>
         <input
           type="text"
@@ -335,7 +347,7 @@ const CreateTeacher = ({ teacherData,  setTeacherData }) => {
         />
       </div>
   
-      <div className="col-md-4 mb-3">
+      <div className="w-[270px] p-2">
         <label htmlFor="last_name" className="block mb-2 text-sm font-medium text-gray-900">Last Name<span className='text-[red]'>*</span></label>
         <input
           type="text"
@@ -347,7 +359,7 @@ const CreateTeacher = ({ teacherData,  setTeacherData }) => {
         />
       </div>
   
-      <div className="col-md-4 mb-3">
+      <div className="w-[270px] p-2">
         <label htmlFor="other_name" className="block mb-2 text-sm font-medium text-gray-900">Other Name<span className='text-[red]'>*</span></label>
         <input
           type="text"
@@ -358,7 +370,7 @@ const CreateTeacher = ({ teacherData,  setTeacherData }) => {
         />
       </div>
   
-      <div className="col-md-4 mb-3">
+      <div className="w-[200px] p-2 mt-[0px]">
         <label htmlFor="phone_number_1" className="block mb-2 text-sm font-medium text-gray-900">Phone Number 1<span className='text-[red]'>*</span></label>
         <input
           type="text"
@@ -370,7 +382,7 @@ const CreateTeacher = ({ teacherData,  setTeacherData }) => {
         />
       </div>
   
-      <div className="col-md-4 mb-3">
+      <div className="w-[270px] p-2">
         <label htmlFor="phone_number_2" className="block mb-2 text-sm font-medium text-gray-900">Phone Number 2<span className='text-[red]'>*</span></label>
         <input
           type="text"
@@ -381,7 +393,7 @@ const CreateTeacher = ({ teacherData,  setTeacherData }) => {
         />
       </div>
   
-      <div className="col-md-4 mb-3">
+      <div className="w-[270px] p-2">
         <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900">Email<span className='text-[red]'>*</span></label>
         <input
           type="email"
@@ -393,7 +405,7 @@ const CreateTeacher = ({ teacherData,  setTeacherData }) => {
         />
       </div>
   
-      <div className="col-md-4 mb-3">
+      <div className="w-[270px] p-2">
         <label htmlFor="gender" className="block mb-2 text-sm font-medium text-gray-900">Gender<span className='text-[red]'>*</span></label>
         <select
           name="gender"
@@ -407,7 +419,7 @@ const CreateTeacher = ({ teacherData,  setTeacherData }) => {
         </select>
       </div>
   
-      <div className="col-md-4 mb-3">
+      <div className="w-[270px] p-2">
         <label htmlFor="employment_type" className="block mb-2 text-sm font-medium text-gray-900">Employment Type<span className='text-[red]'>*</span></label>
         <select
           name="employment_type"
@@ -423,7 +435,7 @@ const CreateTeacher = ({ teacherData,  setTeacherData }) => {
 <option value="CORPER">Corper</option>
         </select>
       </div>
-      <div className="col-md-4 mb-3">
+      <div className="w-[270px] p-2">
         <label htmlFor="employment_type" className="block mb-2 text-sm font-medium text-gray-900">Staff Type<span className='text-[red]'>*</span></label>
         <select
           name="staff_type"
@@ -437,7 +449,7 @@ const CreateTeacher = ({ teacherData,  setTeacherData }) => {
         </select>
       </div>
   
-      <div className="col-md-4 mb-3">
+      <div className="w-[270px] p-2">
         <label htmlFor="position" className="block mb-2 text-sm font-medium text-gray-900">Position<span className='text-[red]'>*</span></label>
         <input
           type="text"
@@ -449,7 +461,7 @@ const CreateTeacher = ({ teacherData,  setTeacherData }) => {
         />
       </div>
   
-      <div className="col-md-4 mb-3">
+      <div className="w-[270px] p-2">
         <label htmlFor="status" className="block mb-2 text-sm font-medium text-gray-900">Status<span className='text-[red]'>*</span></label>
         <input
           type="text"
@@ -461,7 +473,7 @@ const CreateTeacher = ({ teacherData,  setTeacherData }) => {
         />
       </div>
   
-      <div className="col-md-4 mb-3">
+      <div className="w-[270px] p-2">
         <label htmlFor="home_address" className="block mb-2 text-sm font-medium text-gray-900">Home Address<span className='text-[red]'>*</span></label>
         <input
           type="text"
@@ -473,7 +485,7 @@ const CreateTeacher = ({ teacherData,  setTeacherData }) => {
         />
       </div>
   
-      <div className="col-md-4 mb-3">
+      <div className="w-[270px] p-2">
         <label htmlFor="state_of_origin" className="block mb-2 text-sm font-medium text-gray-900">State of Origin<span className='text-[red]'>*</span></label>
         <input
           type="text"
@@ -485,7 +497,7 @@ const CreateTeacher = ({ teacherData,  setTeacherData }) => {
         />
       </div>
   
-      <div className="col-md-4 mb-3">
+      <div className="w-[270px] p-2">
         <label htmlFor="local_government_area" className="block mb-2 text-sm font-medium text-gray-900">Local Government Area<span className='text-[red]'>*</span></label>
         <input
           type="text"
@@ -497,7 +509,7 @@ const CreateTeacher = ({ teacherData,  setTeacherData }) => {
         />
       </div>
   
-      <div className="col-md-4 mb-3">
+      <div className="w-[270px] ml-[0] p-2">
         <label htmlFor="nin" className="block mb-2 text-sm font-medium text-gray-900">NIN<span className='text-[red]'>*</span></label>
         <input
           type="text"
@@ -510,7 +522,7 @@ const CreateTeacher = ({ teacherData,  setTeacherData }) => {
         />
       </div>
   
-      <div className="col-md-4 mb-3">
+      <div className="w-[270px] p-2">
         <label htmlFor="bvn" className="block mb-2 text-sm font-medium text-gray-900">BVN<span className='text-[red]'>*</span></label>
         <input
           type="text"
@@ -523,7 +535,7 @@ const CreateTeacher = ({ teacherData,  setTeacherData }) => {
         />
       </div>
   
-      {/* <div className="col-md-4 mb-3">
+      {/* <div className="mb-3 col-md-4">
         <label htmlFor="staff_id" className="form-label">Staff ID</label>
         <input
           type="text"
@@ -534,21 +546,11 @@ const CreateTeacher = ({ teacherData,  setTeacherData }) => {
           required
         />
       </div> */}
-  
-      <div className="col-md-4 mb-3">
-        <label htmlFor="upload" className="block mb-2 text-sm font-medium text-gray-900">Upload Image<span className='text-[red]'>*</span></label>
-        <input
-          type="file"
-          name="upload"
       
-          onChange={handleFileChange}
-          accept="image/*"
-          required
-          className=" form-control bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-        />
-      </div>
+  
+    
     </div>
-    <button type="submit" className="btn btn-primary">Submit</button>
+    <button type="submit" className="w-1/4 md:ml-[419px] mt-[30px] text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Submit</button>
   </form>
    </div>
   );
