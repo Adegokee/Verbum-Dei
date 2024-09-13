@@ -34,7 +34,7 @@ const StudentId = () => {
       <h1>Staff Detail</h1>
       {staff ? (
         <div>
-          <p>ID: {staff.id}</p>
+          <p>ID: {staff.registration_id}</p>
           <p>Name: {staff.first_name} {staff.last_name}</p>
           <p>Email: {staff.email}</p>
           {/* Add more staff details as needed */}

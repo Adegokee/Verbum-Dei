@@ -50,11 +50,6 @@ const PrivateRoute = ({ user, children }) => {
   return user ? children : <Navigate to="/login" />;
 };
 
-// const handleLogout = () => {
-//   setUser(null);
-//   localStorage.removeItem('token');
-//   navigate('/login');
-// };
 
 const handleLogout = async (setUser) => {
   try {
@@ -180,8 +175,6 @@ const handleLogout = async (setUser) => {
     fetchTeacherData()
     
   }, []);
-
-
   useEffect(() => {
     // console.log(teacherData);
   }, [teacherData]);
@@ -296,7 +289,7 @@ const handleLogout = async (setUser) => {
 
 
   useEffect(() => {
-    // console.log(teacherData);
+    console.log(parent);
   }, [parent]);
 
   const addMyParent = async (newReview) => {
@@ -507,7 +500,7 @@ const handleLogout = async (setUser) => {
         <Route path="/inventory-management" element={<InventoryManagement inventoryType={inventoryType} />} />
         <Route path="/event-management" element={<EventManagement />} />
         <Route path="/create-student" element={<CreateStudent addStudent={addStudent} myclass={myclass} mydata={mydata} errors={errors} myparent={parent} teacherData={teacherData}/>}/>
-        <Route path="/create-teacher" element={<CreateTeacher addTeacher={addTeacher } editTeacher={editTeacher} errors={errors} teacherData={teacherData}/>}/>
+        <Route path="/create-teacher" element={<CreateTeacher addTeacher={addTeacher } editTeacher={editTeacher} errors={errors} teacherData={teacherData} setTeacherData={setTeacherData}/>}/>
         <Route path="/teacher-management/:id" element={<TeachersProfile updateTeacher={editTeacher}  />} />
         <Route path="/student-finished-reg" element={<StudentFinishedReg/>}/>
         <Route path="/teacher-finished-reg" element={<TeacherSuccess />} />

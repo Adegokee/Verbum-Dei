@@ -131,9 +131,9 @@ const StudentManagement = ({mydata, setMydata}) => {
       <div className='pr-[5px] text-center'>
        <p>ID</p>
       </div>
-      <div  className='pl-[10px] text-center'>
-       <p>Date Registered</p>
-      </div>
+      {/* <div  className='pl-[10px] text-center'>
+      ?
+      </div> */}
       <div  className='pl-[10px] text-center'>
        <p>Parent Name</p>
       </div>
@@ -156,37 +156,37 @@ const StudentManagement = ({mydata, setMydata}) => {
       
   </main>
   {mydata.map((x)=> (
-    <Link key={x.id} to={`/student-management/${x.id}`}>
+    <Link key={x.registration_id} to={`/student-management/${x.registration_id}`}>
    
      <main className='mt-[20px] flex justify-between items-center border-b-2 border-[gray] py-[20px]'>
      <div  className='flex items-center'>
        <input type="checkbox" className='mr-[12px]' />
        <div className='w-[40px] h-[40px] rounded-full'>
-       <img src={x.profile_image} className='object-cover w-full h-full rounded-full' alt="" />
+       <img src={x.img_url} className='object-cover w-full h-full rounded-full' alt="" />
        </div>
        <span className='ml-[10px] font-semibold'>{x.first_name}</span>
      </div>
 
      <div>
-      <small className='font-semibold'>#{x.registration_id}</small>
+      <small className='font-semibold'>{x.registration_id}</small>
      </div>
      <div>
       <p className='font-semibold'>{x.class_assigned.created_at}</p>
      </div>
      <div>
-      <p className='ml-[30px] font-semibold'>{x.parent.parent_name}</p>
+      <p className='ml-[10px] font-semibold'>{x.parent}</p>
      </div>
      <div>
       <small className='font-semibold'>{x.home_address.slice(0, 19)}...</small>
      </div>
 
      <div className='flex items-center'>
-       <span className='mr-[20px] text-[#007bff] py-[10px] px-[15px] rounded-2xl bg-[#d6dfe8]'><FaPhone /></span>
-       <span className="text-[#007bff] text-[20px] py-[10px] px-[15px] rounded-2xl bg-[#d6dfe8]"><TiMessages /></span>
+       <span className='mr-[20px] text-[#007bff] text-[10px] py-[10px] px-[25px] rounded-2xl bg-[#d6dfe8]'><FaPhone /></span>
+       <span className="text-[#007bff] text-[12px]  py-[10px] px-[25px] rounded-2xl bg-[#d6dfe8]"><a href=''><TiMessages /></a></span>
      </div>
 
-     <div  className='pr-[40px] text-center'>
-      <p className='font-semibold rounded-2xl bg-[#fb7d5b] py-[10px] px-[15px]  text-white'>{x.class_assigned.name}</p>
+     <div  className='pr-[4px] text-center'>
+      <p className='font-semibold rounded-2xl bg-[#fb7d5b] py-[5px] px-[8px]  text-[11px]  text-white'>{x.class_assigned}</p>
      </div>
 
      <div className='font-semibold'>
