@@ -30,6 +30,7 @@ import { Navigate } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import Subject from './components/Subject';
 import CreateSubject from './components/CreateSubject';
+import EditStudent from './components/EditStudent';
 
 
 
@@ -503,7 +504,8 @@ const handleLogout = async (setUser) => {
         <Route path="/create-student" element={<CreateStudent addStudent={addStudent} myclass={myclass} mydata={mydata} errors={errors} myparent={parent} teacherData={teacherData}/>}/>
         <Route path="/create-teacher" element={<CreateTeacher addTeacher={addTeacher } editTeacher={editTeacher} errors={errors} teacherData={teacherData} setTeacherData={setTeacherData}/>}/>
         <Route path="/teacher-management/:id" element={<TeachersProfile updateTeacher={editTeacher}  />} />
-        <Route path="/edit-teacher/:id" element={<EditTeacher />} />
+        <Route path="/teacher/:id" element={<EditTeacher />} />
+        <Route path="/student/:id" element={<EditStudent />} />
         <Route path="/student-finished-reg" element={<StudentFinishedReg/>}/>
         <Route path="/teacher-finished-reg" element={<TeacherSuccess />} />
 

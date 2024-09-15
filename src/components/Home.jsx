@@ -3,7 +3,7 @@ import logo from '../../src/assest/logo.png'
 
 const Home = () => {
   return (
-    <div className='dashboard mybg  absolute bg-[#f5f9fc] top-[75px] left-[16%] p-[10px] flex justify-center items-center'>
+    <div className=' mybg sticky  top-[-100px] z-10'>
       
 
 <form className="max-w-sm mx-auto bg-[#f5f9fc] p-[20px]">

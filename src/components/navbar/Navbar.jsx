@@ -72,9 +72,9 @@ const Navbar = () => {
         </div>
         <div className='relative flex items-center pr-[40px]'>
           <nav className='w-[40px]'>
-            <img className='w-[100%] cursor-pointer' src={profile} alt="Profile" onClick={toggleDropdown} />
+            <img className='w-[100%] cursor-pointer ml-4' src={profile} alt="Profile" onClick={toggleDropdown} />
           </nav>
-          <span className='ml-[10px] cursor-pointer' onClick={toggleDropdown}>Favour John</span>
+          <span className='ml-[20px] cursor-pointer' onClick={toggleDropdown}>Favour John</span>
           <span className='ml-[10px]' onClick={toggleDropdown}><FaCaretDown /></span>
 
           {/* Dropdown Menu */}

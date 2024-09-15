@@ -31,11 +31,12 @@ const TeachersProfile = () => {
   }, [id]);
 
   const handleEdit = () => {
-    navigate(`/edit-teacher/${id}`);
+    navigate(`/teacher/${id}`);
   };
 
-  if (loading) return <p>Loading...</p>;  
-  if (error) return <p>Error: {error}</p>;  
+
+  if (loading) return <p className=' absolute bg-[#f5f9fc] top-[75px] left-[50%] p-[10px] '>Loading..</p>;  
+  if (error) return <p className=' absolute bg-[#f5f9fc] top-[75px] left-[50%] p-[10px] '>Error: {error}</p>;  
 
   return (
     <div className='dashboard absolute bg-[#f5f9fc] top-[75px] left-[16%] p-[10px] '>
