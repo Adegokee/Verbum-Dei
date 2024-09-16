@@ -31,6 +31,7 @@ import { useNavigate } from 'react-router-dom';
 import Subject from './components/Subject';
 import CreateSubject from './components/CreateSubject';
 import EditStudent from './components/EditStudent';
+import ParentId from './components/ParentId';
 
 
 
@@ -493,6 +494,8 @@ const handleLogout = async (setUser) => {
            <Route path="/password-reset" element={<PasswordReset />} />
         <Route path="/create_parent" element={<CreateParent addMyParent={addMyParent} myerrors={myerrors}/>}/>
         <Route path="/parent" element={<Parent parent={parent} errors={errors} />} />
+        <Route path="/parent:id" element={<ParentId parent={parent} errors={errors} />} />
+
         <Route path="/student-management" element={<StudentManagement  mydata={mydata} setMydata={setMydata}/>} />
         <Route path='/student-management/:id' element={< StudentId/>}/>
         {/* <Route path="/teacher-management" element={<TeacherManagement teacherData={teacherData}  setTeacherData={setTeacherData} />} /> */}

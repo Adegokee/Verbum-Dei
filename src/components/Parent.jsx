@@ -92,7 +92,7 @@ const Parent = ({ parent, errors }) => {
 
      
         {records.map((x) => (
-          <Link key={x.id} to={`/student-management/${x.id}`}>
+          <Link key={x.id} to={`/parent/${x.id}`}>
             <main className='mt-[20px] flex justify-between items-center border-b-2 border-[gray] py-[20px]'>
               <div className='flex items-center'>
                 <input type="checkbox" className='mr-[12px]' />
