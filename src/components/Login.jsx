@@ -1,63 +1,92 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+// import React, { useState } from 'react';
 
-const Login = ({ setUser }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState(null);
-  const navigate = useNavigate();
+// const Login = () => {
+//   const [adminId, setAdminId] = useState('');
+//   const [password, setPassword] = useState('');
+//   const [message, setMessage] = useState('');
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await fetch('https://sore-ebba-emekadefirst-e04c4e7b.koyeb.app/sub-admin/api/auth/login/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
-      });
+//   // Function to get CSRF token from cookies
+//   const getCsrfToken = () => {
+//     const name = 'csrftoken=';
+//     const decodedCookie = decodeURIComponent(document.cookie);
+//     const ca = decodedCookie.split(';');
+//     for (let i = 0; i < ca.length; i++) {
+//       let c = ca[i].trim();
+//       if (c.indexOf(name) === 0) {
+//         return c.substring(name.length, c.length);
+//       }
+//     }
+//     return '';
+//   };
 
-      if (!response.ok) {
-        throw new Error('Login failed');
-      }
+//   // Function to handle login
+//   const handleLogin = (e) => {
+//     e.preventDefault(); // Prevent page refresh
 
-      const data = await response.json();
-      setUser(data.user); // Save user data
-      localStorage.setItem('token', data.token); // Save token
-      navigate('/dashboard'); // Redirect to dashboard
-    } catch (error) {
-      setError(error.message);
-    }
-  };
+//     if (!adminId || !password) {
+//       setMessage('Please fill in all fields.');
+//       return;
+//     }
 
-  return (
-    <div className="login-container dashboard absolute bg-[#f5f9fc] top-[75px] left-[16%] p-[10px]'">
-      <h2>Login</h2>
-      <form onSubmit={handleLogin}>
-        <div>
-          <label>Email:</label>
-          <input 
-            type="email" 
-            value={email} 
-            onChange={(e) => setEmail(e.target.value)} 
-            required 
-          />
-        </div>
-        <div>
-          <label>Password:</label>
-          <input 
-            type="password" 
-            value={password} 
-            onChange={(e) => setPassword(e.target.value)} 
-            required 
-          />
-        </div>
-        {error && <p className="error">{error}</p>}
-        <button type="submit">Login</button>
-      </form>
-    </div>
-  );
-};
+//     const csrfToken = getCsrfToken();
 
-export default Login;
+//     fetch('http://127.0.0.1:8000/subadmin/login/', {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json',
+//         'X-CSRFToken': csrfToken, // Include CSRF token in the header
+//       },
+//       body: JSON.stringify({
+//         admin_id: adminId,
+//         password: password,
+//       }),
+//     })
+//       .then((response) => response.json())
+//       .then((data) => {
+//         if (data.message === 'Login successful') {
+//           setMessage('Login successful!');
+//         } else {
+//           setMessage('Login failed. Please check your credentials.');
+//         }
+//       })
+//       .catch((error) => {
+//         setMessage('An error occurred. Please try again.');
+//       });
+//   };
+
+//   return (
+//     <div className="container">
+//       <h2>Admin Login</h2>
+//       <div id="message" className="message">
+//         {message}
+//       </div>
+//       <form onSubmit={handleLogin}>
+//         <div className="form-group">
+//           <label htmlFor="admin_id">Admin ID:</label>
+//           <input
+//             type="text"
+//             id="admin_id"
+//             name="admin_id"
+//             value={adminId}
+//             onChange={(e) => setAdminId(e.target.value)}
+//           />
+//         </div>
+//         <div className="form-group">
+//           <label htmlFor="password">Password:</label>
+//           <input
+//             type="password"
+//             id="password"
+//             name="password"
+//             value={password}
+//             onChange={(e) => setPassword(e.target.value)}
+//           />
+//         </div>
+//         <div className="form-group">
+//           <button type="submit">Login</button>
+//         </div>
+//       </form>
+//     </div>
+//   );
+// };
+
+// export default Login;

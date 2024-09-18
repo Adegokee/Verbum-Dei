@@ -476,7 +476,7 @@ const handleLogout = async (setUser) => {
     <div className="">
       <Page/>      
       <Routes>
-      <Route path="/login" element={<Login/>}/>
+      {/* <Route path="/login" element={<Login/>}/> */}
       <Route path="/dashboard" element={<Dashboard user={user}/>} />
       <Route path="/subject-management" element={<Subject subject={subject}  />}/>
       <Route path="/create-subject" element={<CreateSubject teacherData={teacherData} myclass={myclass} subject={subject} addSubject={addSubject} />}/> 
@@ -490,7 +490,7 @@ const handleLogout = async (setUser) => {
             <Dashboard />
           </PrivateRoute>
           } /> */}
-           <Route path="/signup" element={<Signup />} />
+           {/* <Route path="/signup" element={<Signup />} /> */}
            <Route path="/password-reset" element={<PasswordReset />} />
         <Route path="/create_parent" element={<CreateParent addMyParent={addMyParent} myerrors={myerrors}/>}/>
         <Route path="/parent" element={<Parent parent={parent} errors={errors} />} />

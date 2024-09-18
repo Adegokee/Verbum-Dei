@@ -1,246 +1,563 @@
-import React, { useState } from 'react';
+// // import React, { useState } from 'react';
 
-const Home = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isSignUp, setIsSignUp] = useState(false); 
-  const [teacher_id, SetTeacher_id] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState(''); 
-  const [errorMessage, setErrorMessage] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
+// // const Home = () => {
+// //   const [isLoggedIn, setIsLoggedIn] = useState(false);
+// //   const [isSignUp, setIsSignUp] = useState(false); 
+// //   const [teacher_id, SetTeacher_id] = useState('');
+// //   const [password, setPassword] = useState('');
+// //   const [confirmPassword, setConfirmPassword] = useState(''); 
+// //   const [errorMessage, setErrorMessage] = useState('');
+// //   const [successMessage, setSuccessMessage] = useState('');
+// //   const [adminId, setAdminId] = useState('');
+// //   // const [password, setPassword] = useState('');
+// //   // const [message, setMessage] = useState('');
 
-  // Handle user login
-  const handleLoginSubmit = async (e) => {
-    e.preventDefault();
-    setErrorMessage('');
+
+
+// //   // const [adminId, setAdminId] = useState('');
+// //   // const [password, setPassword] = useState('');
+// //   const [message, setMessage] = useState('');
+
+// //   // Function to get CSRF token from cookies
+// //   const getCsrfToken = () => {
+// //     const name = 'csrftoken=';
+// //     const decodedCookie = decodeURIComponent(document.cookie);
+// //     const ca = decodedCookie.split(';');
+// //     for (let i = 0; i < ca.length; i++) {
+// //       let c = ca[i].trim();
+// //       if (c.indexOf(name) === 0) {
+// //         return c.substring(name.length, c.length);
+// //       }
+// //     }
+// //     return '';
+// //   };
+
+// //   // Function to handle login
+// //   const handleLogin = (e) => {
+// //     e.preventDefault(); // Prevent page refresh
+
+// //     if (!adminId || !password) {
+// //       setMessage('Please fill in all fields.');
+// //       return;
+// //     }
+
+// //     const csrfToken = getCsrfToken();
+
+// //     fetch('http://127.0.0.1:8000/subadmin/login/', {
+// //       method: 'POST',
+// //       headers: {
+// //         'Content-Type': 'application/json',
+// //         'X-CSRFToken': csrfToken, // Include CSRF token in the header
+// //       },
+// //       body: JSON.stringify({
+// //         admin_id: adminId,
+// //         password: password,
+// //       }),
+// //     })
+// //       .then((response) => response.json())
+// //       .then((data) => {
+// //         if (data.message === 'Login successful') {
+// //           setMessage('Login successful!');
+// //         } else {
+// //           setMessage('Login failed. Please check your credentials.');
+// //         }
+// //       })
+// //       .catch((error) => {
+// //         setMessage('An error occurred. Please try again.');
+// //       });
+// //   };
+
+//   // Handle user login
+//   // const handleLoginSubmit = async (e) => {
+//   //   e.preventDefault();
+//   //   setErrorMessage('');
     
-    try {
-      const response = await fetch('https://verbumdei-management-system-vms.onrender.com/teacheradmin/login/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          teacher_id: teacher_id,
-          password: password,
-        }),
-      });
+//   //   try {
+//   //     const response = await fetch('https://verbumdei-management-system-vms.onrender.com/teacheradmin/login/', {
+//   //       method: 'POST',
+//   //       headers: {
+//   //         'Content-Type': 'application/json',
+//   //       },
+//   //       body: JSON.stringify({
+//   //         teacher_id: teacher_id,
+//   //         password: password,
+//   //       }),
+//   //     });
   
-      const data = await response.json();
+//   //     const data = await response.json();
   
-      if (response.ok) {
+//   //     if (response.ok) {
       
-        localStorage.setItem('token', data.token);  
-        setIsLoggedIn(true);
-        setSuccessMessage('Login successful');
-        console.log('Token:', data.token);
-        fetchProtectedData();
-      } else {
-        setErrorMessage(data.message || 'Login failed. Please try again.');
-      }
-    } catch (error) {
-      console.error('Error logging in:', error);
-      setErrorMessage('An error occurred. Please try again later.');
-    }
-  };
+//   //       localStorage.setItem('token', data.token);  
+//   //       setIsLoggedIn(true);
+//   //       setSuccessMessage('Login successful');
+//   //       console.log('Token:', data.token);
+//   //       fetchProtectedData();
+//   //     } else {
+//   //       setErrorMessage(data.message || 'Login failed. Please try again.');
+//   //     }
+//   //   } catch (error) {
+//   //     console.error('Error logging in:', error);
+//   //     setErrorMessage('An error occurred. Please try again later.');
+//   //   }
+//   // };
   
  
-  const handleSignUpSubmit = async (e) => {
-    e.preventDefault();
-    setErrorMessage('');
+//   // const handleSignUpSubmit = async (e) => {
+//   //   e.preventDefault();
+//   //   setErrorMessage('');
   
-    if (password !== confirmPassword) {
-      setErrorMessage('Passwords do not match');
-      return;
-    }
+//   //   if (password !== confirmPassword) {
+//   //     setErrorMessage('Passwords do not match');
+//   //     return;
+//   //   }
   
-    try {
-      const response = await fetch('https://verbumdei-management-system-vms.onrender.com/teacheradmin/signup/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          teacher_id: teacher_id,
-          password: password,
-        }),
-      });
+//   //   try {
+//   //     const response = await fetch('https://verbumdei-management-system-vms.onrender.com/teacheradmin/signup/', {
+//   //       method: 'POST',
+//   //       headers: {
+//   //         'Content-Type': 'application/json',
+//   //       },
+//   //       body: JSON.stringify({
+//   //         teacher_id: teacher_id,
+//   //         password: password,
+//   //       }),
+//   //     });
   
-      const data = await response.json();
+//   //     const data = await response.json();
   
-      if (response.ok) {
+//   //     if (response.ok) {
       
-        localStorage.setItem('token', data.token);
+//   //       localStorage.setItem('token', data.token);
   
-        setSuccessMessage('Sign-up successful! You can now log in.');
-        setIsSignUp(false);
-      } else {
-        setErrorMessage(data.message || 'Sign-up failed. Please try again.');
+//   //       setSuccessMessage('Sign-up successful! You can now log in.');
+//   //       setIsSignUp(false);
+//   //     } else {
+//   //       setErrorMessage(data.message || 'Sign-up failed. Please try again.');
+//   //     }
+//   //   } catch (error) {
+//   //     console.error('Error signing up:', error);
+//   //     setErrorMessage('An error occurred. Please try again later.');
+//   //   }
+//   // };
+
+//   // // Fetch protected data with JWT token
+//   // const fetchProtectedData = async () => {
+//   //   const token = localStorage.getItem('token');
+  
+//   //   if (!token) {
+//   //     console.error('No token found, please log in.');
+//   //     return;
+//   //   }
+  
+//   //   try {
+//   //     const response = await fetch('https://verbumdei-management-system-vms.onrender.com/protected-endpoint/', {
+//   //       method: 'GET',
+//   //       headers: {
+//   //         'Authorization': `Bearer ${token}`,  // Pass JWT token for authorization
+//   //         'Content-Type': 'application/json',
+//   //       },
+//   //     });
+  
+//   //     const data = await response.json();
+  
+//   //     if (response.ok) {
+//   //       console.log('Protected data:', data);
+//   //     } else {
+//   //       console.error('Failed to fetch protected data:', data.message);
+//   //     }
+//   //   } catch (error) {
+//   //     console.error('Error fetching protected data:', error);
+//   //   }
+//   // };
+
+//   // return (
+//   //   <div className="mybg absolute top-[-100px] z-[1000]">
+//   //     {!isLoggedIn ? (
+//   //       <div className="max-w-sm mx-auto bg-[#f5f9fc] p-[20px] relative top-[200px]">
+//   //         {!isSignUp ? (
+//   //           // Login Form
+//   //           <div className="container">
+//   //     <h2>Admin Login</h2>
+//   //     <div id="message" className="message">
+//   //       {message}
+//   //     </div>
+//   //     <form onSubmit={handleLogin}>
+//   //       <div className="form-group">
+//   //         <label htmlFor="admin_id">Admin ID:</label>
+//   //         <input
+//   //           type="text"
+//   //           id="admin_id"
+//   //           name="admin_id"
+//   //           value={adminId}
+//   //           onChange={(e) => setAdminId(e.target.value)}
+//   //         />
+//   //       </div>
+//   //       <div className="form-group">
+//   //         <label htmlFor="password">Password:</label>
+//   //         <input
+//   //           type="password"
+//   //           id="password"
+//   //           name="password"
+//   //           value={password}
+//   //           onChange={(e) => setPassword(e.target.value)}
+//   //         />
+//   //       </div>
+//   //       <div className="form-group">
+//   //         <button type="submit">Login</button>
+//   //       </div>
+//   //     </form>
+//   //   </div>
+//             // <form onSubmit={handleLoginSubmit}>
+//             //   <h2 className="text-center text-lg font-bold mb-5">Login</h2>
+//             //   {errorMessage && (
+//             //     <div className="text-red-500 text-sm mb-3">{errorMessage}</div>
+//             //   )}
+//             //   {successMessage && (
+//             //     <div className="text-green-500 text-sm mb-3">{successMessage}</div>
+//             //   )}
+//             //   <div className="mb-5">
+//             //     <label htmlFor="teacher_id" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Teacher's ID</label>
+//             //     <input
+//             //       type="text"
+//             //       id="teacher_id"
+//             //       value={teacher_id}
+//             //       onChange={(e) => SetTeacher_id(e.target.value)}
+//             //       className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
+//             //       required
+//             //     />
+//             //   </div>
+//             //   <div className="mb-5">
+//             //     <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your password</label>
+//             //     <input
+//             //       type="password"
+//             //       id="password"
+//             //       value={password}
+//             //       onChange={(e) => setPassword(e.target.value)}
+//             //       className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
+//             //       required
+//             //     />
+//             //   </div>
+//             //   <button
+//             //     type="submit"
+//             //     className="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+//             //   >
+//             //     Submit
+//             //   </button>
+//             //   <p className="text-sm mt-3">
+//             //     New user?{' '}
+//             //     <button
+//             //       type="button"
+//             //       onClick={() => setIsSignUp(true)}
+//             //       className="text-blue-600 hover:underline"
+//             //     >
+//             //       Sign Up
+//             //     </button>
+//             //   </p>
+// //             // </form>
+// //           ) : (
+// //             // Sign-up Form
+// //             <form onSubmit={handleSignUpSubmit}>
+// //               <h2 className="text-center text-lg font-bold mb-5">Sign Up</h2>
+// //               {errorMessage && (
+// //                 <div className="text-red-500 text-sm mb-3">{errorMessage}</div>
+// //               )}
+// //               {successMessage && (
+// //                 <div className="text-green-500 text-sm mb-3">{successMessage}</div>
+// //               )}
+// //               <div className="mb-5">
+// //                 <label htmlFor="teacher_id" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Teacher's ID</label>
+// //                 <input
+// //                   type="text"
+// //                   id="text"
+// //                   value={teacher_id}
+// //                   onChange={(e) => SetTeacher_id(e.target.value)}
+// //                   className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
+// //                   required
+// //                 />
+// //               </div>
+// //               <div className="mb-5">
+// //                 <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your password</label>
+// //                 <input
+// //                   type="password"
+// //                   id="password"
+// //                   value={password}
+// //                   onChange={(e) => setPassword(e.target.value)}
+// //                   className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
+// //                   required
+// //                 />
+// //               </div>
+// //               <div className="mb-5">
+// //                 <label htmlFor="confirm-password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirm password</label>
+// //                 <input
+// //                   type="password"
+// //                   id="confirm-password"
+// //                   value={confirmPassword}
+// //                   onChange={(e) => setConfirmPassword(e.target.value)}
+// //                   className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
+// //                   required
+// //                 />
+// //               </div>
+// //               <button
+// //                 type="submit"
+// //                 className="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+// //               >
+// //                 Sign Up
+// //               </button>
+// //               <p className="text-sm mt-3">
+// //                 Already have an account?{' '}
+// //                 <button
+// //                   type="button"
+// //                   onClick={() => setIsSignUp(false)}
+// //                   className="text-blue-600 hover:underline"
+// //                 >
+// //                   Log In
+// //                 </button>
+// //               </p>
+// //             </form>
+// //           )}
+// //         </div>
+// //       ) : (
+// //         // If the user is logged in, display welcome message or protected data
+// //         <div className="max-w-sm mx-auto bg-[#f5f9fc] p-[20px] relative top-[200px] text-center">
+// //           <h2 className="text-lg font-bold mb-5">Welcome, You are logged in!</h2>
+// //           <p className="mb-5">You now have access to protected content.</p>
+// //           <button
+// //             className="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+// //             onClick={fetchProtectedData}
+// //           >
+// //             Fetch Protected Data
+// //           </button>
+// //         </div>
+// //       )}
+// //     </div>
+// //   );
+// // };
+
+// // export default Home;
+
+// import React, { useState } from 'react';
+
+// const AdminLogin = () => {
+//   const [adminId, setAdminId] = useState('');
+//   const [password, setPassword] = useState('');
+//   const [message, setMessage] = useState('');
+
+//   // Function to get CSRF token from cookies
+//   const getCsrfToken = () => {
+//     const name = 'csrftoken=';
+//     const decodedCookie = decodeURIComponent(document.cookie);
+//     const ca = decodedCookie.split(';');
+//     for (let i = 0; i < ca.length; i++) {
+//       let c = ca[i].trim();
+//       if (c.indexOf(name) === 0) {
+//         return c.substring(name.length, c.length);
+//       }
+//     }
+//     return '';
+//   };
+
+//   // Function to handle login
+//   const handleLogin = (e) => {
+//     e.preventDefault(); // Prevent page refresh
+
+//     if (!adminId || !password) {
+//       setMessage('Please fill in all fields.');
+//       return;
+//     }
+
+//     const csrfToken = getCsrfToken();
+
+//     fetch('http://127.0.0.1:8000/subadmin/login/', {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json',
+//         'X-CSRFToken': csrfToken, // Include CSRF token in the header
+//       },
+//       body: JSON.stringify({
+//         admin_id: adminId,
+//         password: password,
+//       }),
+//     })
+//       .then((response) => response.json())
+//       .then((data) => {
+//         if (data.message === 'Login successful') {
+//           setMessage('Login successful!');
+//         } else {
+//           setMessage('Login failed. Please check your credentials.');
+//         }
+//       })
+//       .catch((error) => {
+//         setMessage('An error occurred. Please try again.');
+//       });
+//   };
+
+//   return (
+//     <div className="">
+//       <h2>Admin Login</h2>
+//       <div id="message" className="message">
+//         {message}
+//       </div>
+//       <form onSubmit={handleLogin}>
+//         <div className="form-group">
+//           <label htmlFor="admin_id">Admin ID:</label>
+//           <input
+//             type="text"
+//             id="admin_id"
+//             name="admin_id"
+//             value={adminId}
+//             onChange={(e) => setAdminId(e.target.value)}
+//           />
+//         </div>
+//         <div className="form-group">
+//           <label htmlFor="password">Password:</label>
+//           <input
+//             type="password"
+//             id="password"
+//             name="password"
+//             value={password}
+//             onChange={(e) => setPassword(e.target.value)}
+//           />
+//         </div>
+//         <div className="form-group">
+//           <button type="submit">Login</button>
+//         </div>
+//       </form>
+//     </div>
+//   );
+// };
+
+// export default AdminLogin;
+
+
+
+import React, { useState, useEffect } from 'react';
+
+const Home = () => {
+  const [teacher_id, setAdminId] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [message, setMessage] = useState('');
+  const [isLogin, setIsLogin] = useState(true);
+
+ 
+  const getCsrfToken = () => {
+    const name = 'csrftoken=';
+    const decodedCookie = decodeURIComponent(document.cookie);
+    const ca = decodedCookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+      let c = ca[i].trim();
+      if (c.indexOf(name) === 0) {
+        const csrfToken = c.substring(name.length, c.length);
+        sessionStorage.setItem('csrfToken', csrfToken); 
+        console.log(csrfToken)
+        return csrfToken;
+        
       }
-    } catch (error) {
-      console.error('Error signing up:', error);
-      setErrorMessage('An error occurred. Please try again later.');
     }
+    return '';
   };
 
-  // Fetch protected data with JWT token
-  const fetchProtectedData = async () => {
-    const token = localStorage.getItem('token');
-  
-    if (!token) {
-      console.error('No token found, please log in.');
+ 
+  useEffect(() => {
+    getCsrfToken();
+  }, []);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (!teacher_id || !password || (!isLogin && !confirmPassword)) {
+      setMessage('Please fill in all fields.');
       return;
     }
-  
-    try {
-      const response = await fetch('https://verbumdei-management-system-vms.onrender.com/protected-endpoint/', {
-        method: 'GET',
-        headers: {
-          'Authorization': `Bearer ${token}`,  // Pass JWT token for authorization
-          'Content-Type': 'application/json',
-        },
-      });
-  
-      const data = await response.json();
-  
-      if (response.ok) {
-        console.log('Protected data:', data);
-      } else {
-        console.error('Failed to fetch protected data:', data.message);
-      }
-    } catch (error) {
-      console.error('Error fetching protected data:', error);
+
+    if (!isLogin && password !== confirmPassword) {
+      setMessage('Passwords do not match.');
+      return;
     }
+
+    // Retrieve the CSRF token from sessionStorage
+    const csrfToken = sessionStorage.getItem('csrfToken');
+
+    const url = isLogin
+      ? 'https://verbumdei-management-system-vms.onrender.com/teacheradmin/login/'
+      : 'https://verbumdei-management-system-vms.onrender.com/teacheradmin/signup/';
+    const body = isLogin
+      ? { teacher_id: teacher_id, password }
+      : { teacher_id: teacher_id, password, confirm_password: confirmPassword };
+
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': csrfToken,
+      },
+      body: JSON.stringify(body),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok.');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        if (data.message === 'Login successful' || data.message === 'Signup successful') {
+          setMessage(isLogin ? 'Login successful!' : 'Signup successful!');
+        } else {
+          setMessage(data.message || 'Request failed. Please check your details.');
+        }
+      })
+      .catch((error) => {
+        setMessage(`An error occurred: ${error.message}`);
+      });
   };
 
   return (
-    <div className="mybg absolute top-[-100px] z-[1000]">
-      {!isLoggedIn ? (
-        <div className="max-w-sm mx-auto bg-[#f5f9fc] p-[20px] relative top-[200px]">
-          {!isSignUp ? (
-            // Login Form
-            <form onSubmit={handleLoginSubmit}>
-              <h2 className="text-center text-lg font-bold mb-5">Login</h2>
-              {errorMessage && (
-                <div className="text-red-500 text-sm mb-3">{errorMessage}</div>
-              )}
-              {successMessage && (
-                <div className="text-green-500 text-sm mb-3">{successMessage}</div>
-              )}
-              <div className="mb-5">
-                <label htmlFor="teacher_id" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Teacher's ID</label>
-                <input
-                  type="text"
-                  id="teacher_id"
-                  value={teacher_id}
-                  onChange={(e) => SetTeacher_id(e.target.value)}
-                  className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
-                  required
-                />
-              </div>
-              <div className="mb-5">
-                <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your password</label>
-                <input
-                  type="password"
-                  id="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
-                  required
-                />
-              </div>
-              <button
-                type="submit"
-                className="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-              >
-                Submit
-              </button>
-              <p className="text-sm mt-3">
-                New user?{' '}
-                <button
-                  type="button"
-                  onClick={() => setIsSignUp(true)}
-                  className="text-blue-600 hover:underline"
-                >
-                  Sign Up
-                </button>
-              </p>
-            </form>
-          ) : (
-            // Sign-up Form
-            <form onSubmit={handleSignUpSubmit}>
-              <h2 className="text-center text-lg font-bold mb-5">Sign Up</h2>
-              {errorMessage && (
-                <div className="text-red-500 text-sm mb-3">{errorMessage}</div>
-              )}
-              {successMessage && (
-                <div className="text-green-500 text-sm mb-3">{successMessage}</div>
-              )}
-              <div className="mb-5">
-                <label htmlFor="teacher_id" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Teacher's ID</label>
-                <input
-                  type="text"
-                  id="text"
-                  value={teacher_id}
-                  onChange={(e) => SetTeacher_id(e.target.value)}
-                  className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
-                  required
-                />
-              </div>
-              <div className="mb-5">
-                <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your password</label>
-                <input
-                  type="password"
-                  id="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
-                  required
-                />
-              </div>
-              <div className="mb-5">
-                <label htmlFor="confirm-password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirm password</label>
-                <input
-                  type="password"
-                  id="confirm-password"
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                  className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
-                  required
-                />
-              </div>
-              <button
-                type="submit"
-                className="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-              >
-                Sign Up
-              </button>
-              <p className="text-sm mt-3">
-                Already have an account?{' '}
-                <button
-                  type="button"
-                  onClick={() => setIsSignUp(false)}
-                  className="text-blue-600 hover:underline"
-                >
-                  Log In
-                </button>
-              </p>
-            </form>
-          )}
+    <div className="container">
+      <h2>{isLogin ? 'Admin Login' : 'Admin Signup'}</h2>
+      <div id="message" className="message">{message}</div>
+      <form onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label htmlFor="admin_id">ID:</label>
+          <input
+            type="text"
+            id="teacher_id"
+            name="teacher_id"
+            value={teacher_id}
+            onChange={(e) => setAdminId(e.target.value)}
+          />
         </div>
-      ) : (
-        // If the user is logged in, display welcome message or protected data
-        <div className="max-w-sm mx-auto bg-[#f5f9fc] p-[20px] relative top-[200px] text-center">
-          <h2 className="text-lg font-bold mb-5">Welcome, You are logged in!</h2>
-          <p className="mb-5">You now have access to protected content.</p>
-          <button
-            className="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-            onClick={fetchProtectedData}
-          >
-            Fetch Protected Data
+        <div className="form-group">
+          <label htmlFor="password">Password:</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+        {!isLogin && (
+          <div className="form-group">
+            <label htmlFor="confirm_password">Confirm Password:</label>
+            <input
+              type="password"
+              id="confirm_password"
+              name="confirm_password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
+          </div>
+        )}
+        <div className="form-group">
+          <button type="submit">{isLogin ? 'Login' : 'Signup'}</button>
+        </div>
+        <div className="form-group">
+          <button type="button" onClick={() => setIsLogin(!isLogin)}>
+            {isLogin ? 'Switch to Signup' : 'Switch to Login'}
           </button>
         </div>
-      )}
+      </form>
     </div>
   );
 };
