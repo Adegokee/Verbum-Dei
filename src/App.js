@@ -32,6 +32,7 @@ import Subject from './components/Subject';
 import CreateSubject from './components/CreateSubject';
 import EditStudent from './components/EditStudent';
 import ParentId from './components/ParentId';
+import AdminInfo from './components/AdminInfo';
 
 
 
@@ -477,6 +478,7 @@ const handleLogout = async (setUser) => {
       <Page/>      
       <Routes>
       {/* <Route path="/login" element={<Login/>}/> */}
+      <Route path="/admin-info" element={<AdminInfo/>}/>
       <Route path="/dashboard" element={<Dashboard user={user}/>} />
       <Route path="/subject-management" element={<Subject subject={subject}  />}/>
       <Route path="/create-subject" element={<CreateSubject teacherData={teacherData} myclass={myclass} subject={subject} addSubject={addSubject} />}/> 
@@ -500,7 +502,7 @@ const handleLogout = async (setUser) => {
         <Route path='/student-management/:id' element={< StudentId/>}/>
         {/* <Route path="/teacher-management" element={<TeacherManagement teacherData={teacherData}  setTeacherData={setTeacherData} />} /> */}
         <Route path="/fee-and-payment" element={<FeesAndPayment />} />
-        <Route path="/class-and-exam" element={<ClassAndExam />} />
+        <Route path="/class-and-exam" element={<ClassAndExam teacherData={teacherData} />} />
         <Route path="/library-and-management" element={<LibraryAndManagement />} />
         <Route path="/inventory-management" element={<InventoryManagement inventoryType={inventoryType} />} />
         <Route path="/event-management" element={<EventManagement />} />

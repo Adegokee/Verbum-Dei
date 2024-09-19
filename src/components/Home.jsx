@@ -1,565 +1,171 @@
-// // import React, { useState } from 'react';
-
-// // const Home = () => {
-// //   const [isLoggedIn, setIsLoggedIn] = useState(false);
-// //   const [isSignUp, setIsSignUp] = useState(false); 
-// //   const [teacher_id, SetTeacher_id] = useState('');
-// //   const [password, setPassword] = useState('');
-// //   const [confirmPassword, setConfirmPassword] = useState(''); 
-// //   const [errorMessage, setErrorMessage] = useState('');
-// //   const [successMessage, setSuccessMessage] = useState('');
-// //   const [adminId, setAdminId] = useState('');
-// //   // const [password, setPassword] = useState('');
-// //   // const [message, setMessage] = useState('');
-
-
-
-// //   // const [adminId, setAdminId] = useState('');
-// //   // const [password, setPassword] = useState('');
-// //   const [message, setMessage] = useState('');
-
-// //   // Function to get CSRF token from cookies
-// //   const getCsrfToken = () => {
-// //     const name = 'csrftoken=';
-// //     const decodedCookie = decodeURIComponent(document.cookie);
-// //     const ca = decodedCookie.split(';');
-// //     for (let i = 0; i < ca.length; i++) {
-// //       let c = ca[i].trim();
-// //       if (c.indexOf(name) === 0) {
-// //         return c.substring(name.length, c.length);
-// //       }
-// //     }
-// //     return '';
-// //   };
-
-// //   // Function to handle login
-// //   const handleLogin = (e) => {
-// //     e.preventDefault(); // Prevent page refresh
-
-// //     if (!adminId || !password) {
-// //       setMessage('Please fill in all fields.');
-// //       return;
-// //     }
-
-// //     const csrfToken = getCsrfToken();
-
-// //     fetch('http://127.0.0.1:8000/subadmin/login/', {
-// //       method: 'POST',
-// //       headers: {
-// //         'Content-Type': 'application/json',
-// //         'X-CSRFToken': csrfToken, // Include CSRF token in the header
-// //       },
-// //       body: JSON.stringify({
-// //         admin_id: adminId,
-// //         password: password,
-// //       }),
-// //     })
-// //       .then((response) => response.json())
-// //       .then((data) => {
-// //         if (data.message === 'Login successful') {
-// //           setMessage('Login successful!');
-// //         } else {
-// //           setMessage('Login failed. Please check your credentials.');
-// //         }
-// //       })
-// //       .catch((error) => {
-// //         setMessage('An error occurred. Please try again.');
-// //       });
-// //   };
-
-//   // Handle user login
-//   // const handleLoginSubmit = async (e) => {
-//   //   e.preventDefault();
-//   //   setErrorMessage('');
-    
-//   //   try {
-//   //     const response = await fetch('https://verbumdei-management-system-vms.onrender.com/teacheradmin/login/', {
-//   //       method: 'POST',
-//   //       headers: {
-//   //         'Content-Type': 'application/json',
-//   //       },
-//   //       body: JSON.stringify({
-//   //         teacher_id: teacher_id,
-//   //         password: password,
-//   //       }),
-//   //     });
-  
-//   //     const data = await response.json();
-  
-//   //     if (response.ok) {
-      
-//   //       localStorage.setItem('token', data.token);  
-//   //       setIsLoggedIn(true);
-//   //       setSuccessMessage('Login successful');
-//   //       console.log('Token:', data.token);
-//   //       fetchProtectedData();
-//   //     } else {
-//   //       setErrorMessage(data.message || 'Login failed. Please try again.');
-//   //     }
-//   //   } catch (error) {
-//   //     console.error('Error logging in:', error);
-//   //     setErrorMessage('An error occurred. Please try again later.');
-//   //   }
-//   // };
-  
- 
-//   // const handleSignUpSubmit = async (e) => {
-//   //   e.preventDefault();
-//   //   setErrorMessage('');
-  
-//   //   if (password !== confirmPassword) {
-//   //     setErrorMessage('Passwords do not match');
-//   //     return;
-//   //   }
-  
-//   //   try {
-//   //     const response = await fetch('https://verbumdei-management-system-vms.onrender.com/teacheradmin/signup/', {
-//   //       method: 'POST',
-//   //       headers: {
-//   //         'Content-Type': 'application/json',
-//   //       },
-//   //       body: JSON.stringify({
-//   //         teacher_id: teacher_id,
-//   //         password: password,
-//   //       }),
-//   //     });
-  
-//   //     const data = await response.json();
-  
-//   //     if (response.ok) {
-      
-//   //       localStorage.setItem('token', data.token);
-  
-//   //       setSuccessMessage('Sign-up successful! You can now log in.');
-//   //       setIsSignUp(false);
-//   //     } else {
-//   //       setErrorMessage(data.message || 'Sign-up failed. Please try again.');
-//   //     }
-//   //   } catch (error) {
-//   //     console.error('Error signing up:', error);
-//   //     setErrorMessage('An error occurred. Please try again later.');
-//   //   }
-//   // };
-
-//   // // Fetch protected data with JWT token
-//   // const fetchProtectedData = async () => {
-//   //   const token = localStorage.getItem('token');
-  
-//   //   if (!token) {
-//   //     console.error('No token found, please log in.');
-//   //     return;
-//   //   }
-  
-//   //   try {
-//   //     const response = await fetch('https://verbumdei-management-system-vms.onrender.com/protected-endpoint/', {
-//   //       method: 'GET',
-//   //       headers: {
-//   //         'Authorization': `Bearer ${token}`,  // Pass JWT token for authorization
-//   //         'Content-Type': 'application/json',
-//   //       },
-//   //     });
-  
-//   //     const data = await response.json();
-  
-//   //     if (response.ok) {
-//   //       console.log('Protected data:', data);
-//   //     } else {
-//   //       console.error('Failed to fetch protected data:', data.message);
-//   //     }
-//   //   } catch (error) {
-//   //     console.error('Error fetching protected data:', error);
-//   //   }
-//   // };
-
-//   // return (
-//   //   <div className="mybg absolute top-[-100px] z-[1000]">
-//   //     {!isLoggedIn ? (
-//   //       <div className="max-w-sm mx-auto bg-[#f5f9fc] p-[20px] relative top-[200px]">
-//   //         {!isSignUp ? (
-//   //           // Login Form
-//   //           <div className="container">
-//   //     <h2>Admin Login</h2>
-//   //     <div id="message" className="message">
-//   //       {message}
-//   //     </div>
-//   //     <form onSubmit={handleLogin}>
-//   //       <div className="form-group">
-//   //         <label htmlFor="admin_id">Admin ID:</label>
-//   //         <input
-//   //           type="text"
-//   //           id="admin_id"
-//   //           name="admin_id"
-//   //           value={adminId}
-//   //           onChange={(e) => setAdminId(e.target.value)}
-//   //         />
-//   //       </div>
-//   //       <div className="form-group">
-//   //         <label htmlFor="password">Password:</label>
-//   //         <input
-//   //           type="password"
-//   //           id="password"
-//   //           name="password"
-//   //           value={password}
-//   //           onChange={(e) => setPassword(e.target.value)}
-//   //         />
-//   //       </div>
-//   //       <div className="form-group">
-//   //         <button type="submit">Login</button>
-//   //       </div>
-//   //     </form>
-//   //   </div>
-//             // <form onSubmit={handleLoginSubmit}>
-//             //   <h2 className="text-center text-lg font-bold mb-5">Login</h2>
-//             //   {errorMessage && (
-//             //     <div className="text-red-500 text-sm mb-3">{errorMessage}</div>
-//             //   )}
-//             //   {successMessage && (
-//             //     <div className="text-green-500 text-sm mb-3">{successMessage}</div>
-//             //   )}
-//             //   <div className="mb-5">
-//             //     <label htmlFor="teacher_id" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Teacher's ID</label>
-//             //     <input
-//             //       type="text"
-//             //       id="teacher_id"
-//             //       value={teacher_id}
-//             //       onChange={(e) => SetTeacher_id(e.target.value)}
-//             //       className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
-//             //       required
-//             //     />
-//             //   </div>
-//             //   <div className="mb-5">
-//             //     <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your password</label>
-//             //     <input
-//             //       type="password"
-//             //       id="password"
-//             //       value={password}
-//             //       onChange={(e) => setPassword(e.target.value)}
-//             //       className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
-//             //       required
-//             //     />
-//             //   </div>
-//             //   <button
-//             //     type="submit"
-//             //     className="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-//             //   >
-//             //     Submit
-//             //   </button>
-//             //   <p className="text-sm mt-3">
-//             //     New user?{' '}
-//             //     <button
-//             //       type="button"
-//             //       onClick={() => setIsSignUp(true)}
-//             //       className="text-blue-600 hover:underline"
-//             //     >
-//             //       Sign Up
-//             //     </button>
-//             //   </p>
-// //             // </form>
-// //           ) : (
-// //             // Sign-up Form
-// //             <form onSubmit={handleSignUpSubmit}>
-// //               <h2 className="text-center text-lg font-bold mb-5">Sign Up</h2>
-// //               {errorMessage && (
-// //                 <div className="text-red-500 text-sm mb-3">{errorMessage}</div>
-// //               )}
-// //               {successMessage && (
-// //                 <div className="text-green-500 text-sm mb-3">{successMessage}</div>
-// //               )}
-// //               <div className="mb-5">
-// //                 <label htmlFor="teacher_id" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Teacher's ID</label>
-// //                 <input
-// //                   type="text"
-// //                   id="text"
-// //                   value={teacher_id}
-// //                   onChange={(e) => SetTeacher_id(e.target.value)}
-// //                   className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
-// //                   required
-// //                 />
-// //               </div>
-// //               <div className="mb-5">
-// //                 <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your password</label>
-// //                 <input
-// //                   type="password"
-// //                   id="password"
-// //                   value={password}
-// //                   onChange={(e) => setPassword(e.target.value)}
-// //                   className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
-// //                   required
-// //                 />
-// //               </div>
-// //               <div className="mb-5">
-// //                 <label htmlFor="confirm-password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirm password</label>
-// //                 <input
-// //                   type="password"
-// //                   id="confirm-password"
-// //                   value={confirmPassword}
-// //                   onChange={(e) => setConfirmPassword(e.target.value)}
-// //                   className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
-// //                   required
-// //                 />
-// //               </div>
-// //               <button
-// //                 type="submit"
-// //                 className="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-// //               >
-// //                 Sign Up
-// //               </button>
-// //               <p className="text-sm mt-3">
-// //                 Already have an account?{' '}
-// //                 <button
-// //                   type="button"
-// //                   onClick={() => setIsSignUp(false)}
-// //                   className="text-blue-600 hover:underline"
-// //                 >
-// //                   Log In
-// //                 </button>
-// //               </p>
-// //             </form>
-// //           )}
-// //         </div>
-// //       ) : (
-// //         // If the user is logged in, display welcome message or protected data
-// //         <div className="max-w-sm mx-auto bg-[#f5f9fc] p-[20px] relative top-[200px] text-center">
-// //           <h2 className="text-lg font-bold mb-5">Welcome, You are logged in!</h2>
-// //           <p className="mb-5">You now have access to protected content.</p>
-// //           <button
-// //             className="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-// //             onClick={fetchProtectedData}
-// //           >
-// //             Fetch Protected Data
-// //           </button>
-// //         </div>
-// //       )}
-// //     </div>
-// //   );
-// // };
-
-// // export default Home;
-
-// import React, { useState } from 'react';
-
-// const AdminLogin = () => {
-//   const [adminId, setAdminId] = useState('');
-//   const [password, setPassword] = useState('');
-//   const [message, setMessage] = useState('');
-
-//   // Function to get CSRF token from cookies
-//   const getCsrfToken = () => {
-//     const name = 'csrftoken=';
-//     const decodedCookie = decodeURIComponent(document.cookie);
-//     const ca = decodedCookie.split(';');
-//     for (let i = 0; i < ca.length; i++) {
-//       let c = ca[i].trim();
-//       if (c.indexOf(name) === 0) {
-//         return c.substring(name.length, c.length);
-//       }
-//     }
-//     return '';
-//   };
-
-//   // Function to handle login
-//   const handleLogin = (e) => {
-//     e.preventDefault(); // Prevent page refresh
-
-//     if (!adminId || !password) {
-//       setMessage('Please fill in all fields.');
-//       return;
-//     }
-
-//     const csrfToken = getCsrfToken();
-
-//     fetch('http://127.0.0.1:8000/subadmin/login/', {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json',
-//         'X-CSRFToken': csrfToken, // Include CSRF token in the header
-//       },
-//       body: JSON.stringify({
-//         admin_id: adminId,
-//         password: password,
-//       }),
-//     })
-//       .then((response) => response.json())
-//       .then((data) => {
-//         if (data.message === 'Login successful') {
-//           setMessage('Login successful!');
-//         } else {
-//           setMessage('Login failed. Please check your credentials.');
-//         }
-//       })
-//       .catch((error) => {
-//         setMessage('An error occurred. Please try again.');
-//       });
-//   };
-
-//   return (
-//     <div className="">
-//       <h2>Admin Login</h2>
-//       <div id="message" className="message">
-//         {message}
-//       </div>
-//       <form onSubmit={handleLogin}>
-//         <div className="form-group">
-//           <label htmlFor="admin_id">Admin ID:</label>
-//           <input
-//             type="text"
-//             id="admin_id"
-//             name="admin_id"
-//             value={adminId}
-//             onChange={(e) => setAdminId(e.target.value)}
-//           />
-//         </div>
-//         <div className="form-group">
-//           <label htmlFor="password">Password:</label>
-//           <input
-//             type="password"
-//             id="password"
-//             name="password"
-//             value={password}
-//             onChange={(e) => setPassword(e.target.value)}
-//           />
-//         </div>
-//         <div className="form-group">
-//           <button type="submit">Login</button>
-//         </div>
-//       </form>
-//     </div>
-//   );
-// };
-
-// export default AdminLogin;
 
 
 
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'; 
+import AdminInfo from '../components/AdminInfo';
 
 const Home = () => {
-  const [teacher_id, setAdminId] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [message, setMessage] = useState('');
-  const [isLogin, setIsLogin] = useState(true);
+    const [admin_id, setAdminId] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [staff_id, setStaff_id] = useState('');
+    const [userInfo, setUserInfo] = useState(null);
+    const [isSigningUp, setIsSigningUp] = useState(false);
+    const navigate = useNavigate(); // Initialize useNavigate
 
- 
-  const getCsrfToken = () => {
-    const name = 'csrftoken=';
-    const decodedCookie = decodeURIComponent(document.cookie);
-    const ca = decodedCookie.split(';');
-    for (let i = 0; i < ca.length; i++) {
-      let c = ca[i].trim();
-      if (c.indexOf(name) === 0) {
-        const csrfToken = c.substring(name.length, c.length);
-        sessionStorage.setItem('csrfToken', csrfToken); 
-        console.log(csrfToken)
-        return csrfToken;
-        
-      }
-    }
-    return '';
-  };
-
- 
-  useEffect(() => {
-    getCsrfToken();
-  }, []);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (!teacher_id || !password || (!isLogin && !confirmPassword)) {
-      setMessage('Please fill in all fields.');
-      return;
-    }
-
-    if (!isLogin && password !== confirmPassword) {
-      setMessage('Passwords do not match.');
-      return;
-    }
-
-    // Retrieve the CSRF token from sessionStorage
-    const csrfToken = sessionStorage.getItem('csrfToken');
-
-    const url = isLogin
-      ? 'https://verbumdei-management-system-vms.onrender.com/teacheradmin/login/'
-      : 'https://verbumdei-management-system-vms.onrender.com/teacheradmin/signup/';
-    const body = isLogin
-      ? { teacher_id: teacher_id, password }
-      : { teacher_id: teacher_id, password, confirm_password: confirmPassword };
-
-    fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-CSRFToken': csrfToken,
-      },
-      body: JSON.stringify(body),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok.');
+    useEffect(() => {
+        // Redirect to AdminInfo if userInfo is set
+        if (userInfo) {
+            navigate('/admin-info'); // Replace with your actual route
         }
-        return response.json();
-      })
-      .then((data) => {
-        if (data.message === 'Login successful' || data.message === 'Signup successful') {
-          setMessage(isLogin ? 'Login successful!' : 'Signup successful!');
-        } else {
-          setMessage(data.message || 'Request failed. Please check your details.');
-        }
-      })
-      .catch((error) => {
-        setMessage(`An error occurred: ${error.message}`);
-      });
-  };
+    }, [userInfo, navigate]);
 
-  return (
-    <div className="container">
-      <h2>{isLogin ? 'Admin Login' : 'Admin Signup'}</h2>
-      <div id="message" className="message">{message}</div>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="admin_id">ID:</label>
-          <input
-            type="text"
-            id="teacher_id"
-            name="teacher_id"
-            value={teacher_id}
-            onChange={(e) => setAdminId(e.target.value)}
-          />
+    const handleLoginSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await fetch('https://verbumdei-management-system-vms.onrender.com/subadmin/login/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ admin_id, password })
+            });
+            const data = await response.json();
+
+            if (data.token) {
+                alert('Login successful!');
+                window.localStorage.setItem('token', data.token);
+                setUserInfo(data.user);
+            } else {
+                alert('Success: ' + JSON.stringify(data));
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
+
+    const handleSignUpSubmit = async (e) => {
+        e.preventDefault();
+
+        if (password !== confirmPassword) {
+            alert('Passwords do not match. Please try again.');
+            return; 
+        }
+
+        try {
+            const response = await fetch('https://verbumdei-management-system-vms.onrender.com/subadmin/signup/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ staff_id, password, confirm_password: confirmPassword })
+            });
+            const data = await response.json();
+
+            if (data.success) {
+                alert('Sign Up successful! You can now log in.');
+                setIsSigningUp(false); 
+            } else {
+                alert('Success: ' + JSON.stringify(data));
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
+
+    return (
+        <div className="mybg absolute top-[-100px] z-[1000] mx-auto mt-12">
+            <div className="flex justify-center relative top-[200px]">
+                <div className="w-full max-w-md">
+                    <div className="bg-white rounded-lg shadow-md">
+                        <div className="text-center text-white bg-blue-500 rounded-t-lg p-4">
+                            <h4>{isSigningUp ? 'Sign Up' : 'SubAdmin Login'}</h4>
+                        </div>
+                        <div className="p-6">
+                            {!isSigningUp ? (
+                                <form id="login-form" onSubmit={handleLoginSubmit}>
+                                    <div className="mb-4">
+                                        <label htmlFor="admin_id" className="block text-sm font-medium text-gray-700">Admin ID</label>
+                                        <input
+                                            type="text"
+                                            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                                            id="admin_id"
+                                            placeholder="Enter Admin ID"
+                                            value={admin_id}
+                                            onChange={(e) => setAdminId(e.target.value)}
+                                            required
+                                        />
+                                    </div>
+                                    <div className="mb-4">
+                                        <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
+                                        <input
+                                            type="password"
+                                            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                                            id="password"
+                                            placeholder="Enter Password"
+                                            value={password}
+                                            onChange={(e) => setPassword(e.target.value)}
+                                            required
+                                        />
+                                    </div>
+                                    <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-200">Login</button>
+                                    <button type="button" className="w-full text-blue-500 mt-2 hover:underline" onClick={() => setIsSigningUp(true)}>Sign Up</button>
+                                </form>
+                            ) : (
+                                <form id="signup-form" onSubmit={handleSignUpSubmit}>
+                                    <div className="mb-4">
+                                        <label htmlFor="admin_id" className="block text-sm font-medium text-gray-700">Admin ID</label>
+                                        <input
+                                            type="text"
+                                            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                                            id="admin_id"
+                                            placeholder="Enter Admin ID"
+                                            value={staff_id}
+                                            onChange={(e) => setStaff_id(e.target.value)}
+                                            required
+                                        />
+                                    </div>
+                                    <div className="mb-4">
+                                        <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
+                                        <input
+                                            type="password"
+                                            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                                            id="password"
+                                            placeholder="Enter Password"
+                                            value={password}
+                                            onChange={(e) => setPassword(e.target.value)}
+                                            required
+                                        />
+                                    </div>
+                                    <div className="mb-4">
+                                        <label htmlFor="confirm_password" className="block text-sm font-medium text-gray-700">Confirm Password</label>
+                                        <input
+                                            type="password"
+                                            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                                            id="confirm_password"
+                                            placeholder="Confirm Password"
+                                            value={confirmPassword}
+                                            onChange={(e) => setConfirmPassword(e.target.value)}
+                                            required
+                                        />
+                                    </div>
+                                    <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-200">Sign Up</button>
+                                    <button type="button" className="w-full text-blue-500 mt-2 hover:underline" onClick={() => setIsSigningUp(false)}>Back to Login</button>
+                                </form>
+                            )}
+                            {userInfo && 
+                            <AdminInfo userInfo={userInfo} />
+                          
+                            
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div className="form-group">
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        {!isLogin && (
-          <div className="form-group">
-            <label htmlFor="confirm_password">Confirm Password:</label>
-            <input
-              type="password"
-              id="confirm_password"
-              name="confirm_password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-            />
-          </div>
-        )}
-        <div className="form-group">
-          <button type="submit">{isLogin ? 'Login' : 'Signup'}</button>
-        </div>
-        <div className="form-group">
-          <button type="button" onClick={() => setIsLogin(!isLogin)}>
-            {isLogin ? 'Switch to Signup' : 'Switch to Login'}
-          </button>
-        </div>
-      </form>
-    </div>
-  );
+    );
 };
 
 export default Home;
+

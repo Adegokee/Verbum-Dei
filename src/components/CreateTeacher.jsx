@@ -248,7 +248,7 @@ const CreateTeacher = ({ teacherData,  setTeacherData }) => {
     phone_number_2: '',
     email: '',
     gender: 'MALE',
-    employment_type: 'FULL_TIME',
+    employment_type: 'FULLTIME',
     position: '',
     status: '',
     home_address: '',

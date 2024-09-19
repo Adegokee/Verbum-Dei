@@ -102,7 +102,7 @@ const TeacherManagement = ({ setTeacherData, teacherData}) => {
     </main>
   </Link>
 ))}   {records.map((teacher) => (
-         <Link to={`/teacher-management/${teacher.id}`}>
+         <Link key={teacher.id} to={`/teacher-management/${teacher.id}`}>
           <main key={teacher.id} className="m-[10px] cursor-pointer  bg-white text-center rounded-lg py-[20px] w-[200px]">
             <div className="flex flex-col items-center justify-center">
               <div className="w-[40px] h-[40px] rounded-full">

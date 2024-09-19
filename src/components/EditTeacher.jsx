@@ -12,7 +12,7 @@ const EditTeacher = () => {
     email: '',
     phone_number_1: '',
     home_address: '',
-    // add more fields as needed
+    
   });
 
   useEffect(() => {
