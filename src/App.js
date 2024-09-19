@@ -480,7 +480,7 @@ const handleLogout = async (setUser) => {
       {/* <Route path="/login" element={<Login/>}/> */}
       <Route path="/admin-info" element={<AdminInfo/>}/>
       <Route path="/dashboard" element={<Dashboard user={user}/>} />
-      <Route path="/subject-management" element={<Subject subject={subject}  />}/>
+      <Route path="/subject-management" element={<Subject  />}/>
       <Route path="/create-subject" element={<CreateSubject teacherData={teacherData} myclass={myclass} subject={subject} addSubject={addSubject} />}/> 
 
         <Route path="/" element={<Home/>}/>
