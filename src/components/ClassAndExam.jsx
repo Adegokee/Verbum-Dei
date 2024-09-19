@@ -50,7 +50,7 @@ const ClassAndExam = ({ teacherData }) => {
   };
 
   return (
-    <div className="container">
+    <div className="dashboard absolute bg-[#f5f9fc] top-[75px] left-[16%] p-[10px] ">
       <h1>Class Management</h1>
       <form onSubmit={handleAddClass}>
         <div>

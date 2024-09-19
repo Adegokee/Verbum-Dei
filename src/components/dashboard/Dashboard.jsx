@@ -58,7 +58,7 @@ useEffect(() => {
 },[teacherCount]);
 
 const mySubjectCount = async() => {
-    const response = await fetch('https://verbumdei-management-system-vms.onrender.com/class/subjects/')
+    const response = await fetch('https://verbumdei-management-system-vms.onrender.com/class/subjects/count')
     const data = await response.json();
     setSubjectCount(data);
     console.log(count);
