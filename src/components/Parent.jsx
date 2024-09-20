@@ -52,7 +52,7 @@ const Parent = ({ parent, errors }) => {
           <input type="text" className="input-field ml-[10px] outline-none w-[270px]" placeholder="Search Students List" />
         </div>
         <Link to="/create_parent" className='w-[250px] bg-blue-700 text-center rounded-md text-white pt-[8px]'>
-          Create Student
+          Create Parent
         </Link>
       </div>
 
