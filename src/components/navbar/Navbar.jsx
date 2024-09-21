@@ -59,10 +59,10 @@ const Navbar = ({ userInfo, handleLogout }) => {
               <Link to='/dashboard' className='block px-[10px] py-[8px] text-black hover:bg-[#f0f0f0]'>Dashboard</Link>
               <a href="#" className='block px-[10px] py-[8px] text-black hover:bg-[#f0f0f0]'>Profile</a>
               <a href="#" className='block px-[10px] py-[8px] text-black hover:bg-[#f0f0f0]'>Settings</a>
-              {userInfo && (
+              {/* {userInfo && ( */}
                  <a href="#" className='block px-[10px] py-[8px] text-black hover:bg-[#f0f0f0]' onClick={handleLogout}>Logout</a>
-              )}
-             
+              {/* )}
+              */}
             </div>
           )}
         </div>

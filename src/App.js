@@ -81,74 +81,74 @@ function App() {
    
 
     const handleLoginSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            const response = await fetch('https://verbumdei-management-system-vms.onrender.com/subadmin/login/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ admin_id, password }),
-            });
-            const data = await response.json();
-
-            if (data.token) {
-                alert('Login successful!');
-                window.localStorage.setItem('token', data.token); // Store token in local storage
-                setUserInfo(data.user);
-                navigate('/dashboard');
-            } else {
-                alert('Error: ' + JSON.stringify(data));
-            }
-        } catch (error) {
-            console.error('Error:', error);
+      e.preventDefault();
+      try {
+        const response = await fetch('https://verbumdei-management-system-vms.onrender.com/subadmin/login/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ admin_id, password }),
+        });
+        const data = await response.json();
+  
+        if (data.token) {
+          alert('Login successful!');
+          window.localStorage.setItem('token', data.token);
+          setUserInfo(data.user);
+          navigate('/dashboard'); // Navigate to dashboard after login
+        } else {
+          alert('Error: ' + JSON.stringify(data));
         }
-       
+      } catch (error) {
+        console.error('Error:', error);
+      }
     };
-
     const handleSignUpSubmit = async (e) => {
-        e.preventDefault();
-        if (password !== confirmPassword) {
-            alert('Passwords do not match. Please try again.');
-            return;
+      e.preventDefault();
+      if (password !== confirmPassword) {
+        alert('Passwords do not match. Please try again.');
+        return;
+      }
+  
+      try {
+        const response = await fetch('https://verbumdei-management-system-vms.onrender.com/subadmin/signup/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ staff_id, password }),
+        });
+        const data = await response.json();
+  
+        if (data.success) {
+          alert('Sign Up successful! You can now log in.');
+          setIsSigningUp(false);
+          navigate('/'); // Navigate to login or home page after signup
+        } else {
+          alert('Error: ' + JSON.stringify(data));
         }
-
-        try {
-            const response = await fetch('https://verbumdei-management-system-vms.onrender.com/subadmin/signup/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ staff_id, password }),
-            });
-            const data = await response.json();
-
-            if (data.success) {
-                alert('Sign Up successful! You can now log in.');
-                setIsSigningUp(false); 
-            } else {
-                alert('Error: ' + JSON.stringify(data));
-            }
-        } catch (error) {
-            console.error('Error:', error);
-        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
     };
-
+  
+  
     const handleLogout = async () => {
       try {
         const response = await fetch('https://verbumdei-management-system-vms.onrender.com/subadmin/logout/', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${window.localStorage.getItem('token')}`, // Use token for auth if required
+            'Authorization': `Bearer ${window.localStorage.getItem('token')}`,
           },
         });
   
         if (response.ok) {
-          window.localStorage.removeItem('token'); // Clear token
-          setUserInfo(null); // Clear user info
+          window.localStorage.removeItem('token');
+          setUserInfo(null);
           alert('Logout successful!');
-          window.location.href = '/'; // Redirect to home
+          window.location.href = '/';
         } else {
           alert('Logout failed. Please try again.');
         }
@@ -156,46 +156,27 @@ function App() {
         console.error('Error:', error);
       }
     };
-
-    useEffect(() => {
-      const token = window.localStorage.getItem('token');
-      if (token) {
-       
-        const fetchUserInfo = async () => {
-          try {
-            const response = await fetch('https://verbumdei-management-system-vms.onrender.com/subadmin/me/', {
-              headers: { 'Authorization': `Bearer ${token}` }
-            });
-            const data = await response.json();
-            setUserInfo(data); // Set user info from the response
-          } catch (error) {
-            console.error('Error fetching user info:', error);
-          }
-        };
   
-        fetchUserInfo();
-      }
-    }, []);
+   
 
 
 
 
 
-
-  useEffect(() => {
-    const fetchStudentData = async () => {
-      try {
-        const response = await fetch('https://verbumdei-management-system-vms.onrender.com/student/students/');
-        const data = await response.json();
-        setMydata(data);
+  // useEffect(() => {
+  //   const fetchStudentData = async () => {
+  //     try {
+  //       const response = await fetch('https://verbumdei-management-system-vms.onrender.com/student/students/');
+  //       const data = await response.json();
+  //       setMydata(data);
      
-      } catch (error) {
-        console.error('Failed to fetch teacher data:', error);
-      }
-    };
-    fetchStudentData()
+  //     } catch (error) {
+  //       console.error('Failed to fetch teacher data:', error);
+  //     }
+  //   };
+  //   fetchStudentData()
     
-  }, []);
+  // }, []);
 
 
   useEffect(() => {
@@ -468,14 +449,14 @@ function App() {
     />
   }/>
    <Route path="/dashboard" element={
-      isAdmin ? <Dashboard /> : <Navigate to="/" />
-    } />
-
-  {/* <Route path="/dashboard" element={
+    
     <PrivateRoute userInfo={userInfo}>
-      <Dashboard userInfo={userInfo} />
+      <Dashboard userInfo={userInfo}/>
     </PrivateRoute>
-  }/> */}
+    }/>
+   
+
+
 
   <Route path="/subject-management" element={
     <PrivateRoute userInfo={userInfo}>

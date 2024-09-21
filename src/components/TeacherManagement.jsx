@@ -13,29 +13,29 @@ const TeacherManagement = ({ setTeacherData, teacherData}) => {
   console.log(teacherData)
 
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const recordsPerPage = 6;
-  const lastIndex = currentPage * recordsPerPage;
-  const firstIndex = lastIndex - recordsPerPage;
-  const records = teacherData.slice(firstIndex, lastIndex);
-  const npage = Math.ceil(teacherData.length / recordsPerPage);
-  const numbers = [...Array(npage).keys()].map(n => n + 1);
+  // const [currentPage, setCurrentPage] = useState(1);
+  // const recordsPerPage = 6;
+  // const lastIndex = currentPage * recordsPerPage;
+  // const firstIndex = lastIndex - recordsPerPage;
+  // const records = teacherData.slice(firstIndex, lastIndex);
+  // const npage = Math.ceil(teacherData.length / recordsPerPage);
+  // const numbers = [...Array(npage).keys()].map(n => n + 1);
 
-  const prePage = () => {
-    if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
-    }
-  };
+  // const prePage = () => {
+  //   if (currentPage > 1) {
+  //     setCurrentPage(currentPage - 1);
+  //   }
+  // };
 
-  const nextPage = () => {
-    if (currentPage < npage) {
-      setCurrentPage(currentPage + 1);
-    }
-  };
+  // const nextPage = () => {
+  //   if (currentPage < npage) {
+  //     setCurrentPage(currentPage + 1);
+  //   }
+  // };
 
-  const changeCPage = (page) => {
-    setCurrentPage(page);
-  };
+  // const changeCPage = (page) => {
+  //   setCurrentPage(page);
+  // };
 
   const Dropdown = ({ label, children }) => (
     <div className="dropdown">
@@ -76,7 +76,7 @@ const TeacherManagement = ({ setTeacherData, teacherData}) => {
       </div>
 
       <nav className="flex flex-wrap justify-center ">
-      {records.map((teacher) => (
+      {teacherData && teacherData.map((teacher) => (
   <Link key={teacher.id} to={`/teacher-management/${teacher.id}`}>
     <main className="m-[10px] cursor-pointer bg-white text-center rounded-lg py-[20px] w-[200px]">
       <div className="flex flex-col items-center justify-center">
@@ -101,7 +101,7 @@ const TeacherManagement = ({ setTeacherData, teacherData}) => {
       </div>
     </main>
   </Link>
-))}   {records.map((teacher) => (
+))}   {teacherData && teacherData.map((teacher) => (
          <Link key={teacher.id} to={`/teacher-management/${teacher.id}`}>
           <main key={teacher.id} className="m-[10px] cursor-pointer  bg-white text-center rounded-lg py-[20px] w-[200px]">
             <div className="flex flex-col items-center justify-center">
@@ -137,7 +137,7 @@ const TeacherManagement = ({ setTeacherData, teacherData}) => {
         ))}
       </nav>
 
-      <nav aria-label="Page navigation example" className="flex justify-end w-full mt-[27px]">
+      {/* <nav aria-label="Page navigation example" className="flex justify-end w-full mt-[27px]">
         <ul className="inline-flex text-sm mt-[15px]">
           <li>
             <a 
@@ -168,7 +168,7 @@ const TeacherManagement = ({ setTeacherData, teacherData}) => {
             </a>
           </li>
         </ul>
-      </nav>
+      </nav> */}
     </div>
   );
 };

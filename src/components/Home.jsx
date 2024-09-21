@@ -5,8 +5,7 @@ import {Link} from "react-router-dom"
 
 const Home = ( {handleLoginSubmit, handleSignUpSubmit, isSigningUp, setIsSigningUp, userInfo, setUserInfo, staff_id, setStaffId, confirmPassword, setConfirmPassword, password, setPassword, admin_id, setAdminId}) => {
     
-    let myInfo = localStorage.setItem('userInfo', userInfo)
-    console.log(myInfo)
+   
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-100 mybg absolute top-[-100px] z-[1000] mx-auto mt-12">
             <div className="w-full max-w-md p-6 bg-white rounded-lg shadow-md">
