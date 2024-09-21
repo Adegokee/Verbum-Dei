@@ -6,7 +6,7 @@ import { FaCaretDown } from 'react-icons/fa';
 import tunde from '../../assest/logo.png';
 import { Link } from 'react-router-dom';
 
-const Navbar = ({ userInfo }) => {
+const Navbar = ({ userInfo, handleLogout }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {
@@ -19,7 +19,7 @@ const Navbar = ({ userInfo }) => {
   return (
     <div className='flex h-[77px] border-2 border-[#c5c8ca] items-center bg-[#f5f9fc]'>
       <div className='flex items-center p-[12px] w-[250px] bg-[#f5f9fc] border-r-[1px] border-b-[1px] border-[#c5c8ca] z-[20]'>
-        <img className='w-[100px] object-cover' src={tunde} alt="Logo" />
+        <img className='w-[50px] object-cover' src={tunde} alt="Logo" />
         <Link to='/' className='ml-[10px] font-bold text-[20px] text-[#007bff]'>
           Verbum Dei
         </Link>
@@ -59,7 +59,10 @@ const Navbar = ({ userInfo }) => {
               <Link to='/dashboard' className='block px-[10px] py-[8px] text-black hover:bg-[#f0f0f0]'>Dashboard</Link>
               <a href="#" className='block px-[10px] py-[8px] text-black hover:bg-[#f0f0f0]'>Profile</a>
               <a href="#" className='block px-[10px] py-[8px] text-black hover:bg-[#f0f0f0]'>Settings</a>
-              <a href="#" className='block px-[10px] py-[8px] text-black hover:bg-[#f0f0f0]'>Logout</a>
+              {userInfo && (
+                 <a href="#" className='block px-[10px] py-[8px] text-black hover:bg-[#f0f0f0]' onClick={handleLogout}>Logout</a>
+              )}
+             
             </div>
           )}
         </div>

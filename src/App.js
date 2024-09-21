@@ -1,4 +1,6 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, createContext, useContext} from 'react';
+import AuthRoute from './components/AuthRoute';
+import PrivateRoute from './components/PrivateRoute';
 import './App.css';
 import EditTeacher from './components/EditTeacher';
 import Dashboard from './components/dashboard/Dashboard';
@@ -36,7 +38,25 @@ import AdminInfo from './components/AdminInfo';
 
 
 
+const AuthContext = createContext();
+
+export const useAuth = () => useContext(AuthContext);
+
+const AuthProvider = ({ children }) => {
+  const [userInfo, setUserInfo] = useState(null);
+  // other states and login/logout logic...
+
+  return (
+    <AuthContext.Provider value={{ userInfo, setUserInfo }}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
+
 function App() {
+  const navigate = useNavigate();
+ 
+
   const [mydata, setMydata] = useState([]);
   const [teacherData, setTeacherData] = useState([]);
   const [parent, setParent] = useState([]);
@@ -55,6 +75,11 @@ function App() {
     const [userInfo, setUserInfo] = useState(null);
     const [isSigningUp, setIsSigningUp] = useState(false);
 
+    const isAdmin = userInfo && userInfo.role === 'admin';
+   
+
+   
+
     const handleLoginSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -71,12 +96,14 @@ function App() {
                 alert('Login successful!');
                 window.localStorage.setItem('token', data.token); // Store token in local storage
                 setUserInfo(data.user);
+                navigate('/dashboard');
             } else {
                 alert('Error: ' + JSON.stringify(data));
             }
         } catch (error) {
             console.error('Error:', error);
         }
+       
     };
 
     const handleSignUpSubmit = async (e) => {
@@ -106,6 +133,49 @@ function App() {
             console.error('Error:', error);
         }
     };
+
+    const handleLogout = async () => {
+      try {
+        const response = await fetch('https://verbumdei-management-system-vms.onrender.com/subadmin/logout/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${window.localStorage.getItem('token')}`, // Use token for auth if required
+          },
+        });
+  
+        if (response.ok) {
+          window.localStorage.removeItem('token'); // Clear token
+          setUserInfo(null); // Clear user info
+          alert('Logout successful!');
+          window.location.href = '/'; // Redirect to home
+        } else {
+          alert('Logout failed. Please try again.');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+
+    useEffect(() => {
+      const token = window.localStorage.getItem('token');
+      if (token) {
+       
+        const fetchUserInfo = async () => {
+          try {
+            const response = await fetch('https://verbumdei-management-system-vms.onrender.com/subadmin/me/', {
+              headers: { 'Authorization': `Bearer ${token}` }
+            });
+            const data = await response.json();
+            setUserInfo(data); // Set user info from the response
+          } catch (error) {
+            console.error('Error fetching user info:', error);
+          }
+        };
+  
+        fetchUserInfo();
+      }
+    }, []);
 
 
 
@@ -376,49 +446,158 @@ function App() {
   return (
     <div className="">
 
-      <Page userInfo={userInfo} setUserInfo={userInfo}/>   
+      <Page userInfo={userInfo} setUserInfo={userInfo} handleLogout={handleLogout}/>   
      
       <Routes>
-      {/* <Route path="/login" element={<Login/>}/> */}
-     
-      <Route path="/dashboard" element={<Dashboard user={user}/>} />
-      <Route path="/subject-management" element={<Subject teacherData={teacherData}  />}/>
-      {/* <Route path="/create-subject" element={<CreateSubject teacherData={teacherData} myclass={myclass} subject={subject} addSubject={addSubject} />}/>  */}
-   
-      <Route path="/" element={<Home handleLoginSubmit={handleLoginSubmit} handleSignUpSubmit={handleSignUpSubmit} isSigningUp={isSigningUp} setIsSigningUp={setIsSigningUp} userInfo={userInfo} setUserInfo={setUserInfo} staff_id={staff_id} setStaffId={setStaffId} confirmPassword={confirmPassword} setConfirmPassword={setConfirmPassword} password={password} setPassword={setPassword} admin_id={admin_id} setAdminId={setAdminId}/>}/>
-     
-       
-        
-        <Route path="/teacher-management" element={<TeacherManagement teacherData={teacherData}  setTeacherData={setTeacherData} />} />
-        
-        {/* <Route path="/dashboard" element={
-          <PrivateRoute>
-            <Dashboard />
-          </PrivateRoute>
-          } /> */}
-           {/* <Route path="/signup" element={<Signup />} /> */}
-           <Route path="/password-reset" element={<PasswordReset />} />
-        <Route path="/create_parent" element={<CreateParent addMyParent={addMyParent} myerrors={myerrors}/>}/>
-        <Route path="/parent" element={<Parent parent={parent} errors={errors} />} />
-        <Route path="/parent:id" element={<ParentId parent={parent} errors={errors} />} />
+  <Route path="/" element={
+    <Home
+      handleLoginSubmit={handleLoginSubmit}
+      handleSignUpSubmit={handleSignUpSubmit}
+      isSigningUp={isSigningUp}
+      setIsSigningUp={setIsSigningUp}
+      userInfo={userInfo}
+      setUserInfo={setUserInfo}
+      staff_id={staff_id}
+      setStaffId={setStaffId}
+      confirmPassword={confirmPassword}
+      setConfirmPassword={setConfirmPassword}
+      password={password}
+      setPassword={setPassword}
+      admin_id={admin_id}
+      setAdminId={setAdminId}
+    />
+  }/>
+   <Route path="/dashboard" element={
+      isAdmin ? <Dashboard /> : <Navigate to="/" />
+    } />
 
-        <Route path="/student-management" element={<StudentManagement  mydata={mydata} setMydata={setMydata}/>} />
-        <Route path='/student-management/:id' element={< StudentId/>}/>
-        {/* <Route path="/teacher-management" element={<TeacherManagement teacherData={teacherData}  setTeacherData={setTeacherData} />} /> */}
-        <Route path="/fee-and-payment" element={<FeesAndPayment />} />
-        <Route path="/class-and-exam" element={<ClassAndExam teacherData={teacherData} />} />
-        <Route path="/library-and-management" element={<LibraryAndManagement />} />
-        <Route path="/inventory-management" element={<InventoryManagement inventoryType={inventoryType} />} />
-        <Route path="/event-management" element={<EventManagement />} />
-        <Route path="/create-student" element={<CreateStudent addStudent={addStudent} myclass={myclass} mydata={mydata} errors={errors} myparent={parent} teacherData={teacherData}/>}/>
-        <Route path="/create-teacher" element={<CreateTeacher addTeacher={addTeacher } editTeacher={editTeacher} errors={errors} teacherData={teacherData} setTeacherData={setTeacherData}/>}/>
-        <Route path="/teacher-management/:id" element={<TeachersProfile updateTeacher={editTeacher}  />} />
-        <Route path="/teacher/:id" element={<EditTeacher />} />
-        <Route path="/student/:id" element={<EditStudent />} />
-        <Route path="/student-finished-reg" element={<StudentFinishedReg/>}/>
-        <Route path="/teacher-finished-reg" element={<TeacherSuccess />} />
+  {/* <Route path="/dashboard" element={
+    <PrivateRoute userInfo={userInfo}>
+      <Dashboard userInfo={userInfo} />
+    </PrivateRoute>
+  }/> */}
 
-      </Routes>
+  <Route path="/subject-management" element={
+    <PrivateRoute userInfo={userInfo}>
+      <Subject teacherData={teacherData} />
+    </PrivateRoute>
+  }/>
+
+  <Route path="/teacher-management" element={
+    <PrivateRoute userInfo={userInfo}>
+      <TeacherManagement teacherData={teacherData} setTeacherData={setTeacherData} />
+    </PrivateRoute>
+  }/>
+
+  <Route path="/password-reset" element={
+    <PrivateRoute userInfo={userInfo}>
+      <PasswordReset />
+    </PrivateRoute>
+  }/>
+
+  <Route path="/create_parent" element={
+    <PrivateRoute userInfo={userInfo}>
+      <CreateParent addMyParent={addMyParent} myerrors={myerrors} />
+    </PrivateRoute>
+  }/>
+
+  <Route path="/parent" element={
+    <PrivateRoute userInfo={userInfo}>
+      <Parent parent={parent} errors={errors} />
+    </PrivateRoute>
+  }/>
+
+  <Route path="/parent:id" element={
+    <PrivateRoute userInfo={userInfo}>
+      <ParentId parent={parent} errors={errors} />
+    </PrivateRoute>
+  }/>
+
+  <Route path="/student-management" element={
+    <PrivateRoute userInfo={userInfo}>
+      <StudentManagement mydata={mydata} setMydata={setMydata} />
+    </PrivateRoute>
+  }/>
+
+  <Route path='/student-management/:id' element={
+    <PrivateRoute userInfo={userInfo}>
+      <StudentId />
+    </PrivateRoute>
+  }/>
+
+  <Route path="/fee-and-payment" element={
+    <PrivateRoute userInfo={userInfo}>
+      <FeesAndPayment />
+    </PrivateRoute>
+  }/>
+
+  <Route path="/class-and-exam" element={
+    <PrivateRoute userInfo={userInfo}>
+      <ClassAndExam teacherData={teacherData} />
+    </PrivateRoute>
+  }/>
+
+  <Route path="/library-and-management" element={
+    <PrivateRoute userInfo={userInfo}>
+      <LibraryAndManagement />
+    </PrivateRoute>
+  }/>
+
+  <Route path="/inventory-management" element={
+    <PrivateRoute userInfo={userInfo}>
+      <InventoryManagement inventoryType={inventoryType} />
+    </PrivateRoute>
+  }/>
+
+  <Route path="/event-management" element={
+    <PrivateRoute userInfo={userInfo}>
+      <EventManagement />
+    </PrivateRoute>
+  }/>
+
+  <Route path="/create-student" element={
+    <PrivateRoute userInfo={userInfo}>
+      <CreateStudent addStudent={addStudent} myclass={myclass} mydata={mydata} errors={errors} myparent={parent} teacherData={teacherData} />
+    </PrivateRoute>
+  }/>
+
+  <Route path="/create-teacher" element={
+    <PrivateRoute userInfo={userInfo}>
+      <CreateTeacher addTeacher={addTeacher} editTeacher={editTeacher} errors={errors} teacherData={teacherData} setTeacherData={setTeacherData} />
+    </PrivateRoute>
+  }/>
+
+  <Route path="/teacher-management/:id" element={
+    <PrivateRoute userInfo={userInfo}>
+      <TeachersProfile updateTeacher={editTeacher} />
+    </PrivateRoute>
+  }/>
+
+  <Route path="/teacher/:id" element={
+    <PrivateRoute userInfo={userInfo}>
+      <EditTeacher />
+    </PrivateRoute>
+  }/>
+
+  <Route path="/student/:id" element={
+    <PrivateRoute userInfo={userInfo}>
+      <EditStudent />
+    </PrivateRoute>
+  }/>
+
+  <Route path="/student-finished-reg" element={
+    <PrivateRoute userInfo={userInfo}>
+      <StudentFinishedReg />
+    </PrivateRoute>
+  }/>
+
+  <Route path="/teacher-finished-reg" element={
+    <PrivateRoute userInfo={userInfo}>
+      <TeacherSuccess />
+    </PrivateRoute>
+  }/>
+</Routes>
+
      
     </div>
   );
