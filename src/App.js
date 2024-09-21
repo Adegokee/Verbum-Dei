@@ -124,7 +124,7 @@ function App() {
         if (data.success) {
           alert('Sign Up successful! You can now log in.');
           setIsSigningUp(false);
-          navigate('/'); // Navigate to login or home page after signup
+          navigate('/'); 
         } else {
           alert('Error: ' + JSON.stringify(data));
         }
@@ -135,28 +135,47 @@ function App() {
   
   
     const handleLogout = async () => {
-      try {
-        const response = await fetch('https://verbumdei-management-system-vms.onrender.com/subadmin/logout/', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${window.localStorage.getItem('token')}`,
-          },
-        });
-  
-        if (response.ok) {
-          window.localStorage.removeItem('token');
-          setUserInfo(null);
-          alert('Logout successful!');
-          window.location.href = '/';
-        } else {
-          alert('Logout failed. Please try again.');
-        }
-      } catch (error) {
-        console.error('Error:', error);
-      }
+      // try {
+      //   const token = window.localStorage.getItem('token');
+        
+      //   if (!token) {
+      //     alert('No token found. You are not logged in.');
+      //     return;
+      //   }
+    
+        
+        // const response = await fetch('https://verbumdei-management-system-vms.onrender.com/subadmin/logout/', {
+        //   method: 'POST',
+        //   headers: {
+        //     'Content-Type': 'application/json',
+        //     'Authorization': `Bearer ${token}`,
+        //   },
+        // });
+    
+      //   const result = await response.json();
+      //   console.log(result);
+    
+        
+      //   if (response.ok || result.success) {
+          
+      //     window.localStorage.removeItem('token');
+      //     setUserInfo(null);
+      //     alert('Logout successful!');
+      //     window.location.href = '/';
+      //   } else {
+      //     alert(`Server Logout failed: ${result.detail || 'Unknown error'}`);
+      //   }
+      // } catch (error) {
+        
+        // console.error('Error during logout:', error);
+        // alert('An error occurred while logging out. Removing token locally.');
+        window.localStorage.removeItem('token');
+        navigate('/'); 
+        setUserInfo(null);
+      //   window.location.href = '/'; 
+      // }
     };
-  
+    
    
 
 

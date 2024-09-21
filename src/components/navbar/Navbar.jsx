@@ -15,6 +15,7 @@ const Navbar = ({ userInfo, handleLogout }) => {
 
   // Fallback for userInfo if it's null or undefined
   const profileImage = userInfo && userInfo.profile_image ? userInfo.profile_image : profile;
+  const firstNAme = userInfo && userInfo.first_name ? userInfo.first_name : 'user';
 
   return (
     <div className='flex h-[77px] border-2 border-[#c5c8ca] items-center bg-[#f5f9fc]'>
@@ -50,7 +51,7 @@ const Navbar = ({ userInfo, handleLogout }) => {
             aria-haspopup="true"
             aria-expanded={dropdownOpen}
           />
-          <span className='ml-[20px] cursor-pointer' onClick={toggleDropdown}>Favour John</span>
+          <span className='ml-[20px] cursor-pointer' onClick={toggleDropdown}> Welcome {firstNAme}</span>
           <FaCaretDown className='ml-[10px] cursor-pointer' onClick={toggleDropdown} />
 
           {/* Dropdown Menu */}
