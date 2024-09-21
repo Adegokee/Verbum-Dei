@@ -48,6 +48,65 @@ function App() {
   // import Dashboard from './Dashboard';
   const [user, setUser] = useState(null);
   const [inventoryType, setInventoryType] = useState();
+  const [admin_id, setAdminId] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [staff_id, setStaffId] = useState('');
+    const [userInfo, setUserInfo] = useState(null);
+    const [isSigningUp, setIsSigningUp] = useState(false);
+
+    const handleLoginSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await fetch('https://verbumdei-management-system-vms.onrender.com/subadmin/login/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ admin_id, password }),
+            });
+            const data = await response.json();
+
+            if (data.token) {
+                alert('Login successful!');
+                window.localStorage.setItem('token', data.token); // Store token in local storage
+                setUserInfo(data.user);
+            } else {
+                alert('Error: ' + JSON.stringify(data));
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
+
+    const handleSignUpSubmit = async (e) => {
+        e.preventDefault();
+        if (password !== confirmPassword) {
+            alert('Passwords do not match. Please try again.');
+            return;
+        }
+
+        try {
+            const response = await fetch('https://verbumdei-management-system-vms.onrender.com/subadmin/signup/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ staff_id, password }),
+            });
+            const data = await response.json();
+
+            if (data.success) {
+                alert('Sign Up successful! You can now log in.');
+                setIsSigningUp(false); 
+            } else {
+                alert('Error: ' + JSON.stringify(data));
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
+
 
 
 
@@ -317,7 +376,7 @@ function App() {
   return (
     <div className="">
 
-      <Page/>   
+      <Page userInfo={userInfo} setUserInfo={userInfo}/>   
      
       <Routes>
       {/* <Route path="/login" element={<Login/>}/> */}
@@ -326,7 +385,7 @@ function App() {
       <Route path="/subject-management" element={<Subject teacherData={teacherData}  />}/>
       {/* <Route path="/create-subject" element={<CreateSubject teacherData={teacherData} myclass={myclass} subject={subject} addSubject={addSubject} />}/>  */}
    
-      <Route path="/" element={<Home/>}/>
+      <Route path="/" element={<Home handleLoginSubmit={handleLoginSubmit} handleSignUpSubmit={handleSignUpSubmit} isSigningUp={isSigningUp} setIsSigningUp={setIsSigningUp} userInfo={userInfo} setUserInfo={setUserInfo} staff_id={staff_id} setStaffId={setStaffId} confirmPassword={confirmPassword} setConfirmPassword={setConfirmPassword} password={password} setPassword={setPassword} admin_id={admin_id} setAdminId={setAdminId}/>}/>
      
        
         

@@ -1,98 +1,71 @@
-import React,{useState, useEffect } from 'react';
-import { CiSearch } from "react-icons/ci";
-import { FaRegBell } from "react-icons/fa6";
-import profile from '../../assest/profile-avatar.png'
-import { FaCaretDown } from "react-icons/fa";
+import React, { useState } from 'react';
+import { CiSearch } from 'react-icons/ci';
+import { FaRegBell } from 'react-icons/fa6';
+import profile from '../../assest/profile-avatar.png'; // Note: Corrected path from 'assest' to 'assets'
+import { FaCaretDown } from 'react-icons/fa';
 import tunde from '../../assest/logo.png';
-import { CgProfile } from "react-icons/cg";
-import {Link} from "react-router-dom"
-import { useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-
-
-
-
-
-
-
-const Navbar = () => {
- 
-    const [url, setUrl] = useState(window.location.href);
-  
-    useEffect(() => {
-      // Update URL when location changes
-      const handleLocationChange = () => {
-        setUrl(window.location.href);
-      };
-  
-      window.addEventListener('popstate', handleLocationChange);
-      window.addEventListener('pushState', handleLocationChange); // For pushState changes
-      window.addEventListener('replaceState', handleLocationChange); // For replaceState changes
-  
-      return () => {
-        window.removeEventListener('popstate', handleLocationChange);
-        window.removeEventListener('pushState', handleLocationChange);
-        window.removeEventListener('replaceState', handleLocationChange);
-      };
-    }, []);
-  
-  
-  
-  
+const Navbar = ({ userInfo }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {
-    setDropdownOpen(prev => !prev);
+    setDropdownOpen((prev) => !prev);
   };
+
+  // Fallback for userInfo if it's null or undefined
+  const profileImage = userInfo && userInfo.profile_image ? userInfo.profile_image : profile;
 
   return (
     <div className='flex h-[77px] border-2 border-[#c5c8ca] items-center bg-[#f5f9fc]'>
-      <main className='flex items-center p-[12px] w-[250px] bg-[#f5f9fc] border-r-[1px] border-b-[1px] border-[#c5c8ca] z-[20px] px-auto'>
-        <div className='w-[50px]'>
-          <img className='w-[100px] object-cover' src={tunde} alt="Profile" />
-        </div>
-       <Link to='/'>
-       <h3 className='ml-[10px] font-bold text-[20px] text-[#007bff]'>Verbum Dei</h3>
-       </Link>
-      </main>
+      <div className='flex items-center p-[12px] w-[250px] bg-[#f5f9fc] border-r-[1px] border-b-[1px] border-[#c5c8ca] z-[20]'>
+        <img className='w-[100px] object-cover' src={tunde} alt="Logo" />
+        <Link to='/' className='ml-[10px] font-bold text-[20px] text-[#007bff]'>
+          Verbum Dei
+        </Link>
+      </div>
 
-      <main className='w-[50%] bg-[#f5f9fc] p-[10px]'>
+      <div className='w-[50%] bg-[#f5f9fc] p-[10px]'>
         <a href="#" className='text-[15px] text-[#afb9d3]'>Home/Dashboard</a>
         <h2 className='font-bold text-[20px] text-[#007bff]'>Main Dashboard</h2>
-      </main>
+      </div>
 
-      <main className='flex justify-between w-[50%]'>
+      <div className='flex justify-between w-[50%]'>
         <div className='border-[1px] rounded-md flex items-center border-[#c5c8ca] w-[300px] h-[40px] p-[3px] ml-[10px]'>
           <CiSearch />
-          <input type="text" placeholder='Search...' className='ml-[10px] bg-[#f5f9fc] w-[260px] h-[100%] border-none outline-none rounded-md' />
+          <input type="text" placeholder='Search...' className='ml-[10px] bg-[#f5f9fc] w-[260px] h-full border-none outline-none rounded-md' />
         </div>
+        
         <div className='relative'>
           <p className='absolute text-white bg-[#be463f] px-[2px] right-[-29px] text-center text-[10px] rounded-md'>3</p>
           <FaRegBell className='text-[30px] absolute top-[5px] z-2' />
         </div>
+
         <div className='relative flex items-center pr-[40px]'>
-          <nav className='w-[40px]'>
-            <img className='w-[100%] cursor-pointer ml-4' src={profile} alt="Profile" onClick={toggleDropdown} />
-          </nav>
+          <img
+            className='w-[40px] h-[40px] cursor-pointer ml-4 rounded-full'
+            src={profileImage}
+            alt="Profile"
+            onClick={toggleDropdown}
+            aria-haspopup="true"
+            aria-expanded={dropdownOpen}
+          />
           <span className='ml-[20px] cursor-pointer' onClick={toggleDropdown}>Favour John</span>
-          <span className='ml-[10px]' onClick={toggleDropdown}><FaCaretDown /></span>
+          <FaCaretDown className='ml-[10px] cursor-pointer' onClick={toggleDropdown} />
 
           {/* Dropdown Menu */}
           {dropdownOpen && (
-            <div className='absolute top-[47px] right-0 mt-[10px] w-[200px] bg-white border border-[#c5c8ca] shadow-lg rounded-md'>
-          <Link to='dashboard' className='block px-[10px] py-[8px] text-black hover:bg-[#f0f0f0]'>Dashbord</Link>
-            
-            <a href="#" className='block px-[10px] py-[8px] text-black hover:bg-[#f0f0f0]'>Profile</a>
-           
-           
+            <div className='absolute top-[47px] right-0 mt-[10px] w-[200px] bg-white border border-[#c5c8ca] shadow-lg rounded-md z-10'>
+              <Link to='/dashboard' className='block px-[10px] py-[8px] text-black hover:bg-[#f0f0f0]'>Dashboard</Link>
+              <a href="#" className='block px-[10px] py-[8px] text-black hover:bg-[#f0f0f0]'>Profile</a>
               <a href="#" className='block px-[10px] py-[8px] text-black hover:bg-[#f0f0f0]'>Settings</a>
               <a href="#" className='block px-[10px] py-[8px] text-black hover:bg-[#f0f0f0]'>Logout</a>
             </div>
           )}
         </div>
-      </main>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

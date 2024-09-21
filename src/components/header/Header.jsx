@@ -4,7 +4,7 @@ import Navbar from '../navbar/Navbar'
 import Chart from '../Chart'
 import Dashboard from '../dashboard/Dashboard'
 // import './header.css'
-const Header = () => {
+const Header = ({userInfo, setUserInfo}) => {
  
   return (
     <>
@@ -13,7 +13,7 @@ const Header = () => {
       
       
       <div className='w-[100%] sticky top-0 z-[1000] '>
-      <Navbar/>
+      <Navbar userInfo={userInfo} setUserInfo={setUserInfo}/>
       </div>
 
        <div className='w-[16%]'>

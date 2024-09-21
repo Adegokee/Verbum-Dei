@@ -186,67 +186,9 @@ import {Link} from "react-router-dom"
 //     return useContext(UserContext);
 // };
 
-const Home = () => {
-    // const {userInfo, setUserInfo} = useContext(UserContext);
-    const [admin_id, setAdminId] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
-    const [staff_id, setStaffId] = useState('');
-    const [userInfo, setUserInfo] = useState(null);
-    const [isSigningUp, setIsSigningUp] = useState(false);
-
-    const handleLoginSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            const response = await fetch('https://verbumdei-management-system-vms.onrender.com/subadmin/login/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ admin_id, password }),
-            });
-            const data = await response.json();
-
-            if (data.token) {
-                alert('Login successful!');
-                window.localStorage.setItem('token', data.token); // Store token in local storage
-                setUserInfo(data.user);
-            } else {
-                alert('Error: ' + JSON.stringify(data));
-            }
-        } catch (error) {
-            console.error('Error:', error);
-        }
-    };
-
-    const handleSignUpSubmit = async (e) => {
-        e.preventDefault();
-        if (password !== confirmPassword) {
-            alert('Passwords do not match. Please try again.');
-            return;
-        }
-
-        try {
-            const response = await fetch('https://verbumdei-management-system-vms.onrender.com/subadmin/signup/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ staff_id, password }),
-            });
-            const data = await response.json();
-
-            if (data.success) {
-                alert('Sign Up successful! You can now log in.');
-                setIsSigningUp(false); 
-            } else {
-                alert('Error: ' + JSON.stringify(data));
-            }
-        } catch (error) {
-            console.error('Error:', error);
-        }
-    };
-
+const Home = ( {handleLoginSubmit, handleSignUpSubmit, isSigningUp, setIsSigningUp, userInfo, setUserInfo, staff_id, setStaffId, confirmPassword, setConfirmPassword, password, setPassword, admin_id, setAdminId}) => {
+    
+    
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-100 mybg absolute top-[-100px] z-[1000] mx-auto mt-12">
             <div className="w-full max-w-md p-6 bg-white rounded-lg shadow-md">

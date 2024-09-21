@@ -1,10 +1,10 @@
 import React from 'react';
 import Header from '../components/header/Header';
 
-const Page = () => {
+const Page = ({userInfo, setUserInfo}) => {
   return (
     <div>
-        <Header />
+        <Header userInfo={userInfo} setUserInfo={userInfo} />
         
     </div>
   )
