@@ -1,176 +1,306 @@
-import React, { useState, useEffect } from 'react';
-import profile from '../assest/profile-avatar.png';
-import { FaCaretDown } from "react-icons/fa";
-import { Link } from 'react-router-dom';
-import { CiSearch } from "react-icons/ci";
-import { FaPhone } from "react-icons/fa6";
-import { TiMessages } from "react-icons/ti";
-import { HiDotsHorizontal } from "react-icons/hi";
-import profileavatar from '../assest/profile-avatar.png'
+import React, { useState } from "react";
 
-const TeacherManagement = ({ setTeacherData, teacherData}) => {
-  // const [teacherData, setTeacherData] = useState([]);
-  console.log(teacherData)
+const CreateTeacher= () => {
+  // const [formData, setFormData] = useState({
+  //   gender: "",
+  //   first_name: "",
+  //   last_name: "",
+  //   phone_number_1: "",
+  //   email: "",
+  //   employment_type: "",
+  //   home_address: "",
+  //   local_government_area: "",
+  //   state_of_origin: "",
+  //   nin: "",
+  //   bvn: "",
+  //   staff_type: "",
+  //   status: "",
+  //   position: ""
+  // });
+
+  // const [errors, setErrors] = useState({});
+
+  // // Handle form input changes
+  // const handleChange = (e) => {
+  //   setFormData({ ...formData, [e.target.name]: e.target.value });
+  // };
+
+  // // Handle form submission using fetchstudent/students/
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const response = await fetch(
+  //       "https://verbumdei-management-system-vms.onrender.com/staff/staff/",
+  //       {
+  //         method: "POST",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //         body: JSON.stringify(formData),
+  //       }
+  //     );
+
+  //     const data = await response.json();
+
+  //     if (!response.ok) {
+  //       // Handle errors from the API and display them
+  //       setErrors(data);
+  //     } else {
+  //       // Handle success (e.g., clear form or redirect)
+  //       console.log("Staff added successfully:", data);
+  //       setErrors({}); // Clear any existing errors
+  //     }
+  //   } catch (error) {
+  //     console.error("An error occurred:", error);
+  //   }
+  // };
 
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const recordsPerPage = 6;
-  const lastIndex = currentPage * recordsPerPage;
-  const firstIndex = lastIndex - recordsPerPage;
-  const records = teacherData.slice(firstIndex, lastIndex);
-  const npage = Math.ceil(teacherData.length / recordsPerPage);
-  const numbers = [...Array(npage).keys()].map(n => n + 1);
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    
+    const formData = new FormData(event.target);
 
-  const prePage = () => {
-    if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
+    try {
+        const response = await fetch('https://verbumdei-management-system-vms.onrender.com/staff/staff/', {
+            method: 'POST',
+            body: formData
+        });
+
+        const data = await response.json();
+        alert('Student added successfully!');
+        event.target.reset();
+    } catch (error) {
+        console.error('Error adding student:', error);
     }
-  };
 
-  const nextPage = () => {
-    if (currentPage < npage) {
-      setCurrentPage(currentPage + 1);
-    }
-  };
-
-  const changeCPage = (page) => {
-    setCurrentPage(page);
-  };
-
-  const Dropdown = ({ label, children }) => (
-    <div className="dropdown">
-      <button className="dropdown-button">{label}</button>
-      <div className="dropdown-menu">
-        {children}
-      </div>
-    </div>
-  );
+};
 
   return (
-    <div className="dashboard absolute bg-[#f5f9fc] top-[75px] left-[16%] p-[10px]">
-      <div className="dropdown-container">
-        <Dropdown label="All">
-          <div className="dropdown-item">Option 1</div>
-          <div className="dropdown-item">Option 2</div>
-        </Dropdown>
-        <Dropdown label="Select Date">
-          <div className="dropdown-item">Option A</div>
-          <div className="dropdown-item">Option B</div>
-        </Dropdown>
-        <div className="bg-white w-[300px] flex items-center rounded-md">
-          <CiSearch className="text-[16px] ml-[5px]" />
-          <input type="text" className="input-field ml-[10px] outline-none w-[270px]" placeholder="Search Teachers List" />
+   <div className="dashboard absolute bg-[#f5f9fc] top-[75px] left-[16%] p-[10px] ">
+     <form onSubmit={handleSubmit}>
+<main className='flex justify-center'>
+<div className="items-center justify-center w-[270px] border-2 border-gray-400 h-[70px]">
+            <input
+              type="file"
+              id="upload"
+              name="upload"
+              accept="image/*"
+            className="w-[167px] flex-grow font-medium px-3 py-2 text-ellipsis dark:bg-gray-900 text-gray-300 dark:text-gray-300"
+              required
+            />
+      
         </div>
-        <Link to="/create-teacher" className="w-[250px] bg-blue-700 text-bold text-center rounded-md text-white pt-[8px]">
-          Add New Teacher
-        </Link>
+      <div className="w-[270px] p-2 ">
+        <label>First Name: <span className="text-[red]">*</span>
+        </label>
+       <div>
+       <input
+          type="text"
+          name="first_name"
+          id="first_name"
+           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+        
+        />
+       </div>
+       
       </div>
 
-      <div className="bg-[#f5f9fc] border-b-2 flex border-[#d9d6d6] h-[40px]">
-        <main className="h-[100%] w-[100px] border-b-2 border-[#0c7eff] text-[#0c7eff]">
-          <a href="" className="pl-[10px] font-semibold">
-            All Teachers
-          </a>
-        </main>
-        {/* Add other categories similarly */}
+      <div className="w-[270px] p-2 ">
+        <label>Last Name:</label>
+        <input
+          type="text"
+          name="last_name"
+          id= "last_name"
+           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+          // value={formData.last_name}
+          // onChange={handleChange}
+        />
+        {/* {errors.last_name && <p>{errors.last_name[0]}</p>} */}
       </div>
 
-      <nav className="flex flex-wrap justify-center ">
-      {records.map((teacher) => (
-  <Link key={teacher.id} to={`/teacher-management/${teacher.id}`}>
-    <main className="m-[10px] cursor-pointer bg-white text-center rounded-lg py-[20px] w-[200px]">
-      <div className="flex flex-col items-center justify-center">
-        <div className="w-[40px] h-[40px] rounded-full">
-          <img src={teacher.img_url ? teacher.img_url : profileavatar} className="object-cover w-full h-full rounded-full cursor-pointer" alt={teacher.first_name} />
-        </div>
-        <span className="ml-[10px] font-semibold">{`${teacher.first_name} ${teacher.last_name}`}</span>
+      <div className="w-[270px] p-2 ">
+        <label>Phone Number:</label>
+        <input
+          type="text"
+          name="phone_number_1"
+          id="phone_number_1"
+           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+          // value={formData.phone_number_1}
+          // onChange={handleChange}
+        />
+        {/* {errors.phone_number_1 && <p>{errors.phone_number_1[0]}</p>} */}
       </div>
-      <div>
-        <p className="">{teacher.staff_id}</p>
+</main>
+
+    <main className="flex justify-center">
+    <div className="w-[270px] p-2 ">
+        <label>Email:</label>
+        <input
+          type="email"
+          name="email"
+          id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+          // value={formData.email}
+          // onChange={handleChange}
+        />
+        {/* {errors.email && <p>{errors.email[0]}</p>} */}
       </div>
-      <div>
-        <p className="">{teacher.position}</p>
+
+      <div className="w-[270px] p-2 ">
+        <label>Gender:</label>
+        <select
+         name="gender" 
+         id="gender"
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+        //  value={formData.gender} 
+        //  onChange={handleChange}
+         >
+          <option value="">Select Gender</option>
+          <option value="MALE">Male</option>
+          <option value="FEMALE">Female</option>
+        </select>
+        {/* {errors.gender && <p>{errors.gender[0]}</p>} */}
       </div>
-      <div className="flex items-center pl-[45px]">
-        <span className="mr-[20px] text-[#007bff] py-[10px] px-[15px] rounded-2xl bg-[#d6dfe8]">
-          <FaPhone />
-        </span>
-        <span className="text-[#007bff] text-[20px] py-[10px] px-[15px] rounded-2xl bg-[#d6dfe8]">
-          <TiMessages />
-        </span>
+
+      <div className="w-[270px] p-2 ">
+        <label>Employment Type:</label>
+        <select
+          name="employment_type"
+          id="employment_type"
+          className="border bg-white font-medium min-w-20 rounded-md shadow-sm text-gray-500 text-sm focus:ring focus:ring-primary-300 focus:border-primary-600 focus:outline-none dark:bg-gray-900 dark:border-gray-700 dark:text-gray-300 dark:focus:border-primary-600 dark:focus:ring-primary-700 px-3 py-2 w-full pr-8 max-w-2xl appearance-none"
+          // value={formData.employment_type}
+          // onChange={handleChange}
+        >
+          <option value="">Select Employment Type</option>
+          <option value="FULLTIME">Fulltime</option>
+          <option value="GRADUATE_ASSISTANT">Graduate Assistant</option>
+          <option value="PART_TIME">Part-time</option>
+          <option value="INTERN">Intern</option>
+          <option value="CORPER">Corper</option>
+        </select>
+        {/* {errors.employment_type && <p>{errors.employment_type[0]}</p>} */}
+      </div>
+
+      <div className="w-[270px] p-2 ">
+        <label>Home Address:</label>
+        <input
+          type="text"
+          name="home_address"
+          id="home_address"
+           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+          // value={formData.home_address}
+          // onChange={handleChange}
+        />
+        {/* {errors.home_address && <p>{errors.home_address[0]}</p>} */}
       </div>
     </main>
-  </Link>
-))}   {records.map((teacher) => (
-         <Link key={teacher.id} to={`/teacher-management/${teacher.id}`}>
-          <main key={teacher.id} className="m-[10px] cursor-pointer  bg-white text-center rounded-lg py-[20px] w-[200px]">
-            <div className="flex flex-col items-center justify-center">
-              <div className="w-[40px] h-[40px] rounded-full">
-                <img src={teacher.profile_img ? teacher.profile_img : profile} className="object-cover w-full h-full rounded-full cursor-pointer" alt={teacher.first_name} />
-              </div>
-              <span className="ml-[10px] font-semibold">{`${teacher.first_name} ${teacher.last_name}`}</span>
-            </div>
-            <div>
-              <p className="">{teacher.staff_id}</p>
-            </div>
-            <div>
-              <p className="">{teacher.position}</p>
-            </div>
-            <div className="flex items-center pl-[45px]">
-                
-            
-              <span className="mr-[20px] text-[#007bff] py-[10px] px-[15px] rounded-2xl bg-[#d6dfe8]">
-                <FaPhone />
-              </span>
-              
-              
-              <span className="text-[#007bff] text-[20px] py-[10px] px-[15px] rounded-2xl bg-[#d6dfe8]">
-                <TiMessages />
-              </span>
-            </div>
-            {/* <div className="font-semibold">
-              <HiDotsHorizontal />
-            </div> */}
-          </main>
-         
-         </Link>
-        ))}
-      </nav>
 
-      <nav aria-label="Page navigation example" className="flex justify-end w-full mt-[27px]">
-        <ul className="inline-flex text-sm mt-[15px]">
-          <li>
-            <a 
-              href="#" 
-              onClick={prePage} 
-              className="flex items-center justify-center h-8 px-3 leading-tight text-gray-500 bg-white border border-gray-300 ms-0 border-e-0 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-              Previous
-            </a>
-          </li>
-          {numbers.map((n) => (
-            <li key={n} className={`page-item ${currentPage === n ? 'active' : ''}`}>
-              <a 
-                href="#" 
-                aria-current={currentPage === n ? "page" : undefined}
-                className={`flex items-center justify-center h-8 px-3 border ${currentPage === n ? 'text-blue-600 bg-blue-50' : 'text-gray-500 bg-white'} border-gray-300 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white`}
-                onClick={() => changeCPage(n)}
-              >
-                {n}
-              </a>
-            </li>
-          ))}
-          <li>
-            <a 
-              href="#" 
-              onClick={nextPage} 
-              className="flex items-center justify-center h-8 px-3 leading-tight text-gray-500 bg-white border border-gray-300 ms-0 border-e-0 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-              Next
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </div>
+  <main className="flex justify-center">
+  <div className="w-[270px] p-2 ">
+        <label>Local Government Area:</label>
+        <input
+          type="text"
+          name="local_government_area"
+          id="local_government_area"
+           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+          // value={formData.local_government_area}
+          // onChange={handleChange}
+        />
+        {/* {errors.local_government_area && <p>{errors.local_government_area[0]}</p>} */}
+      </div>
+
+      <div className="w-[270px] p-2 ">
+        <label>State of Origin:</label>
+        <input
+          type="text"
+          name="state_of_origin"
+          id="state_of_origin"
+           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+          // value={formData.state_of_origin}
+          // onChange={handleChange}
+          
+        />
+        {/* {errors.state_of_origin && <p>{errors.state_of_origin[0]}</p>} */}
+      </div>
+
+      <div className="w-[270px] p-2 " >
+        <label>NIN:</label>
+        <input
+          type="text"
+          name="nin"
+          id="nin"
+           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+          // value={formData.nin}
+          // onChange={handleChange}
+        />
+        {/* {errors.nin && <p>{errors.nin[0]}</p>} */}
+      </div>
+
+      <div className="w-[270px] p-2 ">
+        <label>BVN:</label>
+        <input
+          type="text"
+          name="bvn"
+          id="bvn"
+           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+          // value={formData.bvn}
+          // onChange={handleChange}
+        />
+        {/* {errors.bvn && <p>{errors.bvn[0]}</p>} */}
+      </div>
+  </main>
+
+ <main className="flex justify-center">
+ <div className="w-[270px] p-2 ">
+    <label>Staff Type:</label>
+    <select
+      name="staff_type"
+      id="staff_type"
+      className="border bg-white font-medium min-w-20 rounded-md shadow-sm text-gray-500 text-sm focus:ring focus:ring-primary-300 focus:border-primary-600 focus:outline-none group-[.errors]:border-red-600 group-[.errors]:focus:ring-red-200 dark:bg-gray-900 dark:border-gray-700 dark:text-gray-300 dark:focus:border-primary-600 dark:focus:ring-primary-700 dark:focus:ring-opacity-50 dark:group-[.errors]:border-red-500 dark:group-[.errors]:focus:ring-red-600/40 px-3 py-2 w-full pr-8 max-w-2xl appearance-none"
+      // value={formData.staff_type}
+      // onChange={handleChange}
+    >
+      <option value="">Select Staff Type</option>
+      <option value="TEACHING">Teaching</option>
+      <option value="NON_TEACHING">Non-teaching</option>
+    </select>
+    {/* {errors.staff_type && <p>{errors.staff_type[0]}</p>} */}
+  </div>
+
+  <div className="w-[270px] p-2">
+    <label>Status:</label>
+    <select
+      name="status"
+      id="status"
+      className="border bg-white font-medium min-w-20 rounded-md shadow-sm text-gray-500 text-sm focus:ring focus:ring-primary-300 focus:border-primary-600 focus:outline-none group-[.errors]:border-red-600 group-[.errors]:focus:ring-red-200 dark:bg-gray-900 dark:border-gray-700 dark:text-gray-300 dark:focus:border-primary-600 dark:focus:ring-primary-700 dark:focus:ring-opacity-50 dark:group-[.errors]:border-red-500 dark:group-[.errors]:focus:ring-red-600/40 px-3 py-2 w-full pr-8 max-w-2xl appearance-none"
+      // value={formData.status}
+      // onChange={handleChange}
+    >
+      <option value="">Select Status</option>
+      <option value="ACTIVE">Active</option>
+      <option value="INACTIVE">Inactive</option>
+    </select>
+    {/* {errors.status && <p>{errors.status[0]}</p>} */}
+  </div>
+
+      <div className="w-[270px] p-2 ">
+        <label>Position:</label>
+        <input
+          type="text"
+          name="position"
+          id="position"
+           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+          // value={formData.position}
+          // onChange={handleChange}
+        />
+        {/* {errors.position && <p>{errors.position[0]}</p>} */}
+      </div>
+ </main>
+
+      <button type="submit"  className="bg-blue-400 border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/5 p-2.5 md:ml-[500px]">Add Staff</button>
+    </form>
+   </div>
   );
 };
 
-export default TeacherManagement;
+export default CreateTeacher;

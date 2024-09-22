@@ -7,13 +7,14 @@ import profile from '../../assest/profile-avatar.png'
 import { FaCaretDown } from "react-icons/fa";
 
 
-const Sidebar = () => {
+const Sidebar = ({userInfo}) => {
 let [active, setActive] = useState('active')
 const [dropdownOpen, setDropdownOpen] = useState(false);
 
 const toggleDropdown = () => {
   setDropdownOpen(prev => !prev);
-};
+}; const profileImage = userInfo && userInfo.profile_image ? userInfo.profile_image : profile;
+const firstNAme = userInfo && userInfo.first_name ? userInfo.first_name : 'user';
 
   return (
     <div className=''>
@@ -34,9 +35,9 @@ const toggleDropdown = () => {
 
         <div className='relative flex items-center ml-[10px] mt-[60px] pr-[40px]'>
           <nav className='w-[40px]'>
-            <img className='w-[100%] cursor-pointer' src={profile} alt="Profile" onClick={toggleDropdown} />
+            <img className='w-[100%] cursor-pointer' src={profileImage} alt="Profile" onClick={toggleDropdown} />
           </nav>
-          <span className='ml-[10px] cursor-pointer' onClick={toggleDropdown}>Favour John</span>
+          <span className='ml-[10px] cursor-pointer' onClick={toggleDropdown}>{firstNAme}</span>
           <span className='ml-[10px]' onClick={toggleDropdown}><FaCaretDown /></span>
 
           {/* Dropdown Menu */}

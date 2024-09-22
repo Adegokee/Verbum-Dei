@@ -91,7 +91,7 @@ const ClassAndExam = ({ teacherData }) => {
     <ul className="mt-4 space-y-2">
       {classes.map((classItem) => (
         <li key={classItem.id} className="p-3 transition duration-200 bg-white rounded-md shadow-md hover:bg-gray-100">
-          {classItem.name} - {classItem.teacher.first_name} {classItem.teacher.last_name}
+          {classItem.name} - {classItem.teacher.first_name} {classItem.teacher.last_name} {classItem.teacher.name}
         </li>
       ))}
     </ul>

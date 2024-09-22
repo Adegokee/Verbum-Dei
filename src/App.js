@@ -12,6 +12,7 @@ import LibraryAndManagement from './components/LibraryAndManagement';
 import InventoryManagement from './components/InventoryManagement';
 import EventManagement from './components/EventManagement';
 import Page from './page/Page';
+import Swal from 'sweetalert2';
 import Signup from './components/SignUp';
 import PasswordReset from './components/PasswordReset';
 import './App.css'
@@ -53,6 +54,8 @@ const AuthProvider = ({ children }) => {
   );
 };
 
+
+
 function App() {
   const navigate = useNavigate();
  
@@ -80,100 +83,113 @@ function App() {
 
    
 
+   
+
     const handleLoginSubmit = async (e) => {
-      e.preventDefault();
-      try {
-        const response = await fetch('https://verbumdei-management-system-vms.onrender.com/subadmin/login/', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ admin_id, password }),
-        });
-        const data = await response.json();
-  
-        if (data.token) {
-          alert('Login successful!');
-          window.localStorage.setItem('token', data.token);
-          setUserInfo(data.user);
-          navigate('/dashboard'); // Navigate to dashboard after login
-        } else {
-          alert('Error: ' + JSON.stringify(data));
+        e.preventDefault();
+        
+        try {
+            const response = await fetch('https://verbumdei-management-system-vms.onrender.com/subadmin/login/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ admin_id, password }),
+            });
+            
+            const data = await response.json();
+    
+            if (data.token) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Login successful!',
+                    text: 'Welcome back!',
+                });
+                
+                window.localStorage.setItem('token', data.token);
+                window.localStorage.setItem('userInfo', JSON.stringify(data.user)); 
+                setUserInfo(data.user);
+                navigate('/dashboard');
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: `Error: ${JSON.stringify(data)}`,
+                });
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            Swal.fire({
+                icon: 'error',
+                title: 'An error occurred',
+                text: 'Please try again later.',
+            });
         }
-      } catch (error) {
-        console.error('Error:', error);
-      }
     };
-    const handleSignUpSubmit = async (e) => {
-      e.preventDefault();
-      if (password !== confirmPassword) {
-        alert('Passwords do not match. Please try again.');
+    
+  
+
+const handleSignUpSubmit = async (e) => {
+    e.preventDefault();
+    
+    if (password !== confirmPassword) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Passwords do not match',
+            text: 'Please try again.',
+        });
         return;
-      }
-  
-      try {
+    }
+
+    try {
         const response = await fetch('https://verbumdei-management-system-vms.onrender.com/subadmin/signup/', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ staff_id, password }),
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ staff_id, password }),
         });
+
         const data = await response.json();
-  
+
         if (data.success) {
-          alert('Sign Up successful! You can now log in.');
-          setIsSigningUp(false);
-          navigate('/'); 
+            Swal.fire({
+                icon: 'success',
+                title: 'Sign Up successful!',
+                text: 'You can now log in.',
+            });
+            setIsSigningUp(false);
+            navigate('/'); 
         } else {
-          alert('Error: ' + JSON.stringify(data));
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: `Error: ${JSON.stringify(data)}`,
+            });
         }
-      } catch (error) {
+    } catch (error) {
         console.error('Error:', error);
-      }
-    };
+        Swal.fire({
+            icon: 'error',
+            title: 'An error occurred',
+            text: 'Please try again later.',
+        });
+    }
+};
+
   
   
-    const handleLogout = async () => {
-      // try {
-      //   const token = window.localStorage.getItem('token');
-        
-      //   if (!token) {
-      //     alert('No token found. You are not logged in.');
-      //     return;
-      //   }
-    
-        
-        // const response = await fetch('https://verbumdei-management-system-vms.onrender.com/subadmin/logout/', {
-        //   method: 'POST',
-        //   headers: {
-        //     'Content-Type': 'application/json',
-        //     'Authorization': `Bearer ${token}`,
-        //   },
-        // });
-    
-      //   const result = await response.json();
-      //   console.log(result);
-    
-        
-      //   if (response.ok || result.success) {
-          
-      //     window.localStorage.removeItem('token');
-      //     setUserInfo(null);
-      //     alert('Logout successful!');
-      //     window.location.href = '/';
-      //   } else {
-      //     alert(`Server Logout failed: ${result.detail || 'Unknown error'}`);
-      //   }
-      // } catch (error) {
-        
-        // console.error('Error during logout:', error);
-        // alert('An error occurred while logging out. Removing token locally.');
+    const handleLogout = () => {
+      try {
         window.localStorage.removeItem('token');
-        navigate('/'); 
+        window.localStorage.removeItem('userInfo'); // Remove user info on logout
         setUserInfo(null);
-      //   window.location.href = '/'; 
-      // }
+        alert('Thank you! Logout successful.');
+        navigate('/'); 
+      } catch (error) {
+        console.error('Error during logout:', error);
+        alert('An error occurred while logging out.');
+      }
     };
     
    
@@ -182,22 +198,20 @@ function App() {
 
 
 
-  // useEffect(() => {
-  //   const fetchStudentData = async () => {
-  //     try {
-  //       const response = await fetch('https://verbumdei-management-system-vms.onrender.com/student/students/');
-  //       const data = await response.json();
-  //       setMydata(data);
+  useEffect(() => {
+    const fetchStudentData = async () => {
+      try {
+        const response = await fetch('https://verbumdei-management-system-vms.onrender.com/student/students/');
+        const data = await response.json();
+        setMydata(data);
      
-  //     } catch (error) {
-  //       console.error('Failed to fetch teacher data:', error);
-  //     }
-  //   };
-  //   fetchStudentData()
+      } catch (error) {
+        console.error('Failed to fetch teacher data:', error);
+      }
+    };
+    fetchStudentData()
     
-  // }, []);
-
-
+  }, []);
   useEffect(() => {
       console.log(mydata);
   }, [mydata]);
@@ -563,7 +577,7 @@ function App() {
 
   <Route path="/create-teacher" element={
     <PrivateRoute userInfo={userInfo}>
-      <CreateTeacher addTeacher={addTeacher} editTeacher={editTeacher} errors={errors} teacherData={teacherData} setTeacherData={setTeacherData} />
+      <CreateTeacher addTeacher={addTeacher} myparent={parent} myclass={myclass} editTeacher={editTeacher} errors={errors} teacherData={teacherData} setTeacherData={setTeacherData} />
     </PrivateRoute>
   }/>
 

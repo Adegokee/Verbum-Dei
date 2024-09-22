@@ -17,7 +17,7 @@ const Header = ({userInfo, setUserInfo, handleLogout}) => {
       </div>
 
        <div className='w-[16%]'>
-       <Sidebar  />
+       <Sidebar userInfo={userInfo}  />
         </div> 
 
       

@@ -13,30 +13,29 @@ const TeacherManagement = ({ setTeacherData, teacherData}) => {
   console.log(teacherData)
 
 
-  // const [currentPage, setCurrentPage] = useState(1);
-  // const recordsPerPage = 6;
-  // const lastIndex = currentPage * recordsPerPage;
-  // const firstIndex = lastIndex - recordsPerPage;
-  // const records = teacherData.slice(firstIndex, lastIndex);
-  // const npage = Math.ceil(teacherData.length / recordsPerPage);
-  // const numbers = [...Array(npage).keys()].map(n => n + 1);
+  const [currentPage, setCurrentPage] = useState(1);
+  const recordsPerPage = 6; 
+  const lastIndex = currentPage * recordsPerPage;
+  const firstIndex = lastIndex - recordsPerPage;
+  const records = teacherData.slice(firstIndex, lastIndex); 
+  const npage = Math.ceil(teacherData.length / recordsPerPage);
+  const numbers = [...Array(npage).keys()].map(n => n + 1);
 
-  // const prePage = () => {
-  //   if (currentPage > 1) {
-  //     setCurrentPage(currentPage - 1);
-  //   }
-  // };
+  const prePage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
 
-  // const nextPage = () => {
-  //   if (currentPage < npage) {
-  //     setCurrentPage(currentPage + 1);
-  //   }
-  // };
+  const nextPage = () => {
+    if (currentPage < npage) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
 
-  // const changeCPage = (page) => {
-  //   setCurrentPage(page);
-  // };
-
+  const changeCPage = (page) => {
+    setCurrentPage(page);
+  };
   const Dropdown = ({ label, children }) => (
     <div className="dropdown">
       <button className="dropdown-button">{label}</button>
@@ -137,38 +136,21 @@ const TeacherManagement = ({ setTeacherData, teacherData}) => {
         ))}
       </nav>
 
-      {/* <nav aria-label="Page navigation example" className="flex justify-end w-full mt-[27px]">
+      <nav aria-label="Page navigation example" className="flex justify-end w-full mt-[7px]">
         <ul className="inline-flex text-sm mt-[15px]">
           <li>
-            <a 
-              href="#" 
-              onClick={prePage} 
-              className="flex items-center justify-center h-8 px-3 leading-tight text-gray-500 bg-white border border-gray-300 ms-0 border-e-0 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-              Previous
-            </a>
+            <a href="#" onClick={prePage} className="flex items-center justify-center h-8 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700">Previous</a>
           </li>
           {numbers.map((n) => (
             <li key={n} className={`page-item ${currentPage === n ? 'active' : ''}`}>
-              <a 
-                href="#" 
-                aria-current={currentPage === n ? "page" : undefined}
-                className={`flex items-center justify-center h-8 px-3 border ${currentPage === n ? 'text-blue-600 bg-blue-50' : 'text-gray-500 bg-white'} border-gray-300 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white`}
-                onClick={() => changeCPage(n)}
-              >
-                {n}
-              </a>
+              <a href="#" aria-current={currentPage === n ? "page" : undefined} className={`flex items-center justify-center h-8 px-3 border ${currentPage === n ? 'text-blue-600 bg-blue-50' : 'text-gray-500 bg-white'} hover:bg-blue-100 hover:text-blue-700`} onClick={() => changeCPage(n)}>{n}</a>
             </li>
           ))}
           <li>
-            <a 
-              href="#" 
-              onClick={nextPage} 
-              className="flex items-center justify-center h-8 px-3 leading-tight text-gray-500 bg-white border border-gray-300 ms-0 border-e-0 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-              Next
-            </a>
+            <a href="#" onClick={nextPage} className="flex items-center justify-center h-8 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700">Next</a>
           </li>
         </ul>
-      </nav> */}
+      </nav>
     </div>
   );
 };

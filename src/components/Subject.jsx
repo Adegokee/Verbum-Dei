@@ -59,7 +59,7 @@ const Subject = ({ teacherData }) => {
       if (response.ok) {
         alert('Subject added successfully!');
         resetForm();
-        await fetchSubjects(); // Fetch updated subjects
+        await fetchSubjects(); 
       } else {
         const errorData = await response.json();
         alert('Failed to add subject: ' + JSON.stringify(errorData));
@@ -156,6 +156,8 @@ const Subject = ({ teacherData }) => {
       </form>
 
       <h2 className="mt-6 text-xl font-semibold">Subjects</h2>
+      <p>{subjects.name}</p>
+
       <ul className="mt-4 space-y-2">
         {renderSubjects()}
       </ul>

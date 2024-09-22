@@ -1,17 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react'; 
 import { Navigate } from 'react-router-dom';
 
 const PrivateRoute = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [loading, setLoading] = useState(true); // Loading state to handle async check
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const token = window.localStorage.getItem('token');
-    if (token) {
-      // You can add a token validation or expiry check here if needed
+    const storedUserInfo = window.localStorage.getItem('userInfo');
+    
+    if (token && storedUserInfo) {
+      // If token and userInfo exist, consider the user authenticated
       setIsAuthenticated(true);
     }
-    setLoading(false); // Done checking token
+    setLoading(false); // Done checking token and userInfo
   }, []);
 
   if (loading) {

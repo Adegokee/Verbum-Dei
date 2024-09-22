@@ -44,14 +44,14 @@ const Navbar = ({ userInfo, handleLogout }) => {
 
         <div className='relative flex items-center pr-[40px]'>
           <img
-            className='w-[40px] h-[40px] cursor-pointer ml-4 rounded-full'
+            className='w-[30px] h-[30px] object-cover cursor-pointer ml-4 rounded-full'
             src={profileImage}
             alt="Profile"
             onClick={toggleDropdown}
             aria-haspopup="true"
             aria-expanded={dropdownOpen}
           />
-          <span className='ml-[20px] cursor-pointer' onClick={toggleDropdown}> Welcome {firstNAme}</span>
+          <span className='ml-[20px] cursor-pointer' onClick={toggleDropdown}> Welcome <br />{firstNAme}</span>
           <FaCaretDown className='ml-[10px] cursor-pointer' onClick={toggleDropdown} />
 
           {/* Dropdown Menu */}

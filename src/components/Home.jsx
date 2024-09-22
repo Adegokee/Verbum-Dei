@@ -1,9 +1,10 @@
 import React, { useState, createContext, useContext } from 'react';
 import {Link} from "react-router-dom"
+import Modal from "../App"
 
 
 
-const Home = ( {handleLoginSubmit, handleSignUpSubmit, isSigningUp, setIsSigningUp, userInfo, setUserInfo, staff_id, setStaffId, confirmPassword, setConfirmPassword, password, setPassword, admin_id, setAdminId}) => {
+const Home = ( { showModal,modalMessage, setModalMessage , setShowModal,handleLoginSubmit, handleSignUpSubmit, isSigningUp, setIsSigningUp, userInfo, setUserInfo, staff_id, setStaffId, confirmPassword, setConfirmPassword, password, setPassword, admin_id, setAdminId}) => {
     
    
     return (
@@ -92,7 +93,15 @@ const Home = ( {handleLoginSubmit, handleSignUpSubmit, isSigningUp, setIsSigning
                             {isSigningUp ? 'Back to Login' : 'Sign Up'}
                         </button>
                     </form>
+                    
                 )}
+                  <div>
+     
+
+    
+    
+    </div>
+                
             </div>
         </div>
     );
