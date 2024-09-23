@@ -51,7 +51,7 @@ const myTeacherCount = async() => {
     const response = await fetch('https://verbumdei-management-system-vms.onrender.com/staff/staff-count/')
     const data = await response.json();
     setTeacherCount(data);
-    console.log(count);
+    // console.log(count);
 }
 useEffect(() => {
     myTeacherCount()
