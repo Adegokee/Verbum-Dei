@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 import ReactApexChart from 'react-apexcharts';
 
 const ApexChart = () => {
-  // State management using useState hook
+ 
   const [series] = useState([
     {
       name: 'This Week',
-      data: [31, 40, 28, 51, 42, 109, 100, 60, 70, 80, 90, 100] // Monthly data points
+      data: [31, 40, 28, 51, 42, 109, 100, 60, 70, 80, 90, 100] 
     },
     {
       name: 'Last Week',
-      data: [11, 32, 45, 32, 34, 52, 41, 30, 40, 50, 60, 70] // Monthly data points
+      data: [11, 32, 45, 32, 34, 52, 41, 30, 40, 50, 60, 70] 
     }
   ]);
 
@@ -42,8 +42,8 @@ const ApexChart = () => {
         "2024-12-01T00:00:00.000Z",
       ],
       labels: {
-        format: 'MMM', // Format to display only the month
-        rotate: -45 // Optional: Rotate labels for better readability
+        format: 'MMM', 
+        rotate: -45 
       }
     },
     tooltip: {

@@ -45,7 +45,6 @@ export const useAuth = () => useContext(AuthContext);
 
 const AuthProvider = ({ children }) => {
   const [userInfo, setUserInfo] = useState(null);
-  // other states and login/logout logic...
 
   return (
     <AuthContext.Provider value={{ userInfo, setUserInfo }}>
@@ -162,9 +161,10 @@ const handleSignUpSubmit = async (e) => {
             navigate('/'); 
         } else {
             Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: `Error: ${JSON.stringify(data)}`,
+                icon: 'success',
+                title: 'Sign Up successful!',
+                text: 'You can now log in.',
+                // text: `Error: ${JSON.stringify(data)}`,
             });
         }
     } catch (error) {
@@ -179,18 +179,38 @@ const handleSignUpSubmit = async (e) => {
 
   
   
-    const handleLogout = () => {
-      try {
-        window.localStorage.removeItem('token');
-        window.localStorage.removeItem('userInfo'); // Remove user info on logout
-        setUserInfo(null);
-        alert('Thank you! Logout successful.');
-        navigate('/'); 
-      } catch (error) {
-        console.error('Error during logout:', error);
-        alert('An error occurred while logging out.');
-      }
-    };
+
+
+const handleLogout = () => {
+  try {
+    window.localStorage.removeItem('token');
+    window.localStorage.removeItem('userInfo'); 
+    setUserInfo(null);
+    
+  
+    Swal.fire({
+      icon: 'success',
+      title: 'Logged Out',
+      text: 'Thank you! Logout successful.',
+      confirmButtonText: 'OK'
+    }).then(() => {
+      navigate('/'); // Navigate after confirmation
+    });
+
+  } catch (error) {
+    console.error('Error during logout:', error);
+
+   
+    Swal.fire({
+      icon: 'error',
+      title: 'Logout Error',
+      text: 'An error occurred while logging out.',
+      confirmButtonText: 'Try Again'
+    });
+  }
+};
+
+    
     
    
 

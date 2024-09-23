@@ -5,11 +5,11 @@ const AuthRoute = ({ children }) => {
     const token = window.localStorage.getItem('token');
 
     if (!token) {
-        // Redirect them to the login page if not logged in
+    
         return <Navigate to="/" replace />;
     }
 
-    return children; // Render the child components if logged in
+    return children;
 };
 
 export default AuthRoute;

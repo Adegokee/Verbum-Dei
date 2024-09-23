@@ -10,14 +10,14 @@ const PrivateRoute = ({ children }) => {
     const storedUserInfo = window.localStorage.getItem('userInfo');
     
     if (token && storedUserInfo) {
-      // If token and userInfo exist, consider the user authenticated
+     
       setIsAuthenticated(true);
     }
-    setLoading(false); // Done checking token and userInfo
+    setLoading(false); 
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>; // Show loading while checking authentication
+    return <div>Loading...</div>; 
   }
 
   return isAuthenticated ? children : <Navigate to="/" />;
