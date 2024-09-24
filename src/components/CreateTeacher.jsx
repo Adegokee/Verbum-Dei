@@ -1,252 +1,268 @@
 import React, { useState } from "react";
 
-const CreateTeacher= () => {
+const CreateTeacher = () => {
+  const [errors, setErrors] = useState({});
 
+  const validateForm = (formData) => {
+    const newErrors = {};
+    if (!formData.get("first_name")) newErrors.first_name = "First Name is required.";
+    if (!formData.get("last_name")) newErrors.last_name = "Last Name is required.";
+    if (!formData.get("phone_number_1")) newErrors.phone_number_1 = "Phone Number is required.";
+    if (!formData.get("email")) newErrors.email = "Email is required.";
+    if (!formData.get("gender")) newErrors.gender = "Gender is required.";
+    if (!formData.get("employment_type")) newErrors.employment_type = "Employment Type is required.";
+    if (!formData.get("home_address")) newErrors.home_address = "Home Address is required.";
+    if (!formData.get("local_government_area")) newErrors.local_government_area = "Local Government Area is required.";
+    if (!formData.get("state_of_origin")) newErrors.state_of_origin = "State of Origin is required.";
+    if (!formData.get("date_of_birth")) newErrors.date_of_birth = "Date of Birth is required.";
+    if (!formData.get("staff_type")) newErrors.staff_type = "Staff Type is required.";
+    if (!formData.get("status")) newErrors.status = "Status is required.";
+
+    return newErrors;
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     
     const formData = new FormData(event.target);
+    const validationErrors = validateForm(formData);
 
-    try {
-        const response = await fetch('https://service.verbumdeiportal.com/staff/staff/', {
-            method: 'POST',
-            body: formData
-        });
-
-        const data = await response.json();
-        alert('Teacher added successfully!');
-        event.target.reset();
-    } catch (error) {
-        console.error('Error adding student:', error);
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
     }
 
-};
+    try {
+      const response = await fetch('https://service.verbumdeiportal.com/staff/staff/', {
+        method: 'POST',
+        body: formData
+      });
+
+      const data = await response.json();
+      alert('Teacher added successfully!');
+      event.target.reset();
+      setErrors({}); // Reset errors on successful submission
+    } catch (error) {
+      console.error('Error adding teacher:', error);
+    }
+  };
 
   return (
-   <div className="dashboard absolute bg-[#f5f9fc] top-[75px] left-[16%] p-[10px] ">
-     <form onSubmit={handleSubmit}>
-<main className='flex justify-center'>
-<div className="items-center justify-center w-[270px] border-2 border-gray-400 h-[70px]">
+    <div className="dashboard absolute bg-[#f5f9fc] top-[75px] left-[16%] p-[10px] ">
+      <form onSubmit={handleSubmit} className="max-w-3xl p-6 mx-auto bg-white rounded-lg shadow-lg">
+        <main className='grid grid-cols-1 gap-6 sm:grid-cols-2'>
+          {/* File Upload Section */}
+          <div className="flex items-center justify-center border-2 border-gray-300 rounded-lg p-2 h-[70px] bg-gray-50">
             <input
               type="file"
               id="upload"
               name="upload"
               accept="image/*"
-            className="w-[167px] flex-grow font-medium px-3 py-2 text-ellipsis dark:bg-gray-900 text-gray-300 dark:text-gray-300"
+              className="flex-grow px-3 py-2 font-medium text-gray-800 dark:bg-gray-900 dark:text-gray-300"
               required
             />
-      
-        </div>
-      <div className="w-[270px] p-2 ">
-        <label>First Name: <span className="text-[red]">*</span>
-        </label>
-       <div>
-       <input
-          type="text"
-          name="first_name"
-          id="first_name"
-           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-        
-        />
-       </div>
-       
-      </div>
+          </div>
 
-      <div className="w-[270px] p-2 ">
-        <label>Last Name:</label>
-        <input
-          type="text"
-          name="last_name"
-          id= "last_name"
-           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-          // value={formData.last_name}
-          // onChange={handleChange}
-        />
-        {/* {errors.last_name && <p>{errors.last_name[0]}</p>} */}
-      </div>
+          {/* First Name */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">First Name: <span className="text-red-500">*</span></label>
+            <input
+              type="text"
+              name="first_name"
+              id="first_name"
+              className="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              required
+            />
+            {errors.first_name && <p className="mt-1 text-sm text-red-500">{errors.first_name}</p>}
+          </div>
 
-      <div className="w-[270px] p-2 ">
-        <label>Phone Number:</label>
-        <input
-          type="text"
-          name="phone_number_1"
-          id="phone_number_1"
-           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-          // value={formData.phone_number_1}
-          // onChange={handleChange}
-        />
-        {/* {errors.phone_number_1 && <p>{errors.phone_number_1[0]}</p>} */}
-      </div>
-</main>
+          {/* Last Name */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Last Name:</label>
+            <input
+              type="text"
+              name="last_name"
+              id="last_name"
+              className="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            />
+            {errors.last_name && <p className="mt-1 text-sm text-red-500">{errors.last_name}</p>}
+          </div>
 
-    <main className="flex justify-center">
-    <div className="w-[270px] p-2 ">
-        <label>Email:</label>
-        <input
-          type="email"
-          name="email"
-          id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-          // value={formData.email}
-          // onChange={handleChange}
-        />
-        {/* {errors.email && <p>{errors.email[0]}</p>} */}
-      </div>
+          {/* Phone Number */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Phone Number:</label>
+            <input
+              type="text"
+              name="phone_number_1"
+              id="phone_number_1"
+              className="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            />
+            {errors.phone_number_1 && <p className="mt-1 text-sm text-red-500">{errors.phone_number_1}</p>}
+          </div>
 
-      <div className="w-[270px] p-2 ">
-        <label>Gender:</label>
-        <select
-         name="gender" 
-         id="gender"
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-        //  value={formData.gender} 
-        //  onChange={handleChange}
-         >
-          <option value="">Select Gender</option>
-          <option value="MALE">Male</option>
-          <option value="FEMALE">Female</option>
-        </select>
-        {/* {errors.gender && <p>{errors.gender[0]}</p>} */}
-      </div>
+          {/* Email */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Email:</label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              className="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            />
+            {errors.email && <p className="mt-1 text-sm text-red-500">{errors.email}</p>}
+          </div>
 
-      <div className="w-[270px] p-2 ">
-        <label>Employment Type:</label>
-        <select
-          name="employment_type"
-          id="employment_type"
-          className="border bg-white font-medium min-w-20 rounded-md shadow-sm text-gray-500 text-sm focus:ring focus:ring-primary-300 focus:border-primary-600 focus:outline-none dark:bg-gray-900 dark:border-gray-700 dark:text-gray-300 dark:focus:border-primary-600 dark:focus:ring-primary-700 px-3 py-2 w-full pr-8 max-w-2xl appearance-none"
-          // value={formData.employment_type}
-          // onChange={handleChange}
-        >
-          <option value="">Select Employment Type</option>
-          <option value="FULLTIME">Fulltime</option>
-          <option value="GRADUATE_ASSISTANT">Graduate Assistant</option>
-          <option value="PART_TIME">Part-time</option>
-          <option value="INTERN">Intern</option>
-          <option value="CORPER">Corper</option>
-        </select>
-        {/* {errors.employment_type && <p>{errors.employment_type[0]}</p>} */}
-      </div>
+          {/* Gender */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Gender:</label>
+            <select
+              name="gender"
+              id="gender"
+              className="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            >
+              <option value="">Select Gender</option>
+              <option value="MALE">Male</option>
+              <option value="FEMALE">Female</option>
+            </select>
+            {errors.gender && <p className="mt-1 text-sm text-red-500">{errors.gender}</p>}
+          </div>
 
-      <div className="w-[270px] p-2 ">
-        <label>Home Address:</label>
-        <input
-          type="text"
-          name="home_address"
-          id="home_address"
-           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-          // value={formData.home_address}
-          // onChange={handleChange}
-        />
-        {/* {errors.home_address && <p>{errors.home_address[0]}</p>} */}
-      </div>
-    </main>
+          {/* Employment Type */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Employment Type:</label>
+            <select
+              name="employment_type"
+              id="employment_type"
+              className="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            >
+              <option value="">Select Employment Type</option>
+              <option value="FULLTIME">Fulltime</option>
+              <option value="GRADUATE_ASSISTANT">Graduate Assistant</option>
+              <option value="PART_TIME">Part-time</option>
+              <option value="INTERN">Intern</option>
+              <option value="CORPER">Corper</option>
+            </select>
+            {errors.employment_type && <p className="mt-1 text-sm text-red-500">{errors.employment_type}</p>}
+          </div>
 
-  <main className="flex justify-center">
-  <div className="w-[270px] p-2 ">
-        <label>Local Government Area:</label>
-        <input
-          type="text"
-          name="local_government_area"
-          id="local_government_area"
-           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-          // value={formData.local_government_area}
-          // onChange={handleChange}
-        />
-        {/* {errors.local_government_area && <p>{errors.local_government_area[0]}</p>} */}
-      </div>
+          {/* Home Address */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Home Address:</label>
+            <input
+              type="text"
+              name="home_address"
+              id="home_address"
+              className="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            />
+            {errors.home_address && <p className="mt-1 text-sm text-red-500">{errors.home_address}</p>}
+          </div>
 
-      <div className="w-[270px] p-2 ">
-        <label>State of Origin:</label>
-        <input
-          type="text"
-          name="state_of_origin"
-          id="state_of_origin"
-           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-          // value={formData.state_of_origin}
-          // onChange={handleChange}
-          
-        />
-        {/* {errors.state_of_origin && <p>{errors.state_of_origin[0]}</p>} */}
-      </div>
+          {/* Local Government Area */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Local Government Area:</label>
+            <input
+              type="text"
+              name="local_government_area"
+              id="local_government_area"
+              className="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            />
+            {errors.local_government_area && <p className="mt-1 text-sm text-red-500">{errors.local_government_area}</p>}
+          </div>
 
-      <div className="w-[270px] p-2 " >
-        <label>NIN:</label>
-        <input
-          type="text"
-          name="nin"
-          id="nin"
-           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-          // value={formData.nin}
-          // onChange={handleChange}
-        />
-        {/* {errors.nin && <p>{errors.nin[0]}</p>} */}
-      </div>
+          {/* State of Origin */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">State of Origin:</label>
+            <input
+              type="text"
+              name="state_of_origin"
+              id="state_of_origin"
+              className="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            />
+            {errors.state_of_origin && <p className="mt-1 text-sm text-red-500">{errors.state_of_origin}</p>}
+          </div>
 
-      <div className="w-[270px] p-2 ">
-        <label>BVN:</label>
-        <input
-          type="text"
-          name="bvn"
-          id="bvn"
-           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-          // value={formData.bvn}
-          // onChange={handleChange}
-        />
-        {/* {errors.bvn && <p>{errors.bvn[0]}</p>} */}
-      </div>
-  </main>
+          {/* NIN */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">NIN:</label>
+            <input
+              type="text"
+              name="nin"
+              id="nin"
+              className="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            />
+          </div>
 
- <main className="flex justify-center">
- <div className="w-[270px] p-2 ">
-    <label>Staff Type:</label>
-    <select
-      name="staff_type"
-      id="staff_type"
-      className="border bg-white font-medium min-w-20 rounded-md shadow-sm text-gray-500 text-sm focus:ring focus:ring-primary-300 focus:border-primary-600 focus:outline-none group-[.errors]:border-red-600 group-[.errors]:focus:ring-red-200 dark:bg-gray-900 dark:border-gray-700 dark:text-gray-300 dark:focus:border-primary-600 dark:focus:ring-primary-700 dark:focus:ring-opacity-50 dark:group-[.errors]:border-red-500 dark:group-[.errors]:focus:ring-red-600/40 px-3 py-2 w-full pr-8 max-w-2xl appearance-none"
-      // value={formData.staff_type}
-      // onChange={handleChange}
-    >
-      <option value="">Select Staff Type</option>
-      <option value="TEACHING">Teaching</option>
-      <option value="NON_TEACHING">Non-teaching</option>
-    </select>
-    {/* {errors.staff_type && <p>{errors.staff_type[0]}</p>} */}
-  </div>
+          {/* BVN */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">BVN:</label>
+            <input
+              type="text"
+              name="bvn"
+              id="bvn"
+              className="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            />
+          </div>
 
-  <div className="w-[270px] p-2">
-    <label>Status:</label>
-    <select
-      name="status"
-      id="status"
-      className="border bg-white font-medium min-w-20 rounded-md shadow-sm text-gray-500 text-sm focus:ring focus:ring-primary-300 focus:border-primary-600 focus:outline-none group-[.errors]:border-red-600 group-[.errors]:focus:ring-red-200 dark:bg-gray-900 dark:border-gray-700 dark:text-gray-300 dark:focus:border-primary-600 dark:focus:ring-primary-700 dark:focus:ring-opacity-50 dark:group-[.errors]:border-red-500 dark:group-[.errors]:focus:ring-red-600/40 px-3 py-2 w-full pr-8 max-w-2xl appearance-none"
-      // value={formData.status}
-      // onChange={handleChange}
-    >
-      <option value="">Select Status</option>
-      <option value="ACTIVE">Active</option>
-      <option value="INACTIVE">Inactive</option>
-    </select>
-    {/* {errors.status && <p>{errors.status[0]}</p>} */}
-  </div>
+          {/* Staff Type */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Staff Type:</label>
+            <select
+              name="staff_type"
+              id="staff_type"
+              className="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            >
+              <option value="">Select Staff Type</option>
+              <option value="TEACHING">Teaching</option>
+              <option value="NON_TEACHING">Non-teaching</option>
+            </select>
+            {errors.staff_type && <p className="mt-1 text-sm text-red-500">{errors.staff_type}</p>}
+          </div>
 
-      <div className="w-[270px] p-2 ">
-        <label>Position:</label>
-        <input
-          type="text"
-          name="position"
-          id="position"
-           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-          // value={formData.position}
-          // onChange={handleChange}
-        />
-        {/* {errors.position && <p>{errors.position[0]}</p>} */}
-      </div>
- </main>
+          {/* Status */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Status:</label>
+            <select
+              name="status"
+              id="status"
+              className="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            >
+              <option value="">Select Status</option>
+              <option value="ACTIVE">Active</option>
+              <option value="INACTIVE">Inactive</option>
+            </select>
+            {errors.status && <p className="mt-1 text-sm text-red-500">{errors.status}</p>}
+          </div>
 
-      <button type="submit"  className="bg-blue-400 border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/5 p-2.5 md:ml-[500px]">Add Staff</button>
-    </form>
-   </div>
+          {/* Date of Birth */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Date of Birth<span className="text-red-500">*</span></label>
+            <input
+              type="date"
+              id="date_of_birth"
+              name="date_of_birth"
+              className="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              required
+            />
+            {errors.date_of_birth && <p className="mt-1 text-sm text-red-500">{errors.date_of_birth}</p>}
+          </div>
+
+          {/* Position */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Position:</label>
+            <input
+              type="text"
+              name="position"
+              id="position"
+              className="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            />
+          </div>
+        </main>
+
+        <button type="submit" className="px-4 py-2 mt-6 font-semibold text-white bg-blue-500 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300">
+          Add Staff
+        </button>
+      </form>
+    </div>
   );
 };
 

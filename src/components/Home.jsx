@@ -9,7 +9,7 @@ const Home = ( { showModal,modalMessage, setModalMessage , setShowModal,handleLo
    
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-100 mybg absolute top-[-100px] z-[1000] mx-auto mt-12">
-            <div className="w-full max-w-md p-6 bg-white rounded-lg shadow-md">
+            <div className="absolute top-[100px] w-1/4 bg-white rounded-lg shadow-md p-6">
                 <h2 className="mb-6 text-2xl font-semibold text-center text-gray-700">
                     {userInfo ? 'User Information' : isSigningUp ? 'Sign Up' : 'SubAdmin Login'}
                 </h2>
@@ -87,10 +87,10 @@ const Home = ( { showModal,modalMessage, setModalMessage , setShowModal,handleLo
                             </div>
                         )}
                         <button type="submit" className="w-full px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600">
-                            {isSigningUp ? 'Sign Up' : 'Login'}
+                            {isSigningUp ? '' : 'Login'}
                         </button>
                         <button type="button" className="w-full mt-2 text-blue-500 hover:underline" onClick={() => setIsSigningUp(!isSigningUp)}>
-                            {isSigningUp ? 'Back to Login' : 'Sign Up'}
+                            {isSigningUp ? 'Back to Login' : ''}
                         </button>
                     </form>
                     

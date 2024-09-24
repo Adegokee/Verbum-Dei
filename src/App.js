@@ -84,98 +84,110 @@ function App() {
 
    
 
-    const handleLoginSubmit = async (e) => {
-        e.preventDefault();
-        
-        try {
-            const response = await fetch('https://service.verbumdeiportal.com/subadmin/login/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ admin_id, password }),
-            });
-            
-            const data = await response.json();
-    
-            if (data.token) {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Login successful!',
-                    text: 'Welcome back!',
-                });
-                
-                window.localStorage.setItem('token', data.token);
-                window.localStorage.setItem('userInfo', JSON.stringify(data.user)); 
-                setUserInfo(data.user);
-                navigate('/dashboard');
-            } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: `Error: ${JSON.stringify(data)}`,
-                });
-            }
-        } catch (error) {
-            console.error('Error:', error);
-            Swal.fire({
-                icon: 'error',
-                title: 'An error occurred',
-                text: 'Please try again later.',
-            });
-        }
-    };
-    
+   
+    useEffect(() => {
+      const token = window.localStorage.getItem('token');
+      const user = JSON.parse(window.localStorage.getItem('userInfo'));
+      
+      if (token && user) {
+          setUserInfo(user);
+          
+      } else {
+          
+          navigate('/');
+      }
+  }, [navigate]);
+
+  const handleLoginSubmit = async (e) => {
+      e.preventDefault();
+      
+      try {
+          const response = await fetch('https://service.verbumdeiportal.com/subadmin/login/', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ admin_id, password }),
+          });
+          
+          const data = await response.json();
   
+          if (data.token) {
+              Swal.fire({
+                  icon: 'success',
+                  title: 'Login successful!',
+                  text: 'Welcome back!',
+              });
+              
+              window.localStorage.setItem('token', data.token);
+              window.localStorage.setItem('userInfo', JSON.stringify(data.user)); 
+              setUserInfo(data.user);
+              navigate('/dashboard');
+          } else {
+              Swal.fire({
+                  icon: 'error',
+                  title: 'Error',
+                  text: `Signed Up Failed`,
+              });
+          }
+      } catch (error) {
+          console.error('Error:', error);
+          Swal.fire({
+              icon: 'error',
+              title: 'An error occurred',
+              text: 'Please try again later.',
+          });
+      }
+  };
 
-const handleSignUpSubmit = async (e) => {
-    e.preventDefault();
-    
-    if (password !== confirmPassword) {
-        Swal.fire({
-            icon: 'error',
-            title: 'Passwords do not match',
-            text: 'Please try again.',
-        });
-        return;
-    }
+  const handleSignUpSubmit = async (e) => {
+      e.preventDefault();
+      
+      if (password !== confirmPassword) {
+          Swal.fire({
+              icon: 'error',
+              title: 'Passwords do not match',
+              text: 'Please try again.',
+          });
+          return;
+      }
 
-    try {
-        const response = await fetch('https://service.verbumdeiportal.com/subadmin/signup/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ staff_id, password }),
-        });
+      try {
+          const response = await fetch('https://service.verbumdeiportal.com/subadmin/signup/', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ staff_id, password }),
+          });
 
-        const data = await response.json();
+          const data = await response.json();
 
-        if (data.success) {
-            Swal.fire({
-                icon: 'success',
-                title: 'Sign Up successful!',
-                text: 'You can now log in.',
-            });
-            setIsSigningUp(false);
-            navigate('/'); 
-        } else {
-            Swal.fire({
-                icon: 'success',
-                title: 'Sign Up successful!',
-                text: 'You can now log in.',
-                // text: `Error: ${JSON.stringify(data)}`,
-            });
-        }
-    } catch (error) {
-        console.error('Error:', error);
-        Swal.fire({
-            icon: 'error',
-            title: 'An error occurred',
-            text: 'Please try again later.',
-        });
-    }
-};
+          if (data.success) {
+              Swal.fire({
+                  icon: 'success',
+                  title: 'Sign Up successful!',
+                  text: 'You can now log in.',
+              });
+              setIsSigningUp(false);
+              navigate('/'); 
+          } else {
+              Swal.fire({
+                  icon: 'error',
+                  title: 'Sign Up failed',
+                  text: 'Your credientials logs failed',
+              });
+          }
+      } catch (error) {
+          console.error('Error:', error);
+          Swal.fire({
+              icon: 'error',
+              title: 'An error occurred',
+              text: 'Please try again later.',
+          });
+      }
+  };
+
 
   
   

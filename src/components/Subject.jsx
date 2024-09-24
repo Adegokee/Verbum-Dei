@@ -27,13 +27,21 @@ const Subject = ({ teacherData }) => {
 
   const fetchClasses = async () => {
     try {
-      const response = await fetch('https://service.verbumdeiportal.com/class/classes/');
-      const data = await response.json();
-      setClasses(data);
+        const response = await fetch('https://service.verbumdeiportal.com/class/classes/');
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        setClasses(data);
     } catch (error) {
-      console.error('Error fetching classes:', error);
+        console.error('Error fetching classes:', error);
     }
-  };
+};
+
+useEffect(() => {
+    fetchClasses();
+}, []); 
+
 
   const fetchSubjects = async () => {
     try {

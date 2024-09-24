@@ -98,8 +98,9 @@
     background-repeat: no-repeat;
     width: 100%;
     background-position: center;
-   
-    height: 200vh;
+    background-size: contain;
+        overflow-y: hidden;
+    height: 170vh;
 
 
   }

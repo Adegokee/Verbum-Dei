@@ -4,7 +4,7 @@ import { FaFileExport } from "react-icons/fa6";
 
 const FeesAndPayment = () => {
   return (
-    <div className='dashboard absolute bg-[#f5f9fc] top-[75px] left-[16%] '>
+    <div className='dashboard   absolute bg-[#f5f9fc] top-[75px] left-[16%] p-[10px] text-[red] text-4xl font-bold '>
       <h2 className="text-[#007bff] font-bold text-[18px] p-[10px]">Fees & Payment</h2>
       
      <nav className="flex items-center justify-between w-[100%]">
