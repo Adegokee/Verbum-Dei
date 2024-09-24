@@ -10,7 +10,7 @@ const StudentCreate = ({myparent, myclass}) => {
         const formData = new FormData(event.target);
 
         try {
-            const response = await fetch('https://verbumdei-management-system-vms.onrender.com/student/students/', {
+            const response = await fetch('https://service.verbumdeiportal.com/student/students/', {
                 method: 'POST',
                 body: formData
             });

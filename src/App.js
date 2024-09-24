@@ -88,7 +88,7 @@ function App() {
         e.preventDefault();
         
         try {
-            const response = await fetch('https://verbumdei-management-system-vms.onrender.com/subadmin/login/', {
+            const response = await fetch('https://service.verbumdeiportal.com/subadmin/login/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -141,7 +141,7 @@ const handleSignUpSubmit = async (e) => {
     }
 
     try {
-        const response = await fetch('https://verbumdei-management-system-vms.onrender.com/subadmin/signup/', {
+        const response = await fetch('https://service.verbumdeiportal.com/subadmin/signup/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -221,7 +221,7 @@ const handleLogout = () => {
   useEffect(() => {
     const fetchStudentData = async () => {
       try {
-        const response = await fetch('https://verbumdei-management-system-vms.onrender.com/student/students/');
+        const response = await fetch('https://service.verbumdeiportal.com/student/students/');
         const data = await response.json();
         setMydata(data);
      
@@ -236,7 +236,7 @@ const handleLogout = () => {
       console.log(mydata);
   }, [mydata]);
   const addStudent = async (newReview) => {
-    const url = "https://verbumdei-management-system-vms.onrender.com/student/students/";
+    const url = "https://service.verbumdeiportal.com/student/students/";
     try {
       const response = await fetch(url, {
         method: 'POST',
@@ -267,7 +267,7 @@ const handleLogout = () => {
    useEffect(() => {
     const fetchTeacherData = async () => {
       try {
-        const response = await fetch('https://verbumdei-management-system-vms.onrender.com/staff/staff/');
+        const response = await fetch('https://service.verbumdeiportal.com/staff/staff/');
         const data = await response.json();
         setTeacherData(data);
        
@@ -283,7 +283,7 @@ const handleLogout = () => {
   }, [teacherData]);
 
    const editTeacher= async (id, updatedReview) => {
-    const url = `https://verbumdei-management-system-vms.onrender.com/staff/staff/${id}/`;
+    const url = `https://service.verbumdeiportal.com/staff/staff/${id}/`;
     const response = await fetch(url, {
       method: 'PUT',  
       headers: { 'Content-Type': 'application/json' },
@@ -295,7 +295,7 @@ const handleLogout = () => {
 
 
   const addTeacher = async (newReview) => {
-    const url = "https://verbumdei-management-system-vms.onrender.com/staff/staff/";
+    const url = "https://service.verbumdeiportal.com/staff/staff/";
 
     try {
       const response = await fetch(url, {
@@ -324,7 +324,7 @@ const handleLogout = () => {
   useEffect(() => {
     const fetchParentData = async () => {
       try {
-        const response = await fetch('https://verbumdei-management-system-vms.onrender.com/parent/');
+        const response = await fetch('https://service.verbumdeiportal.com/parent/');
         const data = await response.json();
         setParent(data);
       
@@ -342,7 +342,7 @@ const handleLogout = () => {
   }, [parent]);
 
   const addMyParent = async (newReview) => {
-    const url = "https://verbumdei-management-system-vms.onrender.com/parent/";
+    const url = "https://service.verbumdeiportal.com/parent/";
   
     try {
       const response = await fetch(url, {
@@ -372,7 +372,7 @@ const handleLogout = () => {
   useEffect(() => {
     const fetchClassData = async () => {
       try {
-        const response = await fetch('https://verbumdei-management-system-vms.onrender.com/class/classes/');
+        const response = await fetch('https://service.verbumdeiportal.com//class/classes/');
         const data = await response.json();
         setMyClass(data);
         
@@ -392,7 +392,7 @@ const handleLogout = () => {
   useEffect(() => {
     const fetchSubject = async () => {
       try {
-        const response = await fetch('https://verbumdei-management-system-vms.onrender.com/class/subjects/');
+        const response = await fetch('https://service.verbumdeiportal.com/class/subjects/');
         const data = await response.json();
         setSubject(data);
         
@@ -412,7 +412,7 @@ const handleLogout = () => {
   useEffect(() => {
     const fetchClassData = async () => {
       try {
-        const response = await fetch('https://verbumdei-management-system-vms.onrender.com/class/classes/');
+        const response = await fetch('https://service.verbumdeiportal.com/class/classes/');
         const data = await response.json();
         setMyClass(data);
      
@@ -429,7 +429,7 @@ const handleLogout = () => {
   useEffect(() => {
     const fetchInventoryType = async () => {
       try {
-        const response = await fetch('https://verbumdei-management-system-vms.onrender.com/inventory/all-type/');
+        const response = await fetch('https://service.verbumdeiportal.com/inventory/all-type/');
         const data = await response.json();
         setInventoryType(data);
         
@@ -450,7 +450,7 @@ const handleLogout = () => {
 
 
   const addInventoryType = async (newReview) => {
-    const url = "https://verbumdei-management-system-vms.onrender.com/inventory/all-type/";
+    const url = "https://service.verbumdeiportal.com/inventory/all-type/";
   
     try {
       const response = await fetch(url, {

@@ -17,7 +17,7 @@ const Subject = ({ teacherData }) => {
 
   const fetchTeachers = async () => {
     try {
-      const response = await fetch('https://verbumdei-management-system-vms.onrender.com/staff/staff/');
+      const response = await fetch('https://service.verbumdeiportal.com/staff/staff/');
       const data = await response.json();
       setTeachers(data);
     } catch (error) {
@@ -27,7 +27,7 @@ const Subject = ({ teacherData }) => {
 
   const fetchClasses = async () => {
     try {
-      const response = await fetch('https://verbumdei-management-system-vms.onrender.com/class/classes/');
+      const response = await fetch('https://service.verbumdeiportal.com/class/classes/');
       const data = await response.json();
       setClasses(data);
     } catch (error) {
@@ -37,7 +37,7 @@ const Subject = ({ teacherData }) => {
 
   const fetchSubjects = async () => {
     try {
-      const response = await fetch('https://verbumdei-management-system-vms.onrender.com/class/subjects/');
+      const response = await fetch('https://service.verbumdeiportal.com/class/subjects/');
       const data = await response.json();
       setSubjects(data);
     } catch (error) {
@@ -50,7 +50,7 @@ const Subject = ({ teacherData }) => {
     const newSubject = { name, grade, teacher };
 
     try {
-      const response = await fetch('https://verbumdei-management-system-vms.onrender.com/class/subjects/', {
+      const response = await fetch('https://service.verbumdeiportal.com/class/subjects/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newSubject),

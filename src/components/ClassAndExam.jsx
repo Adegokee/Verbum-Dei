@@ -27,7 +27,7 @@ const ClassAndExam = ({ teacherData }) => {
     };
 
     try {
-      const response = await fetch('https://verbumdei-management-system-vms.onrender.com/class/classes/', {
+      const response = await fetch('https://service.verbumdeiportal.com/class/classes/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

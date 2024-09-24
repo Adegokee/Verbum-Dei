@@ -13,7 +13,7 @@ const ParentId = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch(`https://verbumdei-management-system-vms.onrender.com/parent/${id}/`)
+    fetch(`https://service.verbumdeiportal.com/parent/${id}/`)
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');

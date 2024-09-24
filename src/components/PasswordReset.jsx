@@ -8,7 +8,7 @@ const PasswordReset = () => {
   const handlePasswordReset = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('https://sore-ebba-emekadefirst-e04c4e7b.koyeb.app/sub-admin/api/auth/password-reset/', {
+      const response = await fetch('https://service.verbumdeiportal.com/sub-admin/api/auth/password-reset/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

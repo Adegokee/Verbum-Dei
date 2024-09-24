@@ -26,7 +26,7 @@ const EditStudent = () => {
 
   useEffect(() => {
     // Fetch the student's data
-    fetch(`https://verbumdei-management-system-vms.onrender.com/student/student/${id}`)
+    fetch(`https://service.verbumdeiportal.com/student/student/${id}`)
       .then(response => response.json())
       .then(data => {
         setStudent(data);
@@ -63,7 +63,7 @@ const EditStudent = () => {
     e.preventDefault();
 
     // Update the student's data
-    fetch(`https://verbumdei-management-system-vms.onrender.com/student/student/${id}/`, {
+    fetch(`https://service.verbumdeiportal.com/student/student/${id}/`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

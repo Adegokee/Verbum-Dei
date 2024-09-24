@@ -38,7 +38,7 @@ const [count, setCount] =useState([]);
 const [teacherCount, setTeacherCount] =useState([]);
 const [subjectCount, setSubjectCount] = useState([]);
 const studentCount = async() => {
-    const response = await fetch('https://verbumdei-management-system-vms.onrender.com/student/student-count/')
+    const response = await fetch('https://service.verbumdeiportal.com/student/student-count/')
     const data = await response.json();
     setCount(data);
     console.log(count);
@@ -48,7 +48,7 @@ useEffect(() => {
 },[count]);
 
 const myTeacherCount = async() => {
-    const response = await fetch('https://verbumdei-management-system-vms.onrender.com/staff/staff-count/')
+    const response = await fetch('https://service.verbumdeiportal.com/staff/staff-count/')
     const data = await response.json();
     setTeacherCount(data);
     // console.log(count);
@@ -58,7 +58,7 @@ useEffect(() => {
 },[teacherCount]);
 
 const mySubjectCount = async() => {
-    const response = await fetch('https://verbumdei-management-system-vms.onrender.com/class/subjects/count')
+    const response = await fetch('https://service.verbumdeiportal.com/class/subjects/count')
     const data = await response.json();
     setSubjectCount(data);
     console.log(count);

@@ -1,59 +1,6 @@
 import React, { useState } from "react";
 
 const CreateTeacher= () => {
-  // const [formData, setFormData] = useState({
-  //   gender: "",
-  //   first_name: "",
-  //   last_name: "",
-  //   phone_number_1: "",
-  //   email: "",
-  //   employment_type: "",
-  //   home_address: "",
-  //   local_government_area: "",
-  //   state_of_origin: "",
-  //   nin: "",
-  //   bvn: "",
-  //   staff_type: "",
-  //   status: "",
-  //   position: ""
-  // });
-
-  // const [errors, setErrors] = useState({});
-
-  // // Handle form input changes
-  // const handleChange = (e) => {
-  //   setFormData({ ...formData, [e.target.name]: e.target.value });
-  // };
-
-  // // Handle form submission using fetchstudent/students/
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     const response = await fetch(
-  //       "https://verbumdei-management-system-vms.onrender.com/staff/staff/",
-  //       {
-  //         method: "POST",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //         body: JSON.stringify(formData),
-  //       }
-  //     );
-
-  //     const data = await response.json();
-
-  //     if (!response.ok) {
-  //       // Handle errors from the API and display them
-  //       setErrors(data);
-  //     } else {
-  //       // Handle success (e.g., clear form or redirect)
-  //       console.log("Staff added successfully:", data);
-  //       setErrors({}); // Clear any existing errors
-  //     }
-  //   } catch (error) {
-  //     console.error("An error occurred:", error);
-  //   }
-  // };
 
 
   const handleSubmit = async (event) => {
@@ -62,13 +9,13 @@ const CreateTeacher= () => {
     const formData = new FormData(event.target);
 
     try {
-        const response = await fetch('https://verbumdei-management-system-vms.onrender.com/staff/staff/', {
+        const response = await fetch('https://service.verbumdeiportal.com/staff/staff/', {
             method: 'POST',
             body: formData
         });
 
         const data = await response.json();
-        alert('Student added successfully!');
+        alert('Teacher added successfully!');
         event.target.reset();
     } catch (error) {
         console.error('Error adding student:', error);

@@ -17,7 +17,7 @@ const EditTeacher = () => {
 
   useEffect(() => {
     // Fetch the teacher's data
-    fetch(`https://verbumdei-management-system-vms.onrender.com/staff/staff/${id}`)
+    fetch(`https://service.verbumdeiportal.com/staff/staff/${id}`)
       .then(response => response.json())
       .then(data => {
         setTeacher(data);
@@ -57,7 +57,7 @@ const EditTeacher = () => {
     e.preventDefault();
 
     // Update the teacher's data
-    fetch(`https://verbumdei-management-system-vms.onrender.com/staff/staff/${id}/`, {
+    fetch(`https://service.verbumdeiportal.com/staff/staff/${id}/`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

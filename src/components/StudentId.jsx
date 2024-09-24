@@ -13,7 +13,7 @@ const StudentId = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch(`https://verbumdei-management-system-vms.onrender.com/student/student/${id}/`)
+    fetch(`https://service.verbumdeiportal.com/student/student/${id}/`)
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
