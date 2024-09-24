@@ -51,7 +51,7 @@ const Navbar = ({ userInfo, handleLogout }) => {
             aria-haspopup="true"
             aria-expanded={dropdownOpen}
           />
-          <span className='ml-[20px] cursor-pointer' onClick={toggleDropdown}> Welcome <br />{firstNAme}</span>
+          <span className='ml-[20px] cursor-pointer' onClick={toggleDropdown}> Welcome <br /> <span className="text-[#007bff]"><b>{firstNAme}</b></span></span>
           <FaCaretDown className='ml-[10px] cursor-pointer' onClick={toggleDropdown} />
 
           {/* Dropdown Menu */}
