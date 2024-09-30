@@ -114,7 +114,7 @@ const StudentManagement = ({ mydata, setMydata }) => {
   
 </div>
       <nav>
-      <main className='mt-[20px] flex items-center border-b-2 border-[gray] py-[20px]'>
+      <main className='mt-[20px] flex justify-between items-center border-b-2 border-[gray] py-[20px]'>
       <div className='pr-[10px]'>
         <input type="checkbox" />
         <span className='pl-[40px]'>Name</span>
@@ -141,9 +141,9 @@ const StudentManagement = ({ mydata, setMydata }) => {
        <p>Class</p>
       </div>
 
-      <div  className='pl-[150px] text-center'>
+      {/* <div  className='pl-[150px] text-center'>
        <p>More</p>
-      </div>
+      </div> */}
 
       
   </main>
@@ -155,30 +155,30 @@ const StudentManagement = ({ mydata, setMydata }) => {
                 <div className='w-[40px] h-[40px] rounded-full'>
                   <img src={x.img_url} className='object-cover w-full h-full rounded-full' alt="" />
                 </div>
-                <small className='ml-[5px] font-semibold'>{x.first_name.slice(0, 4)}...</small>
+                <small className='ml-[5px] font-semibold'>{x.first_name}</small>
               </div>
-              <div>
-                <small className='font-semibold pl-[85px]'>{x.registration_id.slice(0, 7)}...</small>
+              <div className='w-[180px] h-[40px] mr-11'>
+                <small className='font-semibold pl-[85px]'>{x.registration_id}</small>
               </div>
-              <div>
+              {/* <div>
                 <p className='font-semibold'>{x.class_assigned}</p>
+              </div> */}
+              <div className='w-[310px] h-[40px] ml-[19px]'>
+                <p className='pl-[75px]  font-semibold'>{x.parent}</p>
               </div>
-              <div>
-                <p className='pl-[75px] font-semibold'>{x.parent.slice(0, 4)}...</p>
+              <div className='w-[340px] h-[40px]'>
+                <small className='font-semibold pl-[85px]'>{x.home_address.slice(0, 10)}</small>
               </div>
-              <div>
-                <small className='font-semibold pl-[85px]'>{x.home_address.slice(0, 8)}...</small>
-              </div>
-              <div className='flex items-center pl-[75px]'>
+              <div className='flex items-center pl-[55px] w-[170px] h-[40px]'>
                 <span className='mr-[20px] text-[#007bff] text-[10px] py-[10px] px-[25px] rounded-2xl bg-[#d6dfe8]'><FaPhone /></span>
                 <span className="text-[#007bff] text-[12px] py-[10px] px-[25px] rounded-2xl bg-[#d6dfe8]"><a href=''><TiMessages /></a></span>
               </div>
-              <div className='pr-[4px] text-center pl-[90px] flex justify-center items-center'>
+              <div className='w-[240px] h-[40px] pr-[4px] text-center pl-[140px] flex  items-center'>
                 <p className='font-semibold rounded-2xl bg-[#fb7d5b] py-[5px] px-[8px] text-[11px] text-white'>{x.class_assigned}</p>
               </div>
-              <div className='font-semibold pl-[120px]'>
+              {/* <div className='font-semibold pl-[120px]'>
                 <HiDotsHorizontal />
-              </div>
+              </div> */}
             </main>
           </Link>
         ))}
