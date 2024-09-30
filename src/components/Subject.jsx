@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { SiX } from 'react-icons/si';
+import Swal from 'sweetalert2';
 
 const Subject = ({ teacherData }) => {
   const [teachers, setTeachers] = useState([]);
@@ -21,27 +23,30 @@ const Subject = ({ teacherData }) => {
       const data = await response.json();
       setTeachers(data);
     } catch (error) {
-      console.error('Error fetching teachers:', error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Error fetching teachers: ' + error.message,
+      });
     }
   };
 
   const fetchClasses = async () => {
     try {
-        const response = await fetch('https://service.verbumdeiportal.com/class/classes/');
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        const data = await response.json();
-        setClasses(data);
+      const response = await fetch('https://service.verbumdeiportal.com/class/classes/');
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      setClasses(data);
     } catch (error) {
-        console.error('Error fetching classes:', error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Error fetching classes: ' + error.message,
+      });
     }
-};
-
-useEffect(() => {
-    fetchClasses();
-}, []); 
-
+  };
 
   const fetchSubjects = async () => {
     try {
@@ -49,7 +54,11 @@ useEffect(() => {
       const data = await response.json();
       setSubjects(data);
     } catch (error) {
-      console.error('Error fetching subjects:', error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Error fetching subjects: ' + error.message,
+      });
     }
   };
 
@@ -65,18 +74,29 @@ useEffect(() => {
       });
 
       if (response.ok) {
-        alert('Subject added successfully!');
+        Swal.fire({
+          icon: 'success',
+          title: 'Success',
+          text: 'Subject added successfully!',
+        });
         resetForm();
-        await fetchSubjects(); 
+        await fetchSubjects();
       } else {
         const errorData = await response.json();
-        alert('Failed to add subject: ' + JSON.stringify(errorData));
+        Swal.fire({
+          icon: 'error',
+          title: 'Failed',
+          text: 'Failed to add subject because teacher has already been assigned',
+        });
       }
     } catch (error) {
-      console.error('Error adding subject:', error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Error adding subject:',
+      });
     }
   };
-
   const resetForm = () => {
     setName('');
     setGrade('');
@@ -157,14 +177,45 @@ useEffect(() => {
         </div>
         <button
           type="submit"
-          className="w-full px-4 py-2 text-white transition duration-200 bg-blue-600 rounded-md hover:bg-blue-700"
+          className="w-[200px] px-auto ml-[400px] py-2 text-white transition duration-200 bg-blue-600 rounded-md hover:bg-blue-700"
         >
           Add Subject
         </button>
       </form>
 
       <h2 className="mt-6 text-xl font-semibold">Subjects</h2>
-      <p>{subjects.name}</p>
+      {subjects.map((x) => (
+        <div key={x.id}>
+          
+          <div className="overflow-x-auto">
+      <table className="min-w-full bg-white border border-gray-300">
+        <thead>
+          <tr className="bg-gray-200 text-gray-700">
+            <th className="py-3 px-4 text-left">Subject Name</th>
+            <th className="py-3 px-4 text-left">Teacher Name</th>
+            <th className="py-3 px-4 text-left">Class Assigned</th>
+          </tr>
+        </thead>
+        <tbody>
+          {subjects.map((x) => (
+            <tr key={x.id} className="hover:bg-gray-100">
+              <td className="py-3 px-4 border border-gray-300">
+                <span>{x.name}</span>
+              </td>
+              <td className="py-3 px-4 border border-gray-300">
+                <span>{x.teacher.first_name} {x.teacher.last_name}</span>
+              </td>
+              <td className="py-3 px-4 border border-gray-300">
+                <span>{x.grade.name}</span>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+          </div>
+      )).slice(0, 1)}
+      
 
       <ul className="mt-4 space-y-2">
         {renderSubjects()}

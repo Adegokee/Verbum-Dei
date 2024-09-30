@@ -75,11 +75,11 @@ const firstNAme = userInfo && userInfo.first_name ? userInfo.first_name : 'user'
        <div className='flex '>
       <div>
       <section class="flex">
-      <div className='pt-[20px] pl-[13px]'>
-            <h1 className='text-[20px] font-bold good mr-[90px]'> Good Day, <span className="text-[#2580ff]">{firstNAme}</span></h1>
+      <div className='pt-[20px] pl-[3px]'>
+            <h1 className='text-[30px] font-bold good mr-[20px]'> Good Day, <span className="text-[#2580ff]">{firstNAme}</span></h1>
         </div>
 
-        <div className='w-[390px] h-[116px] mb-[14px] px-3 flex items-center bg-white border-[3px] border-gray-200 rounded-md'>
+        <div className='w-[460px] h-[116px] mb-[14px] px-3 flex items-center bg-white border-[3px] border-gray-200 rounded-md'>
             <main className='bg-[#fcc43e] w-[25px] h-[25px] rounded-full flex justify-center items-center mr-[20px] '>
             <img src={payment} alt="" />
             </main>

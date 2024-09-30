@@ -127,7 +127,7 @@ function App() {
               Swal.fire({
                   icon: 'error',
                   title: 'Error',
-                  text: `Signed Up Failed`,
+                  text: `Login  Failed Due to Invalid Credentials`,
               });
           }
       } catch (error) {
@@ -353,29 +353,44 @@ const handleLogout = () => {
     console.log(parent);
   }, [parent]);
 
-  const addMyParent = async (newReview) => {
-    const url = "https://service.verbumdeiportal.com/parent/";
   
+
+  const addMyParent = async (newReview) => { 
+    const url = "https://service.verbumdeiportal.com/parent/";
+    
     try {
       const response = await fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newReview),
       });
-      
   
       if (!response.ok) {
-        
         const errorText = await response.text();
         throw new Error(`Server error: ${errorText}`);
       }
   
-   
       const data = await response.json();
       setParent([data, ...parent]);
       setMyErrors({});
+  
+      // Show success message
+      Swal.fire({
+        icon: 'success',
+        title: 'Success',
+        text: 'Parent added successfully!',
+      });
+  
     } catch (error) {
       console.error('Error adding parent:', error);
+  
+      // Show error message
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: error.message || 'An error occurred while adding the parent.',
+      });
+  
       setErrors({ global: 'An error occurred while adding the parent.' });
     }
   };

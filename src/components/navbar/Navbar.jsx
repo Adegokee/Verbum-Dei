@@ -21,7 +21,7 @@ const Navbar = ({ userInfo, handleLogout }) => {
     <div className='flex h-[77px] border-2 border-[#c5c8ca] items-center bg-[#f5f9fc]'>
       <div className='flex items-center p-[12px] w-[250px] bg-[#f5f9fc] border-r-[1px] border-b-[1px] border-[#c5c8ca] z-[20]'>
         <img className='w-[50px] object-cover' src={tunde} alt="Logo" />
-        <Link to='/' className='ml-[10px] font-bold text-[20px] text-[#007bff]'>
+        <Link to='/dashboard' className='ml-[10px] font-bold text-[20px] text-[#007bff]'>
           Verbum Dei
         </Link>
       </div>

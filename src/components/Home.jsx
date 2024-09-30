@@ -8,8 +8,8 @@ const Home = ( { showModal,modalMessage, setModalMessage , setShowModal,handleLo
     
    
     return (
-        <div className="flex items-center justify-center min-h-screen bg-gray-100 mybg absolute top-[-100px] z-[1000] mx-auto mt-12">
-            <div className="absolute top-[100px] w-1/4 bg-white rounded-lg shadow-md p-6">
+        <div className="flex items-center justify-center min-h-screen bg-gray-100 fixed mybg overflow-y-hidden top-[-100px] z-[1000] mx-auto mt-12">
+            <div className="absolute top-[250px]  w-1/4 bg-white rounded-lg shadow-md p-6">
                 <h2 className="mb-6 text-2xl font-semibold text-center text-gray-700">
                     {userInfo ? 'User Information' : isSigningUp ? 'Sign Up' : 'SubAdmin Login'}
                 </h2>

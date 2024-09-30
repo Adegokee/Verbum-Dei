@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Swal from 'sweetalert2';
 
 const StudentCreate = ({ myparent, myclass }) => {
     const [errors, setErrors] = useState({});
@@ -21,38 +22,54 @@ const StudentCreate = ({ myparent, myclass }) => {
         return newErrors;
     };
 
+    
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         
         const formData = new FormData(event.target);
         const validationErrors = validateForm(formData);
-
+    
         if (Object.keys(validationErrors).length > 0) {
             setErrors(validationErrors);
             console.log('Validation Errors:', validationErrors);
+            Swal.fire({
+                icon: 'error',
+                title: 'Validation Error',
+                text: 'Please correct the highlighted errors.',
+            });
             return;
         }
-
+    
         try {
             const response = await fetch('https://service.verbumdeiportal.com/student/students/', {
                 method: 'POST',
                 body: formData,
             });
-
+    
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
-
+    
             const data = await response.json();
             console.log('Response Data:', data);
-            alert('Student added successfully!');
+            Swal.fire({
+                icon: 'success',
+                title: 'Success',
+                text: 'Student added successfully!',
+            });
             event.target.reset();
             setErrors({});
         } catch (error) {
             console.error('Error adding student:', error);
-            alert('Failed to add student. Please try again.');
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Failed to add student. Please try again.',
+            });
         }
     };
+    
 
     return (
         <div className="dashboard absolute bg-[#f5f9fc] top-[75px] left-[16%] p-[10px] ">

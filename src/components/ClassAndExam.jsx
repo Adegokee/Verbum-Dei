@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Swal from 'sweetalert2';
 
 const ClassAndExam = ({ teacherData }) => {
   const [classes, setClasses] = useState([]);
@@ -11,11 +12,15 @@ const ClassAndExam = ({ teacherData }) => {
 
   const fetchClasses = async () => {
     try {
-      const response = await fetch('https://verbumdei-management-system-vms.onrender.com/class/classes/');
+      const response = await fetch('https://service.verbumdeiportal.com/class/classes/');
       const data = await response.json();
       setClasses(data);
     } catch (error) {
-      console.error('Error fetching classes:', error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Error fetching classes: ' + error.message,
+      });
     }
   };
 
@@ -36,19 +41,30 @@ const ClassAndExam = ({ teacherData }) => {
       });
 
       if (response.ok) {
-        alert('Class added successfully!');
+        Swal.fire({
+          icon: 'success',
+          title: 'Success',
+          text: 'Class added successfully!',
+        });
         setNewClassName('');
         setSelectedTeacherId('');
         fetchClasses(); 
       } else {
         const errorData = await response.json();
-        alert('Failed to add class: ' + JSON.stringify(errorData));
+        Swal.fire({
+          icon: 'error',
+          title: 'Failed',
+          text: 'Failed to add class: ' + JSON.stringify(errorData),
+        });
       }
     } catch (error) {
-      console.error('Error adding class:', error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Error adding class: ' + error.message,
+      });
     }
   };
-
   return (
     <div className="dashboard absolute bg-[#f5f9fc] top-[75px] left-[16%] p-6 rounded-lg shadow-lg">
     <h1 className="mb-6 text-2xl font-bold text-gray-800">Class Management</h1>
@@ -81,7 +97,7 @@ const ClassAndExam = ({ teacherData }) => {
       </div>
       <button
         type="submit"
-        className="w-full px-4 py-2 text-white transition duration-200 bg-blue-600 rounded-md hover:bg-blue-700"
+        className="w-[200px] ml-[400px] px-4 py-2 text-white transition duration-200 bg-blue-600 rounded-md hover:bg-blue-700"
       >
         Add Class
       </button>
